@@ -1,53 +1,42 @@
-# Cursor Landing Page Clone (HTML & CSS)
+# Mintlify Landing Page Clone
 
-This project is a static recreation of the Cursor landing page using only HTML and CSS. The goal was to match the layout, visual hierarchy, and overall look and feel of the original website.
+This project is a static HTML and CSS clone of the Mintlify landing page, created as part of an assignment.
 
 ---
 
 ## Sections Recreated
 
-The following sections of the Cursor landing page were recreated:
-
-- Header / Navigation  
-- Hero Section  
-- Social Proof (Trusted by companies)  
-- Feature Section 1 – Agent turns ideas into code  
-- Feature Section 2 – Autocomplete (Tab)  
-- Feature Section 3 – Cursor Ecosystem  
-- Testimonials Section  
-- Feature Highlights Section  
-- Join Us Section  
-- Call To Action (CTA)  
-- Footer
+- Top Navigation Bar  
+- Hero Section (headline, description, email input, CTA, background illustration)  
+- Documentation Preview  
+- Trusted By / Company Logos  
+- Feature Highlights  
+- Intelligent Assistant UI Preview  
+- Enterprise Features Section  
+- Customer Story / Case Study  
+- Final Call-To-Action  
+- Footer with multi-column links and company info  
 
 ---
 
-## Fonts & Colors Used
+## Fonts Used
 
-### Fonts
-- System font stack with Cursor-style fallback:
-  - `CursorGothic`, `CursorGothic Fallback`
-  - `system-ui`, `Helvetica Neue`, `Helvetica`, `Arial`, `sans-serif`
+- **Inter** (Google Fonts)
 
-### Colors
+```css
+font-family: "Inter", sans-serif;
+```
+
+## Colors Used
+
 Defined using CSS variables:
 
-- Background:
-  - Primary: `#14120b`
-  - Secondary: `#1b1913`
-  - Surface: `#1d1b15`
-- Text:
-  - Primary: `#edecec`
-  - Muted: `#9a9996`
-- Accent:
-  - Orange accent: `#bf4105`
-
-These colors were chosen to closely match the dark theme and accent style of the original Cursor website.
-
----
-
-## Screenshots (Final Output)
-![screenshot](./public/assets/images/screenshot-of-site.png)
+- **Background:** `#0a0f12`, `#0f1419`, `#151c22`
+- **Accent:** `#0d9373`, `#23b193`
+- **Text:** `#ffffff`, `#9ca3af`, `#6b7280`
+- **Borders:** `#1f2937`, `#2d3748`
 
 
-[Hosted here: ](https://mohammad-1105.github.io/cursor-landing-page-clone/)
+![Homepage](./public/assets/images/homepage-screenshot.png)
+
+[Hosted Link](https://mohammad-1105.github.io/mintlify-landing-page-clone/)

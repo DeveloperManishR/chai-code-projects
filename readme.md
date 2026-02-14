@@ -39,4 +39,3 @@ Defined using CSS variables:
 
 ![Homepage](./public/assets/images/homepage-screenshot.png)
 
-[Hosted Link](https://mohammad-1105.github.io/mintlify-landing-page-clone/)

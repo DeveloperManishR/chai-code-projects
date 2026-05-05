@@ -1,16 +1,58 @@
-# React + Vite
+#  Jokes Viewer Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a simple **React + Vite** based Jokes Viewer app that fetches random jokes from a public API and displays them in a clean, responsive UI.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+##  Live Demo
+https://jokes-viewer-delta.vercel.app
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+##  Features
 
-## Expanding the ESLint configuration
+- Fetch random jokes from FreeAPI
+- Display jokes in card layout
+- Dark theme UI
+- Responsive design for all devices
+- Clean and simple user interface
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+##  API Used
+
+https://api.freeapi.app/api/v1/public/randomjokes
+
+---
+
+##  Tech Stack
+
+- React (Vite)
+- JavaScript (ES6+)
+- CSS3
+- FreeAPI
+
+---
+
+##  Project Setup
+
+### 1. Clone the repository
+git clone https://github.com/malhotrasarika789-blip/Jokes-viewer
+
+## 2. Install dependencies
+npm install
+## 3. Run the project
+npm run dev
+
+## Learning Outcome
+API integration in React
+useEffect & useState hooks
+Responsive UI design
+Handling JSON data from API
+Dark theme styling
+
+## Author
+Sarika Malhotra
+
+
+git clone https://github.com/malhotrasarika789-blip/Jokes-viewer

@@ -1,49 +1,47 @@
 import { useEffect, useState } from "react";
 
 export default function App() {
-  const [products, setProducts] = useState([]);
+  const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchVideos = async () => {
       try {
         const res = await fetch(
-          "https://api.freeapi.app/api/v1/public/randomproducts"
+          "https://api.freeapi.app/api/v1/public/youtube/videos"
         );
         const data = await res.json();
 
-        console.log("FULL API RESPONSE:", data);
+        console.log("FULL RESPONSE:", data);
 
-        // ✅ SAFE EXTRACTION (handles all possible structures)
-        const items =
-          data?.data?.data ||
-          data?.data ||
-          [];
+        const raw = data?.data?.data || [];
 
-        console.log("PRODUCTS ARRAY:", items);
+        // 🔥 IMPORTANT FIX (flatten nested items)
+        const flattened = raw
+          .map((item) => item?.items)
+          .flat()
+          .filter(Boolean);
 
-        setProducts(items);
+        console.log("FLATTENED VIDEOS:", flattened);
+
+        setVideos(flattened);
       } catch (error) {
-        console.log("Error:", error);
+        console.log(error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchProducts();
+    fetchVideos();
   }, []);
 
   if (loading) {
-    return (
-      <h2 style={{ textAlign: "center", marginTop: "50px" }}>
-        Loading products...
-      </h2>
-    );
+    return <h2 style={{ textAlign: "center" }}>Loading...</h2>;
   }
 
   return (
     <div style={{ padding: "20px", fontFamily: "Arial" }}>
-      <h1 style={{ textAlign: "center" }}>Product Listing</h1>
+      <h1 style={{ textAlign: "center" }}>YouTube Videos Listing</h1>
 
       <div
         style={{
@@ -53,13 +51,19 @@ export default function App() {
           marginTop: "20px",
         }}
       >
-        {products.map((item, index) => {
-          // 🔥 SAFE IMAGE HANDLING (MAIN FIX)
-          const image =
-            item?.image ||
-            item?.images?.[0] ||
-            item?.thumbnail ||
+        {videos.map((video, index) => {
+          const snippet = video?.snippet || {};
+
+          const thumb =
+            snippet?.thumbnails?.high?.url ||
+            snippet?.thumbnails?.medium?.url ||
+            snippet?.thumbnails?.default?.url ||
             "https://via.placeholder.com/300";
+
+          const videoId =
+            snippet?.resourceId?.videoId ||
+            video?.id ||
+            "";
 
           return (
             <div
@@ -73,31 +77,33 @@ export default function App() {
             >
               {/* IMAGE */}
               <img
-                src={image}
-                alt={item?.title}
+                src={thumb}
+                alt="video"
                 style={{
                   width: "100%",
-                  height: "180px",
+                  height: "150px",
                   objectFit: "cover",
-                }}
-                onError={(e) => {
-                  e.target.src = "https://via.placeholder.com/300";
                 }}
               />
 
               {/* CONTENT */}
               <div style={{ padding: "10px" }}>
                 <h3 style={{ fontSize: "14px" }}>
-                  {item?.title || "No Title"}
+                  {snippet?.title || "No Title"}
                 </h3>
 
                 <p style={{ fontSize: "12px", color: "gray" }}>
-                  {item?.category || "No Category"}
+                  {snippet?.channelTitle || "Unknown Channel"}
                 </p>
 
-                <p style={{ fontSize: "14px", fontWeight: "bold" }}>
-                  ₹{item?.price || 0}
-                </p>
+                <a
+                  href={`https://www.youtube.com/watch?v=${videoId}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{ fontSize: "12px", color: "blue" }}
+                >
+                  Watch Video
+                </a>
               </div>
             </div>
           );

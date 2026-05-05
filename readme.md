@@ -38,7 +38,6 @@ https://api.freeapi.app/api/v1/public/randomproducts
 ##  Project Setup
 
 ### 1. Clone the repository
-git clone https://github.com/malhotrasarika789-blip/Pruduct-listing
 
 ## 2. Install dependencies
 npm install
@@ -59,4 +58,4 @@ Handling real-world API data structure
 
 ## Author
 
-Sarika Malhotra
+Manish

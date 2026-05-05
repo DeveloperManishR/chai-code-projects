@@ -1,28 +1,28 @@
-#  Quotes Listing Application
+#  Meals Listing Interface
 
-This is a simple **React + Vite** project that displays inspirational quotes fetched from a public API in a clean and responsive UI.
+This is a simple **React + Vite** project that displays a list of meals fetched from a public API in a clean and responsive grid layout.
 
 ---
 
 ##  Live Demo
-https://quotes-ui-three.vercel.app
+https://meals-ui.vercel.app
 
 ---
 
 ##  Features
 
-- Fetch quotes from FreeAPI
-- Display quote content and author
-- Responsive grid/card layout
-- Clean and minimal UI
+- Fetch meals from FreeAPI
+- Display meal image, name, category, and area
+- Responsive grid layout
+- Clean and simple UI
 - Loading state handling
-- Safe fallback values
+- Fallback image support
 
 ---
 
 ##  API Used
 
-https://api.freeapi.app/api/v1/public/quotes
+https://api.freeapi.app/api/v1/public/meals
 
 ---
 
@@ -35,29 +35,24 @@ https://api.freeapi.app/api/v1/public/quotes
 
 ---
 
-## 📂 Project Setup
+##  Project Setup
 
-git clone https://github.com/malhotrasarika789-blip/Quotes-ui
+### 1. Clone repository
+git clone https://github.com/malhotrasarika789-blip/meals-ui
 
 ## 2. Install dependencies
-
 npm install
 
 ## 3. Run project
-
 npm run dev
 
 ## Learning Outcomes
-
 API integration in React
-useEffect & useState hooks
+useEffect and useState hooks
+Handling nested API responses
 Dynamic rendering using map()
-Handling JSON responses
 Responsive UI design
 
-👩‍💻 Author
-Sarika Malhotra
+# Author
 
-### 1. Clone repository
-```bash id="quoteclone"
-git clone https://github.com/malhotrasarika789-blip/Quotes-ui
+Sarika Malhotra

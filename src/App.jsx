@@ -1,22 +1,25 @@
 import { useEffect, useState } from "react";
 
 export default function App() {
-  const [quotes, setQuotes] = useState([]);
+  const [meals, setMeals] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchQuotes = async () => {
+    const fetchMeals = async () => {
       try {
         const res = await fetch(
-          "https://api.freeapi.app/api/v1/public/quotes"
+          "https://api.freeapi.app/api/v1/public/meals"
         );
         const data = await res.json();
 
-        console.log("API RESPONSE:", data);
+        console.log("FULL RESPONSE:", data);
+
 
         const items = data?.data?.data || [];
 
-        setQuotes(items);
+        console.log("MEALS ARRAY:", items);
+
+        setMeals(items);
       } catch (error) {
         console.log(error);
       } finally {
@@ -24,13 +27,13 @@ export default function App() {
       }
     };
 
-    fetchQuotes();
+    fetchMeals();
   }, []);
 
   if (loading) {
     return (
       <h2 style={{ textAlign: "center", marginTop: "50px" }}>
-        Loading quotes...
+        Loading meals...
       </h2>
     );
   }
@@ -44,7 +47,7 @@ export default function App() {
         minHeight: "100vh",
       }}
     >
-      <h1 style={{ textAlign: "center" }}>💬 Quotes Listing</h1>
+      <h1 style={{ textAlign: "center" }}>🍽️ Meals Listing</h1>
 
       <div
         style={{
@@ -54,23 +57,44 @@ export default function App() {
           marginTop: "20px",
         }}
       >
-        {quotes.map((item, index) => (
+        {meals.map((item) => (
           <div
-            key={index}
+            key={item?.idMeal}
             style={{
               background: "#fff",
               borderRadius: "10px",
-              padding: "15px",
+              overflow: "hidden",
               boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
             }}
           >
-            <p style={{ fontSize: "14px", marginBottom: "10px" }}>
-              “{item?.content || item?.quote || "No quote"}”
-            </p>
 
-            <h4 style={{ fontSize: "13px", color: "gray" }}>
-              — {item?.author || "Unknown"}
-            </h4>
+            <img
+              src={
+                item?.strMealThumb ||
+                item?.image ||
+                "https://via.placeholder.com/300"
+              }
+              alt={item?.strMeal}
+              style={{
+                width: "100%",
+                height: "180px",
+                objectFit: "cover",
+              }}
+            />
+
+            <div style={{ padding: "10px" }}>
+              <h3 style={{ fontSize: "14px" }}>
+                {item?.strMeal}
+              </h3>
+
+              <p style={{ fontSize: "12px", color: "gray" }}>
+                {item?.strCategory}
+              </p>
+
+              <p style={{ fontSize: "13px" }}>
+                {item?.strArea}
+              </p>
+            </div>
           </div>
         ))}
       </div>

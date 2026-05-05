@@ -37,7 +37,7 @@ https://api.freeapi.app/api/v1/public/randomjokes
 ##  Project Setup
 
 ### 1. Clone the repository
-git clone https://github.com/malhotrasarika789-blip/Jokes-viewer
+git clone https://github.com/DeveloperManishR/chai-code-projects/tree/jokes-viewer
 
 ## 2. Install dependencies
 npm install
@@ -52,7 +52,7 @@ Handling JSON data from API
 Dark theme styling
 
 ## Author
-Sarika Malhotra
+Manish Rawat
 
 
-git clone https://github.com/malhotrasarika789-blip/Jokes-viewer
+git clone https://github.com/DeveloperManishR/chai-code-projects/tree/jokes-viewer

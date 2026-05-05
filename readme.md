@@ -38,7 +38,7 @@ https://api.freeapi.app/api/v1/public/meals
 ##  Project Setup
 
 ### 1. Clone repository
-git clone https://github.com/malhotrasarika789-blip/meals-ui
+git clone https://github.com/DeveloperManishR/chai-code-projects/tree/meals-ui
 
 ## 2. Install dependencies
 npm install
@@ -55,4 +55,4 @@ Responsive UI design
 
 # Author
 
-Sarika Malhotra
+Manish Rawat

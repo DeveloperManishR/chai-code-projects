@@ -1,41 +1,63 @@
-# Mintlify Landing Page Clone
+#  Quotes Listing Application
 
-This project is a static HTML and CSS clone of the Mintlify landing page, created as part of an assignment.
-
----
-
-## Sections Recreated
-
-- Top Navigation Bar  
-- Hero Section (headline, description, email input, CTA, background illustration)  
-- Documentation Preview  
-- Trusted By / Company Logos  
-- Feature Highlights  
-- Intelligent Assistant UI Preview  
-- Enterprise Features Section  
-- Customer Story / Case Study  
-- Final Call-To-Action  
-- Footer with multi-column links and company info  
+This is a simple **React + Vite** project that displays inspirational quotes fetched from a public API in a clean and responsive UI.
 
 ---
 
-## Fonts Used
+##  Live Demo
+https://quotes-ui-three.vercel.app
 
-- **Inter** (Google Fonts)
+---
 
-```css
-font-family: "Inter", sans-serif;
-```
+##  Features
 
-## Colors Used
+- Fetch quotes from FreeAPI
+- Display quote content and author
+- Responsive grid/card layout
+- Clean and minimal UI
+- Loading state handling
+- Safe fallback values
 
-Defined using CSS variables:
+---
 
-- **Background:** `#0a0f12`, `#0f1419`, `#151c22`
-- **Accent:** `#0d9373`, `#23b193`
-- **Text:** `#ffffff`, `#9ca3af`, `#6b7280`
-- **Borders:** `#1f2937`, `#2d3748`
+##  API Used
 
+https://api.freeapi.app/api/v1/public/quotes
 
-![Homepage](./public/assets/images/homepage-screenshot.png)
+---
 
+##  Tech Stack
+
+- React (Vite)
+- JavaScript (ES6+)
+- CSS (Inline styling)
+- FreeAPI
+
+---
+
+## 📂 Project Setup
+
+git clone https://github.com/malhotrasarika789-blip/Quotes-ui
+
+## 2. Install dependencies
+
+npm install
+
+## 3. Run project
+
+npm run dev
+
+## Learning Outcomes
+
+API integration in React
+useEffect & useState hooks
+Dynamic rendering using map()
+Handling JSON responses
+Responsive UI design
+
+👩‍💻 Author
+Sarika Malhotra
+
+### 1. Clone repository
+```bash id="quoteclone"
+git clone https://github.com/malhotrasarika789-blip/Quotes-ui

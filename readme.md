@@ -37,7 +37,7 @@ https://api.freeapi.app/api/v1/public/quotes
 
 ## 📂 Project Setup
 
-git clone https://github.com/malhotrasarika789-blip/Quotes-ui
+git clone https://github.com/DeveloperManishR/chai-code-projects/tree/quotes-ui
 
 ## 2. Install dependencies
 
@@ -56,8 +56,7 @@ Handling JSON responses
 Responsive UI design
 
 👩‍💻 Author
-Sarika Malhotra
-
+Manish Rawat
 ### 1. Clone repository
 ```bash id="quoteclone"
-git clone https://github.com/malhotrasarika789-blip/Quotes-ui
+https://github.com/DeveloperManishR/chai-code-projects/tree/quotes-ui

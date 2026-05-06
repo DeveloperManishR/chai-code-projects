@@ -1,98 +1,131 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
-export default function App() {
-  const [meals, setMeals] = useState([]);
+function App() {
+  const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Fetch Users
   useEffect(() => {
-    const fetchMeals = async () => {
+    const fetchUsers = async () => {
       try {
-        const res = await fetch(
-          "https://api.freeapi.app/api/v1/public/meals"
+        const response = await fetch(
+          "https://api.freeapi.app/api/v1/public/randomusers"
         );
-        const data = await res.json();
 
-        console.log("FULL RESPONSE:", data);
+        const result = await response.json();
 
+        console.log(result);
 
-        const items = data?.data?.data || [];
-
-        console.log("MEALS ARRAY:", items);
-
-        setMeals(items);
+        // Correct API Data
+        setUsers(result.data.data);
       } catch (error) {
-        console.log(error);
+        console.log("Error fetching users:", error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchMeals();
+    fetchUsers();
   }, []);
 
+  // Loading State
   if (loading) {
     return (
-      <h2 style={{ textAlign: "center", marginTop: "50px" }}>
-        Loading meals...
-      </h2>
+      <h1
+        style={{
+          textAlign: "center",
+          marginTop: "50px",
+          fontFamily: "Arial",
+        }}
+      >
+        Loading Users...
+      </h1>
     );
   }
 
   return (
     <div
       style={{
+        minHeight: "100vh",
+        backgroundColor: "#f1f5f9",
         padding: "20px",
         fontFamily: "Arial",
-        background: "#f5f5f5",
-        minHeight: "100vh",
       }}
     >
-      <h1 style={{ textAlign: "center" }}>🍽️ Meals Listing</h1>
+      <h1
+        style={{
+          textAlign: "center",
+          marginBottom: "30px",
+        }}
+      >
+        Random Users API
+      </h1>
 
+      {/* Users Grid */}
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-          gap: "15px",
-          marginTop: "20px",
+          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+          gap: "20px",
         }}
       >
-        {meals.map((item) => (
+        {users.map((user) => (
           <div
-            key={item?.idMeal}
+            key={user.id}
             style={{
-              background: "#fff",
-              borderRadius: "10px",
+              backgroundColor: "white",
+              borderRadius: "12px",
               overflow: "hidden",
-              boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
+              boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
             }}
           >
-
+            {/* User Image */}
             <img
-              src={
-                item?.strMealThumb ||
-                item?.image ||
-                "https://via.placeholder.com/300"
-              }
-              alt={item?.strMeal}
+              src={user.picture.large}
+              alt={user.name.first}
               style={{
                 width: "100%",
-                height: "180px",
+                height: "250px",
                 objectFit: "cover",
               }}
             />
 
-            <div style={{ padding: "10px" }}>
-              <h3 style={{ fontSize: "14px" }}>
-                {item?.strMeal}
-              </h3>
+            {/* User Details */}
+            <div style={{ padding: "15px" }}>
+              <h2
+                style={{
+                  marginBottom: "10px",
+                }}
+              >
+                {user.name.title} {user.name.first} {user.name.last}
+              </h2>
 
-              <p style={{ fontSize: "12px", color: "gray" }}>
-                {item?.strCategory}
+              <p>
+                <strong>Gender:</strong> {user.gender}
               </p>
 
-              <p style={{ fontSize: "13px" }}>
-                {item?.strArea}
+              <p>
+                <strong>Email:</strong> {user.email}
+              </p>
+
+              <p>
+                <strong>Phone:</strong> {user.phone}
+              </p>
+
+              <p>
+                <strong>Country:</strong> {user.location.country}
+              </p>
+
+              <p>
+                <strong>City:</strong> {user.location.city}
+              </p>
+
+              <p>
+                <strong>Username:</strong> {user.login.username}
+              </p>
+
+              <p>
+                <strong>Age:</strong> {user.dob.age}
               </p>
             </div>
           </div>
@@ -101,3 +134,5 @@ export default function App() {
     </div>
   );
 }
+
+export default App;

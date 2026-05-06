@@ -1,57 +1,76 @@
-#  Meals Listing Interface
+# Random Users Listing Interface
 
-This is a simple **React + Vite** project that displays a list of meals fetched from a public API in a clean and responsive grid layout.
-
----
-
-##  Live Demo
-https://meals-ui.vercel.app
+This is a simple **React + Vite** project that displays random users fetched from a public API in a clean and responsive card layout.
 
 ---
 
-##  Features
 
-- Fetch meals from FreeAPI
-- Display meal image, name, category, and area
+
+---
+
+## Features
+
+- Fetch random users from FreeAPI
+- Display user image, name, email, phone, country, and age
 - Responsive grid layout
-- Clean and simple UI
+- Clean and modern UI
 - Loading state handling
-- Fallback image support
+- Error handling
+- Dynamic rendering using React
 
 ---
 
-##  API Used
+## API Used
 
-https://api.freeapi.app/api/v1/public/meals
+https://api.freeapi.app/api/v1/public/randomusers
 
 ---
 
-##  Tech Stack
+## Tech Stack
 
 - React (Vite)
 - JavaScript (ES6+)
-- CSS (Inline styling)
+- CSS (Inline Styling)
 - FreeAPI
 
 ---
 
-##  Project Setup
+## Project Setup
 
-### 1. Clone repository
-git clone https://github.com/DeveloperManishR/chai-code-projects/tree/meals-ui
+### 1. Clone Repository
 
-## 2. Install dependencies
+```bash
+git clone https://github.com/DeveloperManishR/chai-code-projects/tree/random-users-ui
+```
+
+---
+
+### 2. Install Dependencies
+
+```bash
 npm install
+```
 
-## 3. Run project
+---
+
+### 3. Run Project
+
+```bash
 npm run dev
+```
+
+---
 
 ## Learning Outcomes
-API integration in React
-useEffect and useState hooks
-Handling nested API responses
-Dynamic rendering using map()
-Responsive UI design
+
+- API integration in React
+- Using `useEffect` and `useState`
+- Handling nested API responses
+- Rendering lists with `map()`
+- Responsive UI design
+- Managing loading and error states
+
+---
 
 # Author
 

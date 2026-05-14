@@ -109,4 +109,39 @@ const deletePoll = asyncHandler(async (req: Request, res: Response) => {
   ApiResponse.ok(res, "Poll deleted successfully");
 });
 
-export { createPoll, getAllPolls, getPollById, votePoll, deletePoll };
+const updatePoll = asyncHandler(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const userId = req.user?._id;
+
+  const poll = await Poll.findById(id);
+
+  if (!poll) {
+    throw ApiError.notFound("Poll not found");
+  }
+
+  if (poll.userId.toString() !== userId) {
+    throw ApiError.forbidden("You can only update your own polls");
+  }
+
+  const { status} = req.body;
+
+  poll.status = status;
+
+  await poll.save();
+
+  ApiResponse.ok(res, "Poll status updated successfully", poll);
+});
+
+const getPollAnalytics = asyncHandler(async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  const poll = await Poll.findById(id);
+
+  if (!poll) {
+    throw ApiError.notFound("Poll not found");
+  }
+
+  ApiResponse.ok(res, "Poll analytics fetched successfully", poll);
+});
+
+export { createPoll, getAllPolls, getPollById, votePoll, deletePoll,updatePoll,getPollAnalytics };

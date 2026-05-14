@@ -13,6 +13,8 @@ import {
   User as UserIcon,
   Wifi,
   WifiOff,
+  Share2,
+  BarChart3,
 } from "lucide-react"
 import * as React from "react"
 
@@ -33,8 +35,9 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
 import { PollResultsBar } from "@/components/polls/poll-results-bar"
 import { PollStatusBadge } from "@/components/polls/poll-status-badge"
+import { PollAnalytics } from "@/components/polls/poll-analytics"
 import { ErrorAlert } from "@/components/shared/error-alert"
-import { usePoll, useDeletePoll } from "@/hooks/use-polls"
+import { usePoll, useDeletePoll, useUpdatePollStatus } from "@/hooks/use-polls"
 import { useAuth } from "@/providers/auth-provider"
 import { useSocket } from "@/context/socket.context"
 import { toast } from "sonner"
@@ -64,6 +67,7 @@ export default function PollDetailPage() {
   // Initial poll data via React Query (one-time fetch on mount)
   const { data: initialPoll, isLoading, isError, refetch } = usePoll(id!)
   const deleteMutation = useDeletePoll()
+  const updateStatusMutation = useUpdatePollStatus()
 
   // Live poll state — seeded from the fetch, then kept fresh by socket events
   const [livePoll, setLivePoll] = React.useState<Poll | null>(null)
@@ -74,7 +78,9 @@ export default function PollDetailPage() {
   const [votedQuestions, setVotedQuestions] = React.useState<Set<number>>(new Set())
   // Which question is currently being submitted (optimistic loading state)
   const [submittingQuestion, setSubmittingQuestion] = React.useState<number | null>(null)
+  
   const [deleteDialogOpen, setDeleteDialogOpen] = React.useState(false)
+  const [publishDialogOpen, setPublishDialogOpen] = React.useState(false)
 
   // Seed livePoll from initial fetch
   React.useEffect(() => {
@@ -172,6 +178,26 @@ export default function PollDetailPage() {
     } finally {
       setDeleteDialogOpen(false)
     }
+  }
+
+  const handlePublish = async () => {
+    if (!id) return
+    try {
+      await updateStatusMutation.mutateAsync({ id, status: "COMPLETED" })
+      toast.success("Poll results published!")
+    } catch (err: unknown) {
+      const message =
+        (err as { response?: { data?: { message?: string } } })?.response?.data
+          ?.message ?? "Failed to publish poll results."
+      toast.error(message)
+    } finally {
+      setPublishDialogOpen(false)
+    }
+  }
+
+  const handleShare = () => {
+    navigator.clipboard.writeText(window.location.href)
+    toast.success("Link copied to clipboard!")
   }
 
   // ── Loading / error guards ─────────────────────────────────────────────────
@@ -274,76 +300,117 @@ export default function PollDetailPage() {
           )}
         </div>
 
-        {/* Delete (owner only) */}
-        {isOwner && (
-          <Dialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
-            <DialogTrigger asChild>
-              <Button
-                variant="outline"
-                size="sm"
-                className="border-destructive/30 text-destructive hover:bg-destructive/10"
-              >
-                <Trash2 className="mr-1.5 h-4 w-4" />
-                Delete Poll
-              </Button>
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>Delete this poll?</DialogTitle>
-                <DialogDescription>
-                  This action cannot be undone. All votes and data will be
-                  permanently removed.
-                </DialogDescription>
-              </DialogHeader>
-              <DialogFooter>
-                <Button variant="outline" onClick={() => setDeleteDialogOpen(false)}>
-                  Cancel
+        {/* Actions row */}
+        <div className="flex flex-wrap items-center gap-3 pt-2">
+          <Button variant="outline" size="sm" onClick={handleShare}>
+            <Share2 className="mr-1.5 h-4 w-4" />
+            Share
+          </Button>
+
+          {isOwner && isActive && (
+            <Dialog open={publishDialogOpen} onOpenChange={setPublishDialogOpen}>
+              <DialogTrigger asChild>
+                <Button variant="outline" size="sm" className="border-primary/30 text-primary hover:bg-primary/10">
+                  <BarChart3 className="mr-1.5 h-4 w-4" />
+                  Publish Results
                 </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Publish poll results?</DialogTitle>
+                  <DialogDescription>
+                    This will close the poll to new votes and reveal the final analytics to everyone.
+                  </DialogDescription>
+                </DialogHeader>
+                <DialogFooter>
+                  <Button variant="outline" onClick={() => setPublishDialogOpen(false)}>
+                    Cancel
+                  </Button>
+                  <Button onClick={handlePublish} disabled={updateStatusMutation.isPending}>
+                    {updateStatusMutation.isPending && (
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    )}
+                    Publish
+                  </Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+          )}
+
+          {isOwner && (
+            <Dialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+              <DialogTrigger asChild>
                 <Button
-                  variant="destructive"
-                  onClick={handleDelete}
-                  disabled={deleteMutation.isPending}
+                  variant="outline"
+                  size="sm"
+                  className="border-destructive/30 text-destructive hover:bg-destructive/10"
                 >
-                  {deleteMutation.isPending && (
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  )}
-                  Delete
+                  <Trash2 className="mr-1.5 h-4 w-4" />
+                  Delete Poll
                 </Button>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
-        )}
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Delete this poll?</DialogTitle>
+                  <DialogDescription>
+                    This action cannot be undone. All votes and data will be
+                    permanently removed.
+                  </DialogDescription>
+                </DialogHeader>
+                <DialogFooter>
+                  <Button variant="outline" onClick={() => setDeleteDialogOpen(false)}>
+                    Cancel
+                  </Button>
+                  <Button
+                    variant="destructive"
+                    onClick={handleDelete}
+                    disabled={deleteMutation.isPending}
+                  >
+                    {deleteMutation.isPending && (
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    )}
+                    Delete
+                  </Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+          )}
+        </div>
       </div>
 
       <Separator />
 
-      {/* ── Questions ───────────────────────────────────────────────────── */}
-      <div className="space-y-6">
-        <h2 className="text-lg font-semibold text-foreground">
-          Questions ({poll.questions.length})
-        </h2>
+      {/* ── Main Content ─────────────────────────────────────────────────── */}
+      {poll.status === "COMPLETED" ? (
+        <PollAnalytics poll={poll} />
+      ) : (
+        <div className="space-y-6">
+          <h2 className="text-lg font-semibold text-foreground">
+            Questions ({poll.questions.length})
+          </h2>
 
-        {poll.questions.map((question, qIdx) => {
-          const hasVotedOnThis = votedQuestions.has(qIdx)
-          const showResults = hasVotedOnThis || !canVote
+          {poll.questions.map((question, qIdx) => {
+            const hasVotedOnThis = votedQuestions.has(qIdx)
+            const showResults = hasVotedOnThis || !canVote
 
-          return (
-            <QuestionCard
-              key={question._id}
-              question={question}
-              questionIndex={qIdx}
-              showResults={showResults}
-              selectedOption={selections[qIdx]}
-              hasVoted={hasVotedOnThis}
-              isSubmitting={submittingQuestion === qIdx}
-              canVote={canVote}
-              isConnected={isConnected}
-              onSelect={handleSelect}
-              onVote={handleVote}
-            />
-          )
-        })}
-      </div>
+            return (
+              <QuestionCard
+                key={question._id}
+                question={question}
+                questionIndex={qIdx}
+                showResults={showResults}
+                selectedOption={selections[qIdx]}
+                hasVoted={hasVotedOnThis}
+                isSubmitting={submittingQuestion === qIdx}
+                canVote={canVote}
+                isConnected={isConnected}
+                onSelect={handleSelect}
+                onVote={handleVote}
+              />
+            )
+          })}
+        </div>
+      )}
 
       {/* ── Auth prompt ──────────────────────────────────────────────────── */}
       <AnimatePresence>

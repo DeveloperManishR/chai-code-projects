@@ -23,4 +23,9 @@ router.delete("/:id", authenticate, controller.deletePoll);
 // This REST endpoint is kept as a fallback.
 router.post("/:id/vote", controller.votePoll);
 
+
+router.patch("/update/:id", authenticate ,controller.updatePoll)
+
+router.get('/:id/analytics',controller.getPollAnalytics)
+
 export default router;

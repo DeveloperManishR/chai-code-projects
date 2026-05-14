@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { createPoll, deletePoll, getPollById, getPolls, votePoll } from "@/api/polls.api"
+import { createPoll, deletePoll, getPollById, getPolls, votePoll, updatePollStatus } from "@/api/polls.api"
 import type { CreatePollInput, VoteInput } from "@/types"
 
 const POLLS_KEY = ["polls"] as const
@@ -45,13 +45,24 @@ export function useVotePoll() {
   })
 }
 
-/** Delete a poll. Invalidates the poll list cache on success. */
 export function useDeletePoll() {
   const qc = useQueryClient()
   return useMutation({
     mutationFn: (id: string) => deletePoll(id),
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: POLLS_KEY })
+    },
+  })
+}
+
+export function useUpdatePollStatus() {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: ({ id, status }: { id: string; status: "ACTIVE" | "INACTIVE" | "COMPLETED" }) =>
+      updatePollStatus(id, status),
+    onSuccess: (_data, variables) => {
+      qc.invalidateQueries({ queryKey: POLLS_KEY })
+      qc.invalidateQueries({ queryKey: [...POLLS_KEY, variables.id] })
     },
   })
 }

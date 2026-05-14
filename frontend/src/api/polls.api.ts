@@ -27,3 +27,9 @@ export async function votePoll(id: string, data: VoteInput): Promise<Poll> {
 export async function deletePoll(id: string): Promise<void> {
   await apiClient.delete(`/api/polls/${id}`)
 }
+
+export async function updatePollStatus(id: string, status: string): Promise<Poll> {
+  const res = await apiClient.patch<ApiResponse<Poll>>(`/api/polls/update/${id}`, { status })
+  if (!res.data.data) throw new Error("Failed to update poll")
+  return res.data.data
+}

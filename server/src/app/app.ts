@@ -19,6 +19,7 @@ export function createServerApplication(): Application {
     })
   );
   app.use(httpLogger);
+  
 
   // ─── Health Check ──────────────────────────────────────────────────────
   app.get("/api/health", (_req, res) => {

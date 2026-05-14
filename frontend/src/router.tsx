@@ -7,6 +7,7 @@ import { AuthGuard } from "@/components/auth/auth-guard"
 import HomePage from "@/pages/home"
 import LoginPage from "@/pages/login"
 import SignupPage from "@/pages/signup"
+import VerifyEmailPage from "@/pages/verify-email"
 import PollDetailPage from "@/pages/poll-detail"
 import CreatePollPage from "@/pages/create-poll"
 import NotFoundPage from "@/pages/not-found"
@@ -18,6 +19,7 @@ export const router = createBrowserRouter([
     children: [
       { path: "/login", element: <LoginPage /> },
       { path: "/signup", element: <SignupPage /> },
+      { path: "/verify-email", element: <VerifyEmailPage /> },
     ],
   },
 

@@ -6,7 +6,7 @@ import { asyncHandler } from "../../common/utils/helper.js";
 
 // ─── Create Poll ────────────────────────────────────────────────────────────
 const createPoll = asyncHandler(async (req: Request, res: Response) => {
-  const { title, description, questions, expiryTime } = req.body;
+  const { title, description, questions, expiryTime ,needAuthentication} = req.body;
   const userId = req.user?._id;
 
   if (!userId) {
@@ -18,6 +18,7 @@ const createPoll = asyncHandler(async (req: Request, res: Response) => {
     title,
     description,
     questions,
+    needAuthentication,
     expiryTime: new Date(expiryTime),
   });
 
@@ -55,6 +56,11 @@ const votePoll = asyncHandler(async (req: Request, res: Response) => {
 
   if (!poll) {
     throw ApiError.notFound("Poll not found");
+  }
+
+  // Enforce auth only when the poll creator requires it
+  if (poll.needAuthentication && !req.user) {
+    throw ApiError.unauthorized("You must be logged in to vote on this poll");
   }
 
   if (poll.status !== "ACTIVE") {

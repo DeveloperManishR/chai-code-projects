@@ -79,4 +79,32 @@ const login = asyncHandler(async (req: Request, res: Response) => {
   });
 });
 
-export { register, login };
+
+const verifyEmail = asyncHandler(async (req: Request, res: Response) => {
+  
+  const trimmed = String(req.params.token).trim();
+  console.log("trimmedtrimmedtrimmed",trimmed)
+  // if (!trimmed) {
+  //   throw ApiError.badRequest("Invalid or expired verification token");
+  // }
+
+  const hashedInput = hashToken(trimmed);
+  let user = await User.findOne({ verificationToken: hashedInput }).select(
+    "+verificationToken",
+  );
+  if (!user) {
+    user = await User.findOne({ verificationToken: trimmed }).select(
+      "+verificationToken",
+    );
+  }
+  if (!user) throw ApiError.badRequest("Invalid or expired verification token");
+
+  await User.findByIdAndUpdate(user._id, {
+    $set: { isVerified: true },
+    $unset: { verificationToken: 1 },
+  });
+
+  ApiResponse.ok(res, "Email verified successfully. You can now log in.");
+});
+
+export { register, login , verifyEmail };

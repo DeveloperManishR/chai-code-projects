@@ -8,16 +8,19 @@ import { QueryProvider } from "@/providers/query-provider.tsx"
 import { AuthProvider } from "@/providers/auth-provider.tsx"
 import { TooltipProvider } from "@/components/ui/tooltip.tsx"
 import { Toaster } from "@/components/ui/sonner.tsx"
+import { SocketProvider } from "./context/socket.context"
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ThemeProvider>
       <QueryProvider>
         <AuthProvider>
-          <TooltipProvider>
-            <App />
-            <Toaster richColors position="top-right" />
-          </TooltipProvider>
+          <SocketProvider>
+            <TooltipProvider>
+              <App />
+              <Toaster richColors position="top-right" />
+            </TooltipProvider>
+          </SocketProvider>
         </AuthProvider>
       </QueryProvider>
     </ThemeProvider>

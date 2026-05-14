@@ -10,3 +10,13 @@ export async function loginUser(data: LoginInput): Promise<ApiResponse<LoginResp
   const res = await apiClient.post<ApiResponse<LoginResponse>>("/api/auth/login", data)
   return res.data
 }
+
+export async function verifyEmail(token: string): Promise<ApiResponse<null>> {
+  const res = await apiClient.get<ApiResponse<null>>(`/api/auth/verify-email/${token}`)
+  return res.data
+}
+
+export async function resendVerificationEmail(email: string): Promise<ApiResponse<null>> {
+  const res = await apiClient.post<ApiResponse<null>>("/api/auth/resend-verification", { email })
+  return res.data
+}

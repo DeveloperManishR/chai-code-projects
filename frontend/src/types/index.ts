@@ -29,6 +29,7 @@ export interface Poll {
   description: string
   questions: Question[]
   expiryTime: string
+  needAuthentication: boolean
   status: "ACTIVE" | "INACTIVE" | "COMPLETED"
   createdAt: string
   updatedAt: string
@@ -75,6 +76,7 @@ export interface CreatePollInput {
     options: { text: string }[]
   }[]
   expiryTime: string
+  needAuthentication: boolean
 }
 
 export interface VoteInput {

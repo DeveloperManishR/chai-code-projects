@@ -65,6 +65,11 @@ const pollSchema = new mongoose.Schema(
       required: true,
     },
 
+    needAuthentication: {
+      type: Boolean,
+      default: true,
+    },
+
     status: {
       type: String,
       enum: ["ACTIVE", "INACTIVE", "COMPLETED"],

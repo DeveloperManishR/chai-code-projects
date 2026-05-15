@@ -46,7 +46,7 @@ const createPollFormSchema = z.object({
     .max(500, "Description cannot exceed 500 characters"),
   questions: z.array(questionSchema).min(1, "At least one question is required"),
   expiryDateTime: z
-    .date({ required_error: "Please select an expiry date and time" })
+    .date()
     .refine((date) => date > new Date(), "Expiry must be in the future"),
   needAuthentication: z.boolean(),
 })
@@ -178,7 +178,7 @@ export default function CreatePollPage() {
                   render={({ field }) => (
                     <DatePicker
                       selected={field.value}
-                      onChange={(date) => field.onChange(date)}
+                      onChange={(date: any) => field.onChange(date)}
                       showTimeSelect
                       timeFormat="HH:mm"
                       timeIntervals={15}

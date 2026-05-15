@@ -1,15 +1,14 @@
 import * as React from "react"
-import { 
-  Bar, BarChart, CartesianGrid, XAxis, YAxis, Tooltip as RechartsTooltip, 
-  ResponsiveContainer, Cell, PieChart, Pie, Legend as RechartsLegend 
+import {
+  Bar, BarChart, CartesianGrid, XAxis, YAxis,
+  Cell, PieChart, Pie
 } from "recharts"
 import { motion, AnimatePresence } from "framer-motion"
 import { BarChart3, PieChart as PieChartIcon } from "lucide-react"
 
 import { ChartContainer, ChartTooltip, ChartTooltipContent, ChartLegend, ChartLegendContent } from "@/components/ui/chart"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { cn } from "@/lib/utils"
+import { Tabs,  TabsList, TabsTrigger } from "@/components/ui/tabs"
 import type { Poll, Question } from "@/types"
 
 // A set of vibrant, distinct colors for the charts
@@ -89,7 +88,7 @@ function QuestionAnalyticsCard({ question, index }: { question: Question; index:
       <Card className="overflow-hidden border-border/50 bg-card shadow-sm transition-all hover:shadow-md">
         {/* Gradient Header Line */}
         <div className="h-1 w-full bg-gradient-to-r from-blue-500 via-violet-500 to-emerald-500" />
-        
+
         <CardHeader className="pb-6">
           <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
             <div className="space-y-2 flex-1">
@@ -102,9 +101,9 @@ function QuestionAnalyticsCard({ question, index }: { question: Question; index:
               </CardDescription>
             </div>
 
-            <Tabs 
-              value={activeTab} 
-              onValueChange={(val) => setActiveTab(val as "bar" | "pie")} 
+            <Tabs
+              value={activeTab}
+              onValueChange={(val) => setActiveTab(val as "bar" | "pie")}
               className="w-[200px]"
             >
               <TabsList className="grid w-full grid-cols-2">
@@ -118,7 +117,7 @@ function QuestionAnalyticsCard({ question, index }: { question: Question; index:
             </Tabs>
           </div>
         </CardHeader>
-        
+
         <CardContent>
           <div className="h-[320px] w-full pt-4 pb-2">
             <AnimatePresence mode="wait">
@@ -142,21 +141,21 @@ function QuestionAnalyticsCard({ question, index }: { question: Question; index:
                         style={{ fontSize: "12px", fill: "hsl(var(--muted-foreground))" }}
                         dy={15}
                       />
-                      <YAxis 
-                        tickLine={false} 
-                        axisLine={false} 
-                        tickFormatter={(val) => Math.round(val).toString()} 
-                        style={{ fontSize: "12px", fill: "hsl(var(--muted-foreground))" }} 
+                      <YAxis
+                        tickLine={false}
+                        axisLine={false}
+                        tickFormatter={(val) => Math.round(val).toString()}
+                        style={{ fontSize: "12px", fill: "hsl(var(--muted-foreground))" }}
                         allowDecimals={false}
                         dx={-10}
                       />
-                      <ChartTooltip 
-                        cursor={{ fill: 'hsl(var(--muted))', opacity: 0.4 }} 
-                        content={<ChartTooltipContent hideLabel indicator="line" />} 
+                      <ChartTooltip
+                        cursor={{ fill: 'hsl(var(--muted))', opacity: 0.4 }}
+                        content={<ChartTooltipContent hideLabel indicator="line" />}
                       />
-                      <Bar 
-                        dataKey="votes" 
-                        radius={[6, 6, 0, 0]} 
+                      <Bar
+                        dataKey="votes"
+                        radius={[6, 6, 0, 0]}
                         maxBarSize={60}
                         animationDuration={1500}
                       >
@@ -178,8 +177,8 @@ function QuestionAnalyticsCard({ question, index }: { question: Question; index:
                 >
                   <ChartContainer config={chartConfig} className="h-full w-full">
                     <PieChart>
-                      <ChartTooltip 
-                        content={<ChartTooltipContent hideLabel nameKey="name" />} 
+                      <ChartTooltip
+                        content={<ChartTooltipContent hideLabel nameKey="name" />}
                       />
                       <Pie
                         data={chartData}
@@ -191,16 +190,16 @@ function QuestionAnalyticsCard({ question, index }: { question: Question; index:
                         innerRadius={65}
                         paddingAngle={4}
                         animationDuration={1500}
-                        label={({ name, percentage }) => percentage > 5 ? `${percentage}%` : null}
+                        label={({ payload }) => payload.percentage > 5 ? `${payload.percentage}%` : null}
                         labelLine={false}
                       >
                         {chartData.map((entry, idx) => (
                           <Cell key={`cell-${idx}`} fill={entry.fill} />
                         ))}
                       </Pie>
-                      <ChartLegend 
+                      <ChartLegend
                         content={<ChartLegendContent nameKey="name" />}
-                        className="flex-wrap pt-8" 
+                        className="flex-wrap pt-8"
                       />
                     </PieChart>
                   </ChartContainer>

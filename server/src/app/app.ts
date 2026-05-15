@@ -6,12 +6,15 @@ import authRoute from "./modules/auth/auth.route.js";
 import pollRoute from "./modules/polling/polling.route.js";
 import { errorHandler } from "./common/middleware/error.middleware.js";
 import { httpLogger } from "./common/middleware/http.logger.middleware.js";
+import cookieParser from "cookie-parser";
 
 export function createServerApplication(): Application {
   const app = express();
 
   // ─── Core Middleware ────────────────────────────────────────────────────
   app.use(express.json());
+  app.use(cookieParser())
+
   app.use(
     cors({
       origin: env.CLIENT_URL,

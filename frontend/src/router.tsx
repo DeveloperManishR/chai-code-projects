@@ -4,6 +4,7 @@ import { AppLayout } from "@/components/layout/app-layout"
 import { AuthLayout } from "@/components/layout/auth-layout"
 import { AuthGuard } from "@/components/auth/auth-guard"
 
+import LandingPage from "@/pages/landing"
 import HomePage from "@/pages/home"
 import LoginPage from "@/pages/login"
 import SignupPage from "@/pages/signup"
@@ -27,7 +28,15 @@ export const router = createBrowserRouter([
   {
     element: <AppLayout />,
     children: [
-      { index: true, element: <HomePage /> },
+      { index: true, element: <LandingPage /> },
+      {
+        path: "/home",
+        element: (
+          <AuthGuard>
+            <HomePage />
+          </AuthGuard>
+        ),
+      },
       { path: "/polls/:id", element: <PollDetailPage /> },
       {
         path: "/polls/create",

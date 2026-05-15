@@ -7,8 +7,8 @@ import { initSocket } from "./app/common/utils/socket.js";
 async function main() {
   await connectDB();
 
-  const app = createServerApplication();
-  const server = http.createServer(app);
+
+  const server = http.createServer(createServerApplication());
   const PORT = Number(env.PORT) || 8000;
   initSocket(server)
 
@@ -16,17 +16,7 @@ async function main() {
     console.log(`🚀 Server is running on PORT ${PORT}`);
   });
 
-  // ─── Graceful Shutdown ────────────────────────────────────────────────
-  const shutdown = (signal: string) => {
-    console.log(`\n${signal} received. Shutting down gracefully...`);
-    server.close(() => {
-      console.log("Server closed.");
-      process.exit(0);
-    });
-  };
 
-  process.on("SIGINT", () => shutdown("SIGINT"));
-  process.on("SIGTERM", () => shutdown("SIGTERM"));
 }
 
 main().catch((error) => {

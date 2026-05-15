@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router"
+import { Link, useNavigate, useLocation } from "react-router"
 import {
   BarChart3,
   LogOut,
@@ -24,6 +24,7 @@ import { cn } from "@/lib/utils"
 export function Navbar() {
   const { user, isAuthenticated, logout } = useAuth()
   const navigate = useNavigate()
+  const { pathname } = useLocation()
   const [mobileOpen, setMobileOpen] = React.useState(false)
 
   const initials = user?.name
@@ -35,15 +36,18 @@ export function Navbar() {
 
   const handleLogout = () => {
     logout()
-    navigate("/login")
+    navigate("/")
   }
+
+  const homeLink = isAuthenticated ? "/home" : "/"
+  const homeLinkLabel = isAuthenticated ? "Dashboard" : "Home"
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-lg">
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         {/* Logo */}
         <Link
-          to="/"
+          to={homeLink}
           className="flex items-center gap-2 text-lg font-bold tracking-tight text-foreground transition-opacity hover:opacity-80"
         >
           <BarChart3 className="h-5 w-5 text-primary" />
@@ -51,14 +55,22 @@ export function Navbar() {
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden items-center gap-2 md:flex">
+        <div className="hidden items-center gap-1 md:flex">
           <Button variant="ghost" size="sm" asChild>
-            <Link to="/">Home</Link>
+            <Link
+              to={homeLink}
+              className={cn(pathname === homeLink && "bg-accent text-accent-foreground")}
+            >
+              {homeLinkLabel}
+            </Link>
           </Button>
 
           {isAuthenticated && (
             <Button variant="ghost" size="sm" asChild>
-              <Link to="/polls/create">
+              <Link
+                to="/polls/create"
+                className={cn(pathname === "/polls/create" && "bg-accent text-accent-foreground")}
+              >
                 <PlusCircle className="mr-1.5 h-4 w-4" />
                 Create Poll
               </Link>
@@ -73,7 +85,7 @@ export function Navbar() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="relative h-9 w-9 rounded-full"
+                  className="relative ml-1 h-9 w-9 rounded-full"
                 >
                   <Avatar className="h-8 w-8">
                     <AvatarFallback className="bg-primary text-xs text-primary-foreground">
@@ -85,9 +97,7 @@ export function Navbar() {
               <DropdownMenuContent align="end" className="w-48">
                 <div className="px-2 py-1.5">
                   <p className="text-sm font-medium">{user?.name}</p>
-                  <p className="text-xs text-muted-foreground">
-                    {user?.email}
-                  </p>
+                  <p className="text-xs text-muted-foreground">{user?.email}</p>
                 </div>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={handleLogout} className="text-destructive">
@@ -97,12 +107,12 @@ export function Navbar() {
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <div className="flex items-center gap-2">
+            <div className="ml-1 flex items-center gap-2">
               <Button variant="ghost" size="sm" asChild>
                 <Link to="/login">Login</Link>
               </Button>
-              <Button size="sm" asChild>
-                <Link to="/signup">Sign up</Link>
+              <Button size="sm" asChild className="shadow-sm">
+                <Link to="/signup">Get Started</Link>
               </Button>
             </div>
           )}
@@ -130,7 +140,7 @@ export function Navbar() {
       <div
         className={cn(
           "overflow-hidden border-t border-border transition-all duration-300 ease-in-out md:hidden",
-          mobileOpen ? "max-h-60" : "max-h-0 border-t-0",
+          mobileOpen ? "max-h-72" : "max-h-0 border-t-0",
         )}
       >
         <div className="space-y-1 px-4 py-3">
@@ -140,7 +150,7 @@ export function Navbar() {
             asChild
             onClick={() => setMobileOpen(false)}
           >
-            <Link to="/">Home</Link>
+            <Link to={homeLink}>{homeLinkLabel}</Link>
           </Button>
 
           {isAuthenticated && (
@@ -190,7 +200,7 @@ export function Navbar() {
                 asChild
                 onClick={() => setMobileOpen(false)}
               >
-                <Link to="/signup">Sign up</Link>
+                <Link to="/signup">Get Started</Link>
               </Button>
             </div>
           )}

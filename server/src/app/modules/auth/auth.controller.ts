@@ -84,9 +84,9 @@ const verifyEmail = asyncHandler(async (req: Request, res: Response) => {
   
   const trimmed = String(req.params.token).trim();
   console.log("trimmedtrimmedtrimmed",trimmed)
-  // if (!trimmed) {
-  //   throw ApiError.badRequest("Invalid or expired verification token");
-  // }
+  if (!trimmed) {
+    throw ApiError.badRequest("Invalid or expired verification token");
+  }
 
   const hashedInput = hashToken(trimmed);
   let user = await User.findOne({ verificationToken: hashedInput }).select(

@@ -1,44 +1,83 @@
-# 🎮 Tic Tac Toe Game (React)
+# ⏰ Stopwatch & Timer App
 
-A modern and interactive **Tic Tac Toe game built using React.js** with clean UI, smooth gameplay, and winner highlighting.
+A modern and responsive Stopwatch & Timer application built using React.js and CSS.
 
----
-
-## ✨ Features
-
-- 🎯 3x3 interactive game board
-- 👥 Two-player system (X and O)
-- 🏆 Winner detection logic
-- 💚 Winning 3-cell highlight effect
-- 🤝 Draw detection
-- 🔄 Reset game button
-- 🎮 Turn indicator (X / O)
-- 🎨 Modern neon/glass UI design
 
 ---
 
-## 🛠 Tech Stack
+## 🚀 Features
 
-- React.js (Vite)
-- JavaScript (ES6)
-- CSS3 (Glassmorphism + Neon Effects)
+- ⏱ Stopwatch
+  - Start
+  - Pause
+  - Reset
+
+- ⏳ Timer
+  - Custom minute & second input
+  - Start
+  - Pause
+  - Reset
+
+- 🔔 Alarm sound when timer ends
+- 🎨 Modern Glassmorphism UI
+- 📱 Fully Responsive Design
+- ⚡ Fast and smooth performance
 
 ---
 
-## 🧠 Game Logic
+## 🛠️ Tech Stack
 
-- Players take turns marking X and O
-- Winner is checked using predefined winning patterns
-- If all cells are filled and no winner → Draw
-- Winning cells are highlighted automatically
-- Reset button restarts the game instantly
+- React.js
+- JavaScript
+- CSS3
+- Vite
+
+---
+
+## 📂 Folder Structure
+
+
+src
+ ┣ components
+ ┃ ┣ Stopwatch.jsx
+ ┃ ┗ Timer.jsx
+ ┣ App.jsx
+ ┣ main.jsx
+ ┗ index.css
+```
 
 ---
 
 ## ⚙️ Installation & Setup
 
-npm install
-npm run dev
+Clone the repository:
 
-👨‍💻 Author
+git clone YOUR_GITHUB_REPO_LINK
+```
+
+Move to project folder:
+
+cd stopwatch-app
+```
+
+Install dependencies:
+
+npm install
+```
+
+Start development server:
+
+npm run dev
+```
+
+---
+
+## 📸 Preview
+
+Modern UI with responsive Stopwatch and Timer cards including alarm functionality.
+
+---
+
+## 👩‍💻 Author
+
 Manish Rawat

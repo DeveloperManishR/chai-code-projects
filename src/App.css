@@ -1,0 +1,120 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: white;
+  color: black;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Container */
+.container {
+  text-align: center;
+  padding: 25px 30px;
+
+  border-radius: 18px;
+  background: white;
+
+  border: 1px solid #ddd;
+
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Title */
+h1 {
+  font-size: 30px;
+  margin-bottom: 10px;
+
+  color: black;
+  background: none;
+
+  -webkit-text-fill-color: black;
+}
+
+/* Status */
+.status {
+  margin: 15px 0;
+  font-size: 18px;
+
+  font-weight: 600;
+  color: black;
+}
+
+.status strong {
+  color: black;
+}
+
+/* Board */
+.board {
+  display: grid;
+
+  grid-template-columns: repeat(3, 95px);
+
+  gap: 12px;
+
+  justify-content: center;
+
+  margin: 20px 0;
+}
+
+/* Cell */
+.cell {
+  width: 95px;
+  height: 95px;
+
+  font-size: 34px;
+
+  font-weight: bold;
+
+  border: 1px solid #ddd;
+
+  border-radius: 14px;
+
+  cursor: pointer;
+
+  background: white;
+
+  color: black;
+
+  transition: 0.25s;
+
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.cell:hover {
+  transform: scale(1.05);
+
+  box-shadow: 0 0 8px rgba(0,0,0,0.2);
+}
+
+.cell.filled {
+  cursor: not-allowed;
+}
+
+/* Reset button */
+.reset {
+  margin-top: 12px;
+
+  padding: 10px 22px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: black;
+
+  color: white;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.reset:hover {
+  background: #222;
+}

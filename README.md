@@ -1,7 +1,5 @@
 # 🎮 Tic Tac Toe Game (React)
 
-🚀 Live Demo: https://tic-tac-toe-delta-peach-35.vercel.app
-
 A modern and interactive **Tic Tac Toe game built using React.js** with clean UI, smooth gameplay, and winner highlighting.
 
 ---
@@ -43,4 +41,4 @@ npm install
 npm run dev
 
 👨‍💻 Author
-Sarika Malhotra
+Manish Rawat

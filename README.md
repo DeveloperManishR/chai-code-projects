@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Atelier — a small, considered storefront
 
-## Getting Started
+A demo shop built with Next.js (App Router) and the public
+[dummyjson.com](https://dummyjson.com) products endpoint. It is purely
+front-end: there is no checkout, no auth, and the cart lives in
+`localStorage`.
 
-First, run the development server:
+## Features
+
+- Server-rendered catalogue with category filtering, search, and sort.
+- Product detail pages with a gallery, related pieces, and an add-to-cart
+  panel.
+- Client-side cart (drawer + dedicated `/cart` page) persisted to
+  `localStorage`.
+- Category index (`/categories`) and category detail pages
+  (`/categories/[id]`), where the `id` is the API category slug
+  (e.g. `mens-watches`).
+- Responsive layout, dark editorial styling, and skeleton / empty states
+  for every async route.
+
+## Tech stack
+
+- [Next.js 16](https://nextjs.org) (App Router, React Server Components)
+- [React 19](https://react.dev)
+- [Tailwind CSS 4](https://tailwindcss.com)
+- TypeScript, ESLint
+
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open <http://localhost:3000>.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Script           | Description                              |
+| ---------------- | ---------------------------------------- |
+| `npm run dev`    | Start the dev server with hot reload.    |
+| `npm run build`  | Build for production.                    |
+| `npm run start`  | Run the production build.                |
+| `npm run lint`   | Lint the project with ESLint.            |
 
-## Learn More
+## Project structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+app/                # App Router routes
+  page.tsx          # Home (hero, featured, collections, manifesto)
+  products/         # /products and /products/[id]
+  categories/       # /categories and /categories/[id]
+  cart/             # /cart
+  about/            # /about
+components/         # Reusable UI (product card, browser, cart, ...)
+lib/
+  api.ts            # Data layer (freeapi.app client + normalizers)
+  types.ts          # Shared types
+  utils.ts          # formatters and helpers
+  cart-store.ts     # localStorage-backed cart store
+public/             # Static assets
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Data source
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+All products are fetched from
+[`https://dummyjson.com/products`](https://dummyjson.com/docs/products).
+The data layer lives in `lib/api.ts` and exposes:
 
-## Deploy on Vercel
+| Function | Endpoint |
+| --- | --- |
+| `getProducts(page, limit)` | `GET /products?skip=&limit=&sortBy=id&order=asc` |
+| `getProductById(id)` | `GET /products/{id}` |
+| `getCategories()` | `GET /products/category-list` |
+| `getProductsByCategory(slug, page, limit)` | `GET /products/category/{slug}?skip=&limit=` |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The dummyjson response (`{ products, total, skip, limit }` for lists,
+bare objects for single-product and category-list) is normalized in
+`lib/api.ts` into the internal `Product` / `Category` shapes the UI
+consumes. Pagination is computed from `total` to keep the existing
+`ProductsPage` contract stable.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Images are served from `cdn.dummyjson.com`; `next.config.ts` allow-lists
+remote image hosts for `next/image`.
+
+## Learn more
+
+- [Next.js documentation](https://nextjs.org/docs)
+- [Learn Next.js](https://nextjs.org/learn)
+
+## Deploy
+
+The easiest way to deploy is the
+[Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js).
+See [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying)
+for details.

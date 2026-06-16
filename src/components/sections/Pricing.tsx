@@ -75,14 +75,14 @@ export default function Pricing() {
 
   const handleCheckout = async (plan: Plan) => {
     if (plan.name === "Starter") {
-      router.push(userId ? "/dashboard" : "/sign-up");
+      router.push(userId ? "/dashboard" : "/signup");
       return;
     }
 
     if (!userId) {
       // If not logged in, redirect to login page with billing page redirect URL
       const redirectPath = encodeURIComponent("/dashboard/billing");
-      router.push(`/sign-in?redirect_url=${redirectPath}`);
+      router.push(`/signup`);
       return;
     }
 

@@ -15,7 +15,7 @@ export async function middleware(request: NextRequest) {
   if (isProtectedRoute) {
     const sessionCookie = request.cookies.get(SESSION_COOKIE_NAME)?.value;
     if (!sessionCookie) {
-      const signInUrl = new URL("/sign-in", request.url);
+      const signInUrl = new URL("/signup", request.url);
       signInUrl.searchParams.set("redirect_url", pathname);
       return NextResponse.redirect(signInUrl);
     }

@@ -68,10 +68,7 @@ export default function Navbar() {
               <>
                 {!isSignedIn && (
                   <>
-                    <Link href="/sign-in">
-                      <Button variant="ghost" className="px-4">Sign In</Button>
-                    </Link>
-                    <Link href="/sign-up">
+                    <Link href="/signup">
                       <Button variant="primary" glow magnetic className="px-4">Get Started</Button>
                     </Link>
                   </>
@@ -118,10 +115,7 @@ export default function Navbar() {
                   <>
                     {!isSignedIn && (
                       <div className="flex gap-2">
-                        <Link href="/sign-in" className="flex-1" onClick={() => setOpen(false)}>
-                          <Button variant="secondary" className="w-full">Sign In</Button>
-                        </Link>
-                        <Link href="/sign-up" className="flex-1" onClick={() => setOpen(false)}>
+                        <Link href="/signup" className="flex-1" onClick={() => setOpen(false)}>
                           <Button variant="primary" className="w-full">Get Started</Button>
                         </Link>
                       </div>

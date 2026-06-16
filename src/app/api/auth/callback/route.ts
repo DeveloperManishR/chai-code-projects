@@ -345,13 +345,12 @@ export async function GET(req: NextRequest) {
       }
     }
 
-    return NextResponse.redirect(`${origin}/onboarding`);
+    return NextResponse.redirect(`${origin}/dashboard`);
   } catch (error: unknown) {
     console.error('Error in OAuth callback:', error);
     const errorMessage = error instanceof Error ? error.message : 'Failed to exchange token';
-    // Redirect to onboarding with an error query param
     return NextResponse.redirect(
-      `${origin}/onboarding?error=${encodeURIComponent(errorMessage)}`
+      `${origin}/dashboard?error=${encodeURIComponent(errorMessage)}`
     );
   }
 }

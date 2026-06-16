@@ -14,7 +14,7 @@ export default async function DashboardLayout({
 }) {
   const session = await auth.api.getSession({ headers: await headers() });
   if (!session) {
-    redirect('/sign-in?redirect_url=' + encodeURIComponent('/dashboard/inbox'));
+    redirect('/signup');
   }
 
   const userId = session.user.id;

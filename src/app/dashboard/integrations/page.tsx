@@ -9,7 +9,7 @@ import IntegrationsClient from './IntegrationsClient';
 export default async function IntegrationsPage() {
   const session = await auth.api.getSession({ headers: await headers() });
   if (!session) {
-    redirect('/sign-in');
+    redirect('/signup');
   }
 
   const userId = session.user.id;

@@ -15,7 +15,7 @@ export default async function OnboardingPage({
 }) {
   const session = await auth.api.getSession({ headers: await headers() });
   if (!session) {
-    redirect('/sign-in?redirect_url=' + encodeURIComponent('/onboarding'));
+    redirect('/signup');
   }
 
   const userId = session.user.id;

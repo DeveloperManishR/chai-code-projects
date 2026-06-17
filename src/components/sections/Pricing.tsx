@@ -5,7 +5,7 @@ import { Check } from "lucide-react";
 import Container from "../ui/Container";
 import SectionHeading from "../ui/SectionHeading";
 import Reveal from "../ui/Reveal";
-import Button from "../ui/Button";
+import { Button } from "../ui/Button";
 import GlassCard from "../ui/GlassCard";
 import { useSession } from "@/utils/auth-client";
 import { useRouter } from "next/navigation";

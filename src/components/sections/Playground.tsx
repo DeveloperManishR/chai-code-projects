@@ -13,7 +13,7 @@ import {
 import Container from "../ui/Container";
 import SectionHeading from "../ui/SectionHeading";
 import Reveal from "../ui/Reveal";
-import Button from "../ui/Button";
+import { Button } from "../ui/Button";
 import { useReveal } from "../../hooks/useReveal";
 
 /* ─── data ─────────────────────────────────────────────────── */

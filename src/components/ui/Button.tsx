@@ -1,60 +1,65 @@
-import { useRef, useState } from "react";
-import type { ButtonHTMLAttributes, ReactNode } from "react";
+import * as React from "react"
+import { cva, type VariantProps } from "class-variance-authority"
+import { Slot } from "radix-ui"
 
-type Variant = "primary" | "secondary" | "ghost";
+import { cn } from "@/lib/utils"
 
-interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: Variant;
-  glow?: boolean;
-  magnetic?: boolean;
-  children: ReactNode;
-}
+const buttonVariants = cva(
+  "group/button inline-flex shrink-0 items-center justify-center rounded-4xl border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  {
+    variants: {
+      variant: {
+        default: "bg-primary text-primary-foreground hover:bg-primary/80",
+        outline:
+          "border-border bg-input/30 hover:bg-input/50 hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground",
+        secondary:
+          "bg-secondary text-secondary-foreground hover:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_5%)] aria-expanded:bg-secondary aria-expanded:text-secondary-foreground",
+        ghost:
+          "hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50",
+        destructive:
+          "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
+        link: "text-primary underline-offset-4 hover:underline",
+      },
+      size: {
+        default:
+          "h-9 gap-1.5 px-3 has-data-[icon=inline-end]:pr-2.5 has-data-[icon=inline-start]:pl-2.5",
+        xs: "h-6 gap-1 px-2.5 text-xs has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2 [&_svg:not([class*='size-'])]:size-3",
+        sm: "h-8 gap-1 px-3 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
+        lg: "h-10 gap-1.5 px-4 has-data-[icon=inline-end]:pr-3 has-data-[icon=inline-start]:pl-3",
+        icon: "size-9",
+        "icon-xs": "size-6 [&_svg:not([class*='size-'])]:size-3",
+        "icon-sm": "size-8",
+        "icon-lg": "size-10",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+    },
+  }
+)
 
-const base =
-  "relative inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 text-sm font-medium transition-all duration-200 select-none";
-
-const variants: Record<Variant, string> = {
-  primary: "bg-accent text-white hover:brightness-[1.08] shadow-sm",
-  secondary: "bg-surface text-text border border-line hover:border-line-strong",
-  ghost: "text-text hover:bg-surface2",
-};
-
-export default function Button({
-  variant = "primary",
-  glow = false,
-  magnetic = false,
-  className = "",
-  children,
-  ...rest
-}: Props) {
-  const ref = useRef<HTMLButtonElement>(null);
-  const [t, setT] = useState({ x: 0, y: 0 });
-
-  const onMove = (e: React.MouseEvent) => {
-    if (!magnetic || !ref.current) return;
-    const r = ref.current.getBoundingClientRect();
-    const x = ((e.clientX - r.left) / r.width - 0.5) * 10;
-    const y = ((e.clientY - r.top) / r.height - 0.5) * 10;
-    setT({ x, y });
-  };
+function Button({
+  className,
+  variant = "default",
+  size = "default",
+  asChild = false,
+  ...props
+}: React.ComponentProps<"button"> &
+  VariantProps<typeof buttonVariants> & {
+    asChild?: boolean
+  }) {
+  const Comp = asChild ? Slot.Root : "button"
 
   return (
-    <button
-      ref={ref}
-      onMouseMove={onMove}
-      onMouseLeave={() => setT({ x: 0, y: 0 })}
-      className={`${base} ${variants[variant]} ${className}`}
-      style={{ transform: `translate(${t.x}px, ${t.y}px)` }}
-      {...rest}
-    >
-      {glow && (
-        <span
-          aria-hidden
-          className="animate-glow pointer-events-none absolute -inset-1 -z-10 rounded-xl blur-md"
-          style={{ background: "var(--glow)" }}
-        />
-      )}
-      {children}
-    </button>
-  );
+    <Comp
+      data-slot="button"
+      data-variant={variant}
+      data-size={size}
+      className={cn(buttonVariants({ variant, size, className }))}
+      {...props}
+    />
+  )
 }
+
+export { Button, buttonVariants }

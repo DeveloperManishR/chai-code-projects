@@ -2,7 +2,7 @@ import { ArrowRight, Play } from "lucide-react";
 import Link from "next/link";
 import Container from "../ui/Container";
 import Reveal from "../ui/Reveal";
-import Button from "../ui/Button";
+import { Button } from "../ui/Button";
 
 // Small floating particle dot
 function Particle({

@@ -37,7 +37,7 @@ export default function SignUpPage() {
         <div className="w-full max-w-md rounded-2xl border border-line bg-surface/60 p-8 backdrop-blur-xl shadow-2xl flex flex-col items-center">
           <div className="mb-6 text-center">
             <h1 className="font-display text-3xl font-extrabold tracking-tight bg-gradient-to-r from-accent via-primary to-secondary bg-clip-text text-transparent">
-              MailyFlow
+              SwiftMail
             </h1>
             <p className="mt-2 text-sm text-muted">
               Sign in to manage your AI workflows and integrations
@@ -77,7 +77,7 @@ export default function SignUpPage() {
           </button>
 
           <p className="mt-6 text-xs text-muted text-center">
-            By continuing, you agree to MailyFlow&apos;s{" "}
+            By continuing, you agree to SwiftMail&apos;s{" "}
             <a href="/terms" className="text-accent hover:underline">Terms</a> and{" "}
             <a href="/privacy" className="text-accent hover:underline">Privacy Policy</a>.
           </p>

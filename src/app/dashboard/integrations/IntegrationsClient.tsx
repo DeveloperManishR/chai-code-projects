@@ -153,7 +153,7 @@ export default function IntegrationsClient({
                           )}
                         </h3>
                         <p className="mt-1.5 text-xs text-text-secondary leading-relaxed">
-                          Authorizes MailyFlow to read, draft, and organize your emails, and sync with your primary Google calendar to manage events and meetings.
+                          Authorizes SwiftMail to read, draft, and organize your emails, and sync with your primary Google calendar to manage events and meetings.
                         </p>
                       </div>
                     </div>

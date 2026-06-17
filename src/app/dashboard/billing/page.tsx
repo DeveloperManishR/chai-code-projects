@@ -169,7 +169,7 @@ export default function BillingPage() {
         key: orderData.keyId,
         amount: orderData.amount,
         currency: orderData.currency,
-        name: "MailyFlow",
+        name: "SwiftMail",
         description: `${planName} Plan Subscription`,
         image: "/icon.png",
         order_id: orderData.orderId,
@@ -306,7 +306,7 @@ export default function BillingPage() {
                       </div>
                       <p className="text-sm text-text-secondary">
                         {subData.planName === 'Starter'
-                          ? 'You are currently utilizing MailyFlow\'s free tier resources. Upgrade to access premium daily AI volumes.'
+                          ? 'You are currently utilizing SwiftMail\'s free tier resources. Upgrade to access premium daily AI volumes.'
                           : `Billed at ${subData.price}/month via Razorpay security gateway.`}
                       </p>
                       {subData.endDate && (

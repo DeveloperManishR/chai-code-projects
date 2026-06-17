@@ -25,21 +25,21 @@ export default function PrivacyPage() {
 
               <div className="prose prose-neutral dark:prose-invert max-w-none flex flex-col gap-6 text-text-secondary text-sm md:text-base leading-relaxed">
                 <p>
-                  At MailyFlow, we value your trust and are committed to protecting your privacy. This Privacy Policy describes how we handle, process, and protect your information when you use our website, application, and AI integration services.
+                  At SwiftMail, we value your trust and are committed to protecting your privacy. This Privacy Policy describes how we handle, process, and protect your information when you use our website, application, and AI integration services.
                 </p>
 
                 <h2 className="font-display text-xl font-semibold text-text-primary mt-4">
                   1. Google API Scopes & OAuth Integration
                 </h2>
                 <p>
-                  MailyFlow integrates directly with your Google Accounts (Gmail and Google Calendar) using official Google OAuth 2.0 credentials. Our service requires specific scopes to function as a client interface:
+                  SwiftMail integrates directly with your Google Accounts (Gmail and Google Calendar) using official Google OAuth 2.0 credentials. Our service requires specific scopes to function as a client interface:
                 </p>
                 <ul className="list-disc pl-6 space-y-2">
                   <li><strong>Gmail Scopes:</strong> To fetch, search, label, compose, stage, and dispatch email drafts.</li>
                   <li><strong>Google Calendar Scopes:</strong> To view, sync, and manage calendar events.</li>
                 </ul>
                 <p>
-                  <strong>Important:</strong> MailyFlow does not store, clone, or index your private emails or calendar event contents on our database servers. Data is processed locally on your client app and dispatched securely through official Google APIs.
+                  <strong>Important:</strong> SwiftMail does not store, clone, or index your private emails or calendar event contents on our database servers. Data is processed locally on your client app and dispatched securely through official Google APIs.
                 </p>
 
                 <h2 className="font-display text-xl font-semibold text-text-primary mt-4">
@@ -61,7 +61,7 @@ export default function PrivacyPage() {
                   Your information is strictly used to:
                 </p>
                 <ul className="list-disc pl-6 space-y-2">
-                  <li>Provide and maintain your MailyFlow workspace.</li>
+                  <li>Provide and maintain your SwiftMail workspace.</li>
                   <li>Enable our AI co-pilot to parse queries and draft responses for your approval.</li>
                   <li>Process payments and subscriptions securely.</li>
                 </ul>
@@ -82,7 +82,7 @@ export default function PrivacyPage() {
                   5. Data Security and Deletion
                 </h2>
                 <p>
-                  We implement robust, enterprise-grade encryption methods. You can revoke Google OAuth access at any time via your Google Security portal or delete your MailyFlow account from your dashboard settings, which permanently wipes all active credentials.
+                  We implement robust, enterprise-grade encryption methods. You can revoke Google OAuth access at any time via your Google Security portal or delete your SwiftMail account from your dashboard settings, which permanently wipes all active credentials.
                 </p>
 
                 <h2 className="font-display text-xl font-semibold text-text-primary mt-4">

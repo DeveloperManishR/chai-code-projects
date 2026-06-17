@@ -1,6 +1,6 @@
-# MailyFlow ✉️🤖 — An AI-First Email & Calendar Workspace
+# SwiftMail ✉️🤖 — An AI-First Email & Calendar Workspace
 
-MailyFlow is a premium, multi-tenant AI email assistant and workspace integrated directly with Gmail and Google Calendar. It is built to optimize daily email routines, streamline calendar scheduling, and provide secure, contextual AI assistance directly from the sidebar.
+SwiftMail is a premium, multi-tenant AI email assistant and workspace integrated directly with Gmail and Google Calendar. It is built to optimize daily email routines, streamline calendar scheduling, and provide secure, contextual AI assistance directly from the sidebar.
 
 ---
 
@@ -83,7 +83,7 @@ RAZORPAY_KEY_ID=your_razorpay_key_id
 RAZORPAY_KEY_SECRET=your_razorpay_key_secret
 
 # Project Details
-ProjectName=MailyFlow
+ProjectName=SwiftMail
 NEXT_PUBLIC_APP_URL=http://localhost:3000
 ```
 
@@ -99,5 +99,5 @@ npm run db:push
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view the MailyFlow dashboard onboarding flow!
+Open [http://localhost:3000](http://localhost:3000) to view the SwiftMail dashboard onboarding flow!
 

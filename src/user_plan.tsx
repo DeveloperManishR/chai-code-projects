@@ -119,7 +119,7 @@ export default function UserPlanEditor() {
         <div className="flex items-center space-x-3">
           <Shield className="h-5 w-5 text-accent" />
           <h1 className="text-lg font-bold text-text-primary flex items-center gap-2">
-            MailyFlow Dev Portal
+            SwiftMail Dev Portal
             <span className="text-[10px] font-bold bg-amber-500/10 text-amber-500 border border-amber-500/20 px-2 py-0.5 rounded-full uppercase">
               Production Users
             </span>

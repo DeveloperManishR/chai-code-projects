@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import UserPlanEditor from '@/user_plan';
 
 export const metadata = {
-  title: 'MailyFlow - Plan Editor (Dev Only)',
+  title: 'SwiftMail - Plan Editor (Dev Only)',
 };
 
 export default function DevPage() {

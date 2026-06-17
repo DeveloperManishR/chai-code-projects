@@ -306,7 +306,7 @@ export default function Problems() {
         <SectionHeading
           eyebrow="What we offer"
           title="The AI-First email client that does the work for you."
-          subtitle="MailyFlow brings your Gmail inbox, Google Calendar, and an intelligent conversational co-pilot together in one modern dashboard. Stop jumping between tabs."
+          subtitle="SwiftMail brings your Gmail inbox, Google Calendar, and an intelligent conversational co-pilot together in one modern dashboard. Stop jumping between tabs."
         />
 
         <div className="grid gap-5 md:grid-cols-3">

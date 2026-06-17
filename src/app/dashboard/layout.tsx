@@ -55,7 +55,7 @@ export default async function DashboardLayout({
     imageUrl: session.user.image || '',
   };
 
-  const projectName = process.env.ProjectName || 'MailyFlow';
+  const projectName = process.env.ProjectName || 'SwiftMail';
 
   return (
     <ClientLayoutWrapper user={serializedUser} projectName={projectName}>

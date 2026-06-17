@@ -25,21 +25,21 @@ export default function TermsPage() {
 
               <div className="prose prose-neutral dark:prose-invert max-w-none flex flex-col gap-6 text-text-secondary text-sm md:text-base leading-relaxed">
                 <p>
-                  Welcome to MailyFlow. These Terms of Service (&ldquo;Terms&rdquo;) govern your access to and use of MailyFlow&apos;s website, dashboard, and automation tools. By accessing or using our services, you agree to be bound by these Terms.
+                  Welcome to SwiftMail. These Terms of Service (&ldquo;Terms&rdquo;) govern your access to and use of SwiftMail&apos;s website, dashboard, and automation tools. By accessing or using our services, you agree to be bound by these Terms.
                 </p>
 
                 <h2 className="font-display text-xl font-semibold text-text-primary mt-4">
                   1. Services Description & Scope
                 </h2>
                 <p>
-                  MailyFlow provides a premium AI-first mail client and dashboard syncing Gmail and Google Calendar operations. Our AI assistant functions as a draft compiler, staging recommendations for you to manually inspect, approve, and send.
+                  SwiftMail provides a premium AI-first mail client and dashboard syncing Gmail and Google Calendar operations. Our AI assistant functions as a draft compiler, staging recommendations for you to manually inspect, approve, and send.
                 </p>
 
                 <h2 className="font-display text-xl font-semibold text-text-primary mt-4">
                   2. Accounts and Authentication
                 </h2>
                 <p>
-                  To use MailyFlow, you must create an account and connect your Google Account via official OAuth credentials. You are responsible for maintaining the confidentiality of your account credentials and for all actions taken under your account.
+                  To use SwiftMail, you must create an account and connect your Google Account via official OAuth credentials. You are responsible for maintaining the confidentiality of your account credentials and for all actions taken under your account.
                 </p>
 
                 <h2 className="font-display text-xl font-semibold text-text-primary mt-4">
@@ -58,21 +58,21 @@ export default function TermsPage() {
                   4. Usage Limits & Fair Use
                 </h2>
                 <p>
-                  Each plan carries specific daily limits on AI operations (triage checks, draft compositions, tool lookups). Automated abuse, spam generation, or scripting that compromises MailyFlow infrastructure may result in immediate workspace suspension.
+                  Each plan carries specific daily limits on AI operations (triage checks, draft compositions, tool lookups). Automated abuse, spam generation, or scripting that compromises SwiftMail infrastructure may result in immediate workspace suspension.
                 </p>
 
                 <h2 className="font-display text-xl font-semibold text-text-primary mt-4">
                   5. No-Refund Policy
                 </h2>
                 <p>
-                  Due to the immediate provisioning of LLM computational credits and sync webhooks, <strong>all sales are final and MailyFlow does not offer refunds</strong>. Please see our Refund Policy for complete information.
+                  Due to the immediate provisioning of LLM computational credits and sync webhooks, <strong>all sales are final and SwiftMail does not offer refunds</strong>. Please see our Refund Policy for complete information.
                 </p>
 
                 <h2 className="font-display text-xl font-semibold text-text-primary mt-4">
                   6. Disclaimers & Limitation of Liability
                 </h2>
                 <p>
-                  MailyFlow is provided &ldquo;as is&rdquo; without warranties of any kind. Since AI models can occasionally hallucinate, MailyFlow requires human-in-the-loop validation for all outbound emails. We are not liable for any messages sent, events modified, or damages resulting from unchecked AI drafts.
+                  SwiftMail is provided &ldquo;as is&rdquo; without warranties of any kind. Since AI models can occasionally hallucinate, SwiftMail requires human-in-the-loop validation for all outbound emails. We are not liable for any messages sent, events modified, or damages resulting from unchecked AI drafts.
                 </p>
 
                 <h2 className="font-display text-xl font-semibold text-text-primary mt-4">

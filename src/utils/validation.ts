@@ -12,7 +12,7 @@ export const chatMessageSchema = z.object({
 });
 
 export const envSchema = z.object({
-  ProjectName: z.string().default('MailyFlow'),
+  ProjectName: z.string().default('SwiftMail'),
   CORSAIR_KEK: z.string().min(1, 'CORSAIR_KEK environment variable is required'),
   DATABASE_URL: z.string().min(1, 'DATABASE_URL environment variable is required'),
   OPENAI_API_KEY: z.string().min(1, 'OPENAI_API_KEY environment variable is required'),

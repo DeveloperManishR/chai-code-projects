@@ -92,7 +92,7 @@ export const processAICall = inngest.createFunction(
 
       // Build system instructions using system promts helper
       const systemInstruction = getSystemInstruction({
-        projectName: process.env.ProjectName || 'MailyFlow',
+        projectName: process.env.ProjectName || 'SwiftMail',
         userLocalTime: localTime || new Date().toISOString(),
         userTimezone: timezone || 'UTC',
         userName: `${userFirstName || 'Unknown'} ${userLastName || ''}`.trim(),

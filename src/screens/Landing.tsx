@@ -1,20 +1,13 @@
 "use client";
 
-import Navbar from "../components/sections/Navbar";
-import Hero from "../components/sections/Hero";
-import Problems from "../components/sections/Problems";
-import HowItWorks from "../components/sections/HowItWorks";
-import Simulation from "../components/sections/Simulation";
-import Features from "../components/sections/Features";
-import Marquee from "../components/sections/Marquee";
-import Playground from "../components/sections/Playground";
-import DeepDive from "../components/sections/DeepDive";
-import Pricing from "../components/sections/Pricing";
-import Testimonials from "../components/sections/Testimonials";
-import Stats from "../components/sections/Stats";
-import FAQ from "../components/sections/FAQ";
-import FinalCTA from "../components/sections/FinalCTA";
-import Footer from "../components/sections/Footer";
+import Navbar from "@/components/landing/Navbar";
+import Hero from "@/components/landing/Hero";
+import Stats from "@/components/landing/Stats";
+import Capabilities from "@/components/landing/Capabilities";
+import HowItWorks from "@/components/landing/HowItWorks";
+import FAQ from "@/components/landing/FAQ";
+import CTA from "@/components/landing/CTA";
+import Footer from "@/components/landing/Footer";
 
 export default function Landing() {
   return (
@@ -22,18 +15,11 @@ export default function Landing() {
       <Navbar />
       <main>
         <Hero />
-        <Problems />
-        <HowItWorks />
-        <Simulation />
-        <Features />
-        <Marquee />
-        <Playground />
-        <DeepDive />
-        <Pricing />
-        <Testimonials />
         <Stats />
+        <Capabilities />
+        <HowItWorks />
         <FAQ />
-        <FinalCTA />
+        <CTA />
       </main>
       <Footer />
     </div>

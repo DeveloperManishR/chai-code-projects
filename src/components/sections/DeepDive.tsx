@@ -54,14 +54,14 @@ function FauxTitleBar({ label }: { label: string }) {
 
 const getInitials = (sender: string) => {
   if (sender === "Google") return "GO";
-  if (sender === "MailyFlow") return "MA";
+  if (sender === "SwiftMail") return "MA";
   if (sender === "Pallab Karmakar") return "PK";
   return sender.slice(0, 2).toUpperCase();
 };
 
 const getInitialsStyles = (sender: string) => {
   if (sender === "Google") return "bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 border border-zinc-200/50 dark:border-zinc-700/50";
-  if (sender === "MailyFlow") return "bg-red-500/10 text-red-500 dark:text-red-400";
+  if (sender === "SwiftMail") return "bg-red-500/10 text-red-500 dark:text-red-400";
   return "bg-slate-100 dark:bg-slate-800/80 text-slate-500 dark:text-slate-400 border border-slate-200/50 dark:border-slate-700/50";
 };
 
@@ -83,9 +83,9 @@ function InboxPreview() {
       unread: true,
     },
     {
-      sender: "MailyFlow",
+      sender: "SwiftMail",
       date: "14/06/2026 with 11:25 pm",
-      subject: "New device signed in to your MailyFlow account",
+      subject: "New device signed in to your SwiftMail account",
       snippet: "New sign in to your...",
       unread: true,
     },
@@ -114,7 +114,7 @@ function InboxPreview() {
 
   return (
     <div className="overflow-hidden rounded-xl border border-line-strong bg-surface shadow-[0_24px_60px_-24px_rgba(17,24,39,0.28)]">
-      <FauxTitleBar label="MailyFlow — Inbox" />
+      <FauxTitleBar label="SwiftMail — Inbox" />
       
       {/* Sub Header */}
       <div className="flex items-center justify-between border-b border-line px-4 py-2.5 bg-surface select-none">
@@ -187,7 +187,7 @@ function AIAssistantPreview() {
 
   return (
     <div className="overflow-hidden rounded-xl border border-line-strong bg-surface shadow-[0_24px_60px_-24px_rgba(17,24,39,0.28)]">
-      <FauxTitleBar label="MailyFlow — AI Assistant" />
+      <FauxTitleBar label="SwiftMail — AI Assistant" />
       <div className="flex flex-col gap-3 p-4">
         {messages.map((m, i) => (
           <div
@@ -384,7 +384,7 @@ function CalendarPreview() {
 
   return (
     <div className="relative overflow-hidden rounded-xl border border-line-strong bg-surface shadow-[0_24px_60px_-24px_rgba(17,24,39,0.28)]">
-      <FauxTitleBar label="MailyFlow — Calendar" />
+      <FauxTitleBar label="SwiftMail — Calendar" />
       
       {/* Header */}
       <div className="h-14 px-4 border-b border-line flex items-center justify-between shrink-0 bg-surface select-none">
@@ -683,7 +683,7 @@ function WorkflowPreview() {
 
   return (
     <div className="overflow-hidden rounded-xl border border-line-strong bg-surface shadow-[0_24px_60px_-24px_rgba(17,24,39,0.28)]">
-      <FauxTitleBar label="MailyFlow — Workflow Automation" />
+      <FauxTitleBar label="SwiftMail — Workflow Automation" />
       {/* workflow name */}
       <div className="flex items-center gap-2 border-b border-line px-4 py-2.5">
         <GitBranch size={12} strokeWidth={2} style={{ color: "var(--accent)" }} />
@@ -787,7 +787,7 @@ const ROWS: DiveRow[] = [
     eyebrow: "Inbox",
     title: "Your email, intelligently organized",
     description:
-      "MailyFlow reads your inbox the moment it arrives — triaging, labeling, and surfacing what matters. Noise disappears. Signal stays.",
+      "SwiftMail reads your inbox the moment it arrives — triaging, labeling, and surfacing what matters. Noise disappears. Signal stays.",
     bullets: [
       "AI triage sorts every email automatically",
       "Priority inbox surfaces what needs your attention",
@@ -813,7 +813,7 @@ const ROWS: DiveRow[] = [
     eyebrow: "Calendar Integration",
     title: "Scheduling that works while you sleep",
     description:
-      "MailyFlow connects your Gmail and Google Calendar to find the best time, send invites, and keep everyone in sync — automatically.",
+      "SwiftMail connects your Gmail and Google Calendar to find the best time, send invites, and keep everyone in sync — automatically.",
     bullets: [
       "AI finds open slots across all attendees",
       "Auto-sends invitations and reminders",
@@ -844,9 +844,9 @@ export default function DeepDive() {
     <section className="relative py-24 md:py-32">
       <Container className="flex flex-col gap-20">
         <SectionHeading
-          eyebrow="Inside MailyFlow"
+          eyebrow="Inside SwiftMail"
           title="Four surfaces, one intelligent workspace"
-          subtitle="Every part of MailyFlow is designed to reduce friction and amplify your focus — from inbox to automation."
+          subtitle="Every part of SwiftMail is designed to reduce friction and amplify your focus — from inbox to automation."
         />
 
         {ROWS.map((row, i) => (

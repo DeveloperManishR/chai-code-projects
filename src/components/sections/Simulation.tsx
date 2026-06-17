@@ -38,7 +38,7 @@ export default function Simulation() {
         <SectionHeading
           eyebrow="Live simulation"
           title="An AI operating system for your workday"
-          subtitle="Give MailyFlow a goal in plain words. Watch it reason, execute, and hand the work back for your approval — in real time."
+          subtitle="Give SwiftMail a goal in plain words. Watch it reason, execute, and hand the work back for your approval — in real time."
         />
         <div className="grid gap-6 md:grid-cols-3">
           {SIMS.map((sim, i) => (
@@ -152,7 +152,7 @@ function SimWindow({ def, index }: { def: SimDef; index: number }) {
               <Sparkles size={14} className="text-accent" />
             </div>
             <p className="text-[10px] text-muted leading-relaxed font-normal px-6">
-              Click the highlighted Send button below to trigger MailyFlow's AI Assistant reasoning stream.
+              Click the highlighted Send button below to trigger SwiftMail's AI Assistant reasoning stream.
             </p>
           </div>
         ) : (

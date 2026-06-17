@@ -13,12 +13,12 @@ const ITEMS: FAQItem[] = [
   {
     question: "Is my Gmail secure?",
     answer:
-      "Yes. MailyFlow connects via Google's official OAuth 2.0 protocol — we never see or store your password. All data in transit is encrypted with TLS 1.3, and we follow Google's API security guidelines. You can revoke access from your Google account at any time.",
+      "Yes. SwiftMail connects via Google's official OAuth 2.0 protocol — we never see or store your password. All data in transit is encrypted with TLS 1.3, and we follow Google's API security guidelines. You can revoke access from your Google account at any time.",
   },
   {
     question: "Does AI send emails automatically?",
     answer:
-      "No. By default, every AI-generated email is saved as a draft and waits for your explicit approval before anything is sent. MailyFlow is designed around a human-in-the-loop model — the AI does the work, you stay in control of what goes out.",
+      "No. By default, every AI-generated email is saved as a draft and waits for your explicit approval before anything is sent. SwiftMail is designed around a human-in-the-loop model — the AI does the work, you stay in control of what goes out.",
   },
   {
     question: "Can I approve before sending?",
@@ -28,7 +28,7 @@ const ITEMS: FAQItem[] = [
   {
     question: "Does it work with Google Calendar?",
     answer:
-      "Yes. MailyFlow has two-way sync with Google Calendar. It can read your availability, create events, send invites, reschedule meetings, and block focus time — all from a plain-language instruction. Support for Outlook Calendar is on the roadmap.",
+      "Yes. SwiftMail has two-way sync with Google Calendar. It can read your availability, create events, send invites, reschedule meetings, and block focus time — all from a plain-language instruction. Support for Outlook Calendar is on the roadmap.",
   },
   {
     question: "Can teams collaborate?",

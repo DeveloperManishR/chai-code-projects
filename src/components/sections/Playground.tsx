@@ -276,7 +276,7 @@ export default function Playground() {
         <SectionHeading
           eyebrow="AI Workflows"
           title="Watch one sentence become five actions"
-          subtitle="Type a goal in plain language. MailyFlow breaks it into tasks, executes them in parallel, and waits for your approval."
+          subtitle="Type a goal in plain language. SwiftMail breaks it into tasks, executes them in parallel, and waits for your approval."
         />
 
         {/* Prompt bar */}
@@ -316,7 +316,7 @@ export default function Playground() {
               <span className="h-2 w-2 rounded-full bg-line-strong" />
               <span className="h-2 w-2 rounded-full bg-line-strong" />
               <span className="ml-2 text-[11px] font-medium text-muted">
-                MailyFlow — Workflow Engine
+                SwiftMail — Workflow Engine
               </span>
               {running && (
                 <span className="ml-auto flex items-center gap-1.5 text-[10.5px] font-medium text-accent-ink">

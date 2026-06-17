@@ -83,11 +83,11 @@ export default function Footer() {
         <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div className="flex flex-col gap-4">
             <Link href="/" className="flex items-center gap-2">
-              <img src="/icon.png" alt="MailyFlow Logo" className="h-7 w-7 object-contain shrink-0" />
-              <span className="font-display text-[17px] font-semibold tracking-tight text-text">MailyFlow</span>
+              <img src="/icon.png" alt="SwiftMail Logo" className="h-7 w-7 object-contain shrink-0" />
+              <span className="font-display text-[17px] font-semibold tracking-tight text-text">SwiftMail</span>
             </Link>
             <p className="max-w-xs text-sm leading-relaxed text-muted">
-              Your AI employee for email and calendar. Describe the outcome — MailyFlow does the work.
+              Your AI employee for email and calendar. Describe the outcome — SwiftMail does the work.
             </p>
             <div className="flex gap-2">
               {[
@@ -121,7 +121,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-line pt-6 sm:flex-row">
-          <p className="text-xs text-muted">© 2026 MailyFlow, Inc. All rights reserved.</p>
+          <p className="text-xs text-muted">© 2026 SwiftMail, Inc. All rights reserved.</p>
           <p className="text-xs text-muted">Built for people who'd rather manage outcomes than inboxes.</p>
         </div>
       </Container>

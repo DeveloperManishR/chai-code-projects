@@ -25,14 +25,14 @@ export default function RefundsPage() {
 
               <div className="prose prose-neutral dark:prose-invert max-w-none flex flex-col gap-6 text-text-secondary text-sm md:text-base leading-relaxed">
                 <p>
-                  Thank you for subscribing to MailyFlow. Because we value transparency, we want to lay out our refund and subscription policies clearly as required for payments processed via Razorpay.
+                  Thank you for subscribing to SwiftMail. Because we value transparency, we want to lay out our refund and subscription policies clearly as required for payments processed via Razorpay.
                 </p>
 
                 <h2 className="font-display text-xl font-semibold text-text-primary mt-4">
                   1. No-Refund Policy (All Sales are Final)
                 </h2>
                 <p>
-                  MailyFlow operates as a Software-as-a-Service (SaaS) application. Due to the immediate cost of provisioning background listener webhooks, Google API routing slots, and active computational credits for LLM processing:
+                  SwiftMail operates as a Software-as-a-Service (SaaS) application. Due to the immediate cost of provisioning background listener webhooks, Google API routing slots, and active computational credits for LLM processing:
                 </p>
                 <p className="font-semibold text-text-primary border-l-2 border-accent pl-4 py-1 bg-surface2 rounded-r-md">
                   We do not offer any refunds or prorated credits for subscriptions purchased. All monthly and annual subscription transactions processed via Razorpay are strictly final and non-refundable.
@@ -42,7 +42,7 @@ export default function RefundsPage() {
                   2. Subscription Cancellation
                 </h2>
                 <p>
-                  You are free to cancel your MailyFlow subscription at any time. To cancel:
+                  You are free to cancel your SwiftMail subscription at any time. To cancel:
                 </p>
                 <ul className="list-disc pl-6 space-y-2">
                   <li>Navigate to your Workspace Settings dashboard and select the &quot;Billing&quot; tab.</li>
@@ -54,7 +54,7 @@ export default function RefundsPage() {
                   3. Free Tier Availability
                 </h2>
                 <p>
-                  To ensure that MailyFlow meets your workspace requirements before committing financially, we offer a fully featured **Starter Free Plan** (offering 10 daily AI operations). We strongly encourage you to evaluate MailyFlow on the free tier before upgrading to a paid Professional or Business plan.
+                  To ensure that SwiftMail meets your workspace requirements before committing financially, we offer a fully featured **Starter Free Plan** (offering 10 daily AI operations). We strongly encourage you to evaluate SwiftMail on the free tier before upgrading to a paid Professional or Business plan.
                 </p>
 
                 <h2 className="font-display text-xl font-semibold text-text-primary mt-4">

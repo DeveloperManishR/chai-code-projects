@@ -59,7 +59,7 @@ export default async function OnboardingPage({
       <header className="flex items-center justify-between border-b border-sidebar-border bg-card px-6 py-4 backdrop-blur-md">
         <div className="flex items-center space-x-3">
           <span className="text-xl font-bold tracking-tight bg-gradient-to-r from-accent via-success to-accent-glow bg-clip-text text-transparent">
-            MailyFlow
+            SwiftMail
           </span>
         </div>
         <div className="flex items-center space-x-4">
@@ -116,7 +116,7 @@ export default async function OnboardingPage({
                       {isGoogleConnected && <span className="text-success text-xs font-semibold bg-success/10 px-2 py-0.5 rounded-full">Connected</span>}
                     </h2>
                     <p className="mt-2 text-sm text-text-secondary leading-relaxed">
-                      Connect your Google Account to authorize MailyFlow to sync your emails, drafts, and calendar events. This enables your AI assistant to draft emails and schedule calendar meetings.
+                      Connect your Google Account to authorize SwiftMail to sync your emails, drafts, and calendar events. This enables your AI assistant to draft emails and schedule calendar meetings.
                     </p>
                   </div>
                 </div>

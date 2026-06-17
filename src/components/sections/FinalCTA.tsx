@@ -135,7 +135,7 @@ export default function FinalCTA() {
         <Reveal delay={160}>
           <p className="mt-6 max-w-lg text-base leading-relaxed text-muted">
             Connect Gmail and Calendar in 60 seconds. Describe what you need.
-            MailyFlow handles the rest — and asks before it acts.
+            SwiftMail handles the rest — and asks before it acts.
           </p>
         </Reveal>
 

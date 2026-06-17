@@ -15,7 +15,7 @@ interface Testimonial {
 
 const TESTIMONIALS: Testimonial[] = [
   {
-    quote: "Honestly, we tried building our own internal email triage script using OpenAI. Complete mess. MailyFlow's MCP orchestration just works out of the box. Saved us weeks.",
+    quote: "Honestly, we tried building our own internal email triage script using OpenAI. Complete mess. SwiftMail's MCP orchestration just works out of the box. Saved us weeks.",
     name: "Aarav Mehta",
     role: "Co-founder, DevScale",
     initials: "AM",
@@ -23,7 +23,7 @@ const TESTIMONIALS: Testimonial[] = [
     avatarStyle: "background: var(--accent); color: #fff;",
   },
   {
-    quote: "I get around 200 emails a day from merchants. MailyFlow's semantic search is magic—I can search 'merchant complains about stripe refunds last week' and it gets the exact thread.",
+    quote: "I get around 200 emails a day from merchants. SwiftMail's semantic search is magic—I can search 'merchant complains about stripe refunds last week' and it gets the exact thread.",
     name: "Kavya Nair",
     role: "Product Manager, Razorpay",
     initials: "KN",
@@ -31,7 +31,7 @@ const TESTIMONIALS: Testimonial[] = [
     avatarStyle: "background: var(--primary); color: #fff;",
   },
   {
-    quote: "The Zero-Trust Draft Staging is the only reason our security team approved MailyFlow. The AI drafts replies, but nothing goes out without a human click.",
+    quote: "The Zero-Trust Draft Staging is the only reason our security team approved SwiftMail. The AI drafts replies, but nothing goes out without a human click.",
     name: "Ishaan Sharma",
     role: "Founding Engineer, Khatabook",
     initials: "IS",
@@ -39,7 +39,7 @@ const TESTIMONIALS: Testimonial[] = [
     avatarStyle: "background: var(--secondary); color: var(--accent-ink);",
   },
   {
-    quote: "MailyFlow's unified dashboard is incredibly fast. Plus, the monthly calendar grid and email feed sync are so seamless. Huge fan of the UX.",
+    quote: "SwiftMail's unified dashboard is incredibly fast. Plus, the monthly calendar grid and email feed sync are so seamless. Huge fan of the UX.",
     name: "Ananya Patel",
     role: "Frontend Architect, Swiggy",
     initials: "AP",
@@ -47,7 +47,7 @@ const TESTIMONIALS: Testimonial[] = [
     avatarStyle: "background: var(--accent); color: #fff;",
   },
   {
-    quote: "MailyFlow saves me at least 12 hours a week. The AI context memory is super smart—it actually remembers the thread context up to 20 messages back.",
+    quote: "SwiftMail saves me at least 12 hours a week. The AI context memory is super smart—it actually remembers the thread context up to 20 messages back.",
     name: "Divyanshu Goel",
     role: "CEO, Finflo",
     initials: "DG",
@@ -55,7 +55,7 @@ const TESTIMONIALS: Testimonial[] = [
     avatarStyle: "background: var(--primary); color: #fff;",
   },
   {
-    quote: "Ditch Gmail's standard UI. MailyFlow is what an email client should be in 2026. The MCP tool calling to auto-update our DB on specific events is insane.",
+    quote: "Ditch Gmail's standard UI. SwiftMail is what an email client should be in 2026. The MCP tool calling to auto-update our DB on specific events is insane.",
     name: "Rohan Deshmukh",
     role: "Engineering Lead, CRED",
     initials: "RD",
@@ -63,7 +63,7 @@ const TESTIMONIALS: Testimonial[] = [
     avatarStyle: "background: var(--secondary); color: var(--accent-ink);",
   },
   {
-    quote: "My calendar booking link is constantly abused. With MailyFlow, the AI screens calendar requests in my email first. Safe to say my sanity is back.",
+    quote: "My calendar booking link is constantly abused. With SwiftMail, the AI screens calendar requests in my email first. Safe to say my sanity is back.",
     name: "Priya Sen",
     role: "Developer Relations, Hasura",
     initials: "PS",
@@ -79,7 +79,7 @@ const TESTIMONIALS: Testimonial[] = [
     avatarStyle: "background: var(--primary); color: #fff;",
   },
   {
-    quote: "I hate email. I've built five custom scripts to auto-sort my inbox but gave up. MailyFlow solved this for me in 5 minutes. Best purchase this year.",
+    quote: "I hate email. I've built five custom scripts to auto-sort my inbox but gave up. SwiftMail solved this for me in 5 minutes. Best purchase this year.",
     name: "Meera Iyer",
     role: "Indie Hacker",
     initials: "MI",
@@ -103,7 +103,7 @@ const TESTIMONIALS: Testimonial[] = [
     avatarStyle: "background: var(--primary); color: #fff;",
   },
   {
-    quote: "Tried other AI clients, they hallucinate and send weird replies. MailyFlow's human-in-the-loop sandboxing is the right way to build AI agents.",
+    quote: "Tried other AI clients, they hallucinate and send weird replies. SwiftMail's human-in-the-loop sandboxing is the right way to build AI agents.",
     name: "Siddharth Roy",
     role: "Core Contributor, OpenMail",
     initials: "SR",
@@ -119,7 +119,7 @@ const TESTIMONIALS: Testimonial[] = [
     avatarStyle: "background: var(--accent); color: #fff;",
   },
   {
-    quote: "MailyFlow's semantic email parser handles natural language search better than anything. Our dev ops queries find log updates in seconds.",
+    quote: "SwiftMail's semantic email parser handles natural language search better than anything. Our dev ops queries find log updates in seconds.",
     name: "Tarun Kapoor",
     role: "CTO, Zomato Labs",
     initials: "TK",
@@ -127,7 +127,7 @@ const TESTIMONIALS: Testimonial[] = [
     avatarStyle: "background: var(--primary); color: #fff;",
   },
   {
-    quote: "The UI design of MailyFlow is incredibly premium. It's clean, lightning fast, and feels like a native desktop app. 10/10 UX.",
+    quote: "The UI design of SwiftMail is incredibly premium. It's clean, lightning fast, and feels like a native desktop app. 10/10 UX.",
     name: "Sneha Hegde",
     role: "Product Designer, Jupiter",
     initials: "SH",
@@ -174,7 +174,7 @@ export default function Testimonials() {
         <SectionHeading
           eyebrow="Testimonials"
           title="Loved by people who hate email"
-          subtitle="From founders to EAs — MailyFlow gives back the hours that email used to steal."
+          subtitle="From founders to EAs — SwiftMail gives back the hours that email used to steal."
         />
 
         <Reveal delay={100}>

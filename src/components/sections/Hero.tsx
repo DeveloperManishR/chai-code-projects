@@ -40,9 +40,9 @@ const EMAILS = [
     unread: true,
   },
   {
-    sender: "MailyFlow",
+    sender: "SwiftMail",
     date: "14/06/2026 with 11:25 pm",
-    subject: "New device signed in to your MailyFlow account",
+    subject: "New device signed in to your SwiftMail account",
     snippet: "New sign in to your...",
     unread: true,
   },
@@ -71,14 +71,14 @@ const EMAILS = [
 
 const getInitials = (sender: string) => {
   if (sender === "Google") return "GO";
-  if (sender === "MailyFlow") return "MA";
+  if (sender === "SwiftMail") return "MA";
   if (sender === "Pallab Karmakar") return "PK";
   return sender.slice(0, 2).toUpperCase();
 };
 
 const getInitialsStyles = (sender: string) => {
   if (sender === "Google") return "bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 border border-zinc-200/50 dark:border-zinc-700/50";
-  if (sender === "MailyFlow") return "bg-red-500/10 text-red-500 dark:text-red-400";
+  if (sender === "SwiftMail") return "bg-red-500/10 text-red-500 dark:text-red-400";
   return "bg-slate-100 dark:bg-slate-800/80 text-slate-500 dark:text-slate-400 border border-slate-200/50 dark:border-slate-700/50";
 };
 
@@ -118,7 +118,7 @@ export default function Hero() {
           
           <Reveal delay={170}>
             <p className="max-w-xl text-lg leading-relaxed text-muted">
-              Connect Gmail and Calendar. Describe what you want in plain language. MailyFlow executes the work — and waits for your approval.
+              Connect Gmail and Calendar. Describe what you want in plain language. SwiftMail executes the work — and waits for your approval.
             </p>
           </Reveal>
           

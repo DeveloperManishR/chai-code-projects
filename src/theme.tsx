@@ -1,39 +1,12 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect } from "react";
-import type { ReactNode } from "react";
+import { useTheme as useNextTheme } from "next-themes";
 
-interface ThemeCtx {
-  isDark: boolean;
-  toggle: () => void;
-}
+export { ThemeProvider } from "next-themes";
 
-const Ctx = createContext<ThemeCtx>({ isDark: false, toggle: () => {} });
-
-export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [isDark, setIsDark] = useState(false);
-
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    const initialDark = savedTheme ? savedTheme === "dark" : false;
-    setIsDark(initialDark);
-    document.documentElement.classList.toggle("dark", initialDark);
-  }, []);
-
-  const toggle = () => {
-    const nextDark = !isDark;
-    setIsDark(nextDark);
-    localStorage.setItem("theme", nextDark ? "dark" : "light");
-    document.documentElement.classList.toggle("dark", nextDark);
-  };
-
-  return (
-    <Ctx.Provider value={{ isDark, toggle }}>
-      <div className={`landing-page ${isDark ? "dark" : ""} min-h-screen bg-bg text-text antialiased`}>
-        {children}
-      </div>
-    </Ctx.Provider>
-  );
-}
-
-export const useTheme = () => useContext(Ctx);
+export const useTheme = () => {
+  const { theme, setTheme, resolvedTheme } = useNextTheme();
+  const isDark = resolvedTheme === "dark";
+  const toggle = () => setTheme(isDark ? "light" : "dark");
+  return { isDark, toggle, theme, setTheme };
+};

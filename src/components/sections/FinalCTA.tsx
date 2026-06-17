@@ -142,7 +142,7 @@ export default function FinalCTA() {
         <Reveal delay={240}>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
             <Link href="/signup">
-              <Button variant="primary" glow magnetic className="px-6 py-3 text-sm">
+              <Button variant="default" glow magnetic className="px-6 py-3 text-sm">
                 <ArrowRight size={15} strokeWidth={2} />
                 Start Free
               </Button>

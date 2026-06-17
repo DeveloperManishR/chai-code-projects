@@ -44,10 +44,14 @@ function Button({
   variant = "default",
   size = "default",
   asChild = false,
+  glow,
+  magnetic,
   ...props
 }: React.ComponentProps<"button"> &
   VariantProps<typeof buttonVariants> & {
     asChild?: boolean
+    glow?: boolean
+    magnetic?: boolean
   }) {
   const Comp = asChild ? Slot.Root : "button"
 

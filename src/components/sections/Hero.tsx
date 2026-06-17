@@ -125,7 +125,7 @@ export default function Hero() {
           <Reveal delay={250}>
             <div className="flex flex-wrap items-center justify-center gap-3">
               <Link href="/signup">
-                <Button variant="primary" glow magnetic className="px-6 py-3 text-[15px]">
+                <Button variant="default" glow magnetic className="px-6 py-3 text-[15px]">
                   Start Free <ArrowRight size={16} strokeWidth={2} />
                 </Button>
               </Link>

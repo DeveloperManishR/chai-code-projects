@@ -17,7 +17,7 @@ interface Plan {
   ops: string;
   features: string[];
   cta: string;
-  ctaVariant: "primary" | "secondary";
+  ctaVariant: "default" | "secondary";
   ctaGlow?: boolean;
   highlighted?: boolean;
 }
@@ -47,7 +47,7 @@ const PLANS: Plan[] = [
       "Priority response speed",
     ],
     cta: "Get Professional",
-    ctaVariant: "primary",
+    ctaVariant: "default",
     ctaGlow: true,
     highlighted: true,
   },

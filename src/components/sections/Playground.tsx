@@ -291,7 +291,7 @@ export default function Playground() {
                 {PROMPT}
               </span>
               <Button
-                variant="primary"
+                variant="default"
                 glow
                 magnetic
                 className="shrink-0 px-4 py-2 text-[13px]"

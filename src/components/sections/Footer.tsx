@@ -78,13 +78,13 @@ const COLS = [
 export default function Footer() {
   return (
     <footer className="relative overflow-hidden border-t border-line">
-      <div aria-hidden className="bg-grid bg-grid-move absolute inset-0 -z-10 opacity-[0.35]" />
+      <div aria-hidden className=" absolute inset-0 -z-10 opacity-[0.35]" />
       <Container className="py-16">
         <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div className="flex flex-col gap-4">
             <Link href="/" className="flex items-center gap-2">
               <img src="/icon.png" alt="SwiftMail Logo" className="h-7 w-7 object-contain shrink-0" />
-              <span className="font-display text-[17px] font-semibold tracking-tight text-text">SwiftMail</span>
+              <span className="text-[17px] font-semibold tracking-tight text-text">SwiftMail</span>
             </Link>
             <p className="max-w-xs text-sm leading-relaxed text-muted">
               Your AI employee for email and calendar. Describe the outcome — SwiftMail does the work.

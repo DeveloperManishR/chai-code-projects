@@ -64,8 +64,8 @@ function MarqueeRow({
 }) {
   const trackClass =
     direction === "left"
-      ? "marquee-track"
-      : "marquee-track-r marquee-slow";
+      ? ""
+      : " ";
 
   return (
     /* overflow-hidden clip + fade masks container */
@@ -112,8 +112,8 @@ export default function Marquee() {
         </Reveal>
       </Container>
 
-      {/* Marquee rows — marquee-pause wraps both so hover on either pauses both */}
-      <div className="marquee-pause flex flex-col gap-3">
+      {/* Marquee rows —  wraps both so hover on either pauses both */}
+      <div className=" flex flex-col gap-3">
         <MarqueeRow chips={TOP_ROW} direction="left" />
         <MarqueeRow chips={BOTTOM_ROW} direction="right" />
       </div>

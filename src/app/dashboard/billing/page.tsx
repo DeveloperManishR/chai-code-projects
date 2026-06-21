@@ -206,7 +206,7 @@ export default function BillingPage() {
           email: "",
         },
         theme: {
-          color: "#5f7a68",
+          color: "#4f46e5",
         },
         modal: {
           ondismiss: function () {
@@ -237,19 +237,19 @@ export default function BillingPage() {
   };
 
   return (
-    <div className="flex-1 flex flex-col min-h-0 bg-background text-text-primary">
+    <div className="flex-1 flex flex-col min-h-0 bg-background text-foreground">
       {/* Billing Header */}
       <div className="h-16 px-6 border-b border-border flex items-center justify-between shrink-0 bg-card">
         <div className="flex items-center space-x-3">
           <CreditCard className="h-5 w-5 text-slate-600 dark:text-slate-400" />
-          <h1 className="text-lg font-bold text-text-primary">Billing & Quota Settings</h1>
+          <h1 className="text-lg font-bold text-foreground">Billing & Quota Settings</h1>
         </div>
         <button
           onClick={fetchBillingStatus}
           disabled={loading}
-          className={`p-1.5 text-text-secondary hover:text-text-primary hover:bg-sidebar-hover rounded-lg transition-colors cursor-pointer flex items-center justify-center shrink-0 ${
-            loading ? 'animate-spin opacity-50' : ''
-          }`}
+          className={`p-1.5 text-muted-foreground hover:text-foreground hover:bg-sidebar-hover rounded-lg transition-colors cursor-pointer flex items-center justify-center shrink-0 ${
+ loading ? 'animate-spin opacity-50' : ''
+ }`}
           title="Refresh billing details"
         >
           <RefreshCw className="h-4 w-4" />
@@ -266,8 +266,8 @@ export default function BillingPage() {
         )}
 
         {successMsg && (
-          <div className="flex items-start space-x-2.5 p-4 rounded-xl border border-success/20 bg-success/5 text-success text-sm font-medium">
-            <CheckCircle2 className="h-5 w-5 shrink-0 mt-0.5 text-success" />
+          <div className="flex items-start space-x-2.5 p-4 rounded-xl border border-primary/20 bg-primary/5 text-primary text-sm font-medium">
+            <CheckCircle2 className="h-5 w-5 shrink-0 mt-0.5 text-primary" />
             <span>{successMsg}</span>
           </div>
         )}
@@ -282,14 +282,14 @@ export default function BillingPage() {
             <>
               {/* Subscription Detail Card */}
               <div className="space-y-4">
-                <h2 className="text-sm font-bold uppercase tracking-wider text-text-muted">Subscription Details</h2>
+                <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">Subscription Details</h2>
                 <div className="bg-card border border-border rounded-2xl p-6 shadow-sm">
                   <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                     <div className="space-y-2">
                       <div className="flex items-center space-x-2">
-                        <span className="text-2xl font-black text-text-primary tracking-tight">{subData.planName}</span>
+                        <span className="text-2xl font-black text-foreground tracking-tight">{subData.planName}</span>
                         {subData.status === 'active' && (
-                          <span className="text-xs font-semibold bg-success/10 text-success border border-success/20 px-2 py-0.5 rounded-full">
+                          <span className="text-xs font-semibold bg-primary/10 text-primary border border-primary/20 px-2 py-0.5 rounded-full">
                             Active
                           </span>
                         )}
@@ -304,13 +304,13 @@ export default function BillingPage() {
                           </span>
                         )}
                       </div>
-                      <p className="text-sm text-text-secondary">
+                      <p className="text-sm text-muted-foreground">
                         {subData.planName === 'Starter'
                           ? 'You are currently utilizing SwiftMail\'s free tier resources. Upgrade to access premium daily AI volumes.'
                           : `Billed at ${subData.price}/month via Razorpay security gateway.`}
                       </p>
                       {subData.endDate && (
-                        <p className="text-xs text-text-muted">
+                        <p className="text-xs text-muted-foreground">
                           {subData.status === 'cancelled'
                             ? `Your plan cancellation is pending cycle end. Premium access will expire on ${formatDate(subData.endDate)}.`
                             : `Next invoice renewal date is scheduled for ${formatDate(subData.endDate)}.`}
@@ -323,7 +323,7 @@ export default function BillingPage() {
                         <button
                           onClick={handleCancelPlan}
                           disabled={cancelling}
-                          className="rounded-xl border border-danger/25 text-danger hover:bg-danger/10 px-5 py-2.5 text-xs font-semibold transition-all duration-200 active:scale-95 cursor-pointer disabled:opacity-50"
+                          className="rounded-xl border border-red-500/25 text-red-600 hover:bg-red-500/10 px-5 py-2.5 text-xs font-semibold transition-all duration-200 active:scale-95 cursor-pointer disabled:opacity-50"
                         >
                           {cancelling ? 'Cancelling...' : 'Cancel Subscription'}
                         </button>
@@ -344,7 +344,7 @@ export default function BillingPage() {
 
               {/* Available Plans Section */}
               <div id="upgrade-section" className="space-y-4 pt-2">
-                <h2 className="text-sm font-bold uppercase tracking-wider text-text-muted">Available Plans</h2>
+                <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">Available Plans</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {PLANS.map((p) => {
                     const isCurrentPlan = subData.planName.toLowerCase() === p.name.toLowerCase();
@@ -375,10 +375,10 @@ export default function BillingPage() {
                       <div
                         key={p.name}
                         className={`flex flex-col rounded-2xl border p-6 bg-card transition-all relative ${
-                          isHighlighted
-                            ? 'border-accent shadow-md shadow-accent/5 ring-1 ring-accent/25'
-                            : 'border-border shadow-sm'
-                        }`}
+ isHighlighted
+ ? 'border-accent shadow-md shadow-accent/5 ring-1 ring-accent/25'
+ : 'border-border shadow-sm'
+ }`}
                       >
                         {isHighlighted && (
                           <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-accent text-white px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase select-none">
@@ -387,19 +387,19 @@ export default function BillingPage() {
                         )}
                         
                         <div className="space-y-1.5 mb-5">
-                          <h3 className="text-base font-bold text-text-primary">{p.name}</h3>
+                          <h3 className="text-base font-bold text-foreground">{p.name}</h3>
                           <div className="flex items-baseline space-x-1">
-                            <span className="text-2xl font-black text-text-primary tracking-tight">{p.price}</span>
-                            {p.priceNote && <span className="text-xs text-text-muted">{p.priceNote}</span>}
+                            <span className="text-2xl font-black text-foreground tracking-tight">{p.price}</span>
+                            {p.priceNote && <span className="text-xs text-muted-foreground">{p.priceNote}</span>}
                           </div>
-                          <p className="text-xs text-text-muted font-medium">{p.ops}</p>
+                          <p className="text-xs text-muted-foreground font-medium">{p.ops}</p>
                         </div>
                         
                         <div className="flex-1 flex flex-col justify-between">
                           <ul className="space-y-2.5 mb-6">
                             {p.features.map((f, idx) => (
-                              <li key={idx} className="flex items-start space-x-2 text-xs text-text-secondary leading-relaxed">
-                                <CheckCircle2 className="h-4 w-4 text-success shrink-0 mt-0.5" />
+                              <li key={idx} className="flex items-start space-x-2 text-xs text-muted-foreground leading-relaxed">
+                                <CheckCircle2 className="h-4 w-4 text-primary shrink-0 mt-0.5" />
                                 <span>{f}</span>
                               </li>
                             ))}
@@ -409,12 +409,12 @@ export default function BillingPage() {
                             onClick={() => handleUpgrade(p.name)}
                             disabled={btnDisabled || upgradingPlan !== null}
                             className={`w-full py-2.5 px-4 rounded-xl text-xs font-semibold transition-all duration-200 cursor-pointer active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none ${
-                              isCurrentPlan && isCancelled
-                                ? 'bg-success text-white hover:bg-success/90'
-                                : isHighlighted
-                                ? 'bg-accent text-white hover:bg-accent/90 hover:shadow-sm'
-                                : 'bg-surface-subtle border border-border text-text-secondary hover:bg-hover-row hover:text-text-primary'
-                            }`}
+ isCurrentPlan && isCancelled
+  ? 'bg-primary text-primary-foreground hover:bg-primary/90'
+ : isHighlighted
+ ? 'bg-accent text-white hover:bg-accent/90 hover:shadow-sm'
+ : 'bg-muted border border-border text-muted-foreground hover:bg-accent hover:text-foreground'
+ }`}
                           >
                             {upgradingPlan === p.name ? (
                               <div className="flex items-center justify-center space-x-1">
@@ -434,27 +434,27 @@ export default function BillingPage() {
 
               {/* Usage & Limits Progress Bars */}
               <div className="space-y-4 pt-2">
-                <h2 className="text-sm font-bold uppercase tracking-wider text-text-muted">Daily Operation Limits</h2>
+                <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">Daily Operation Limits</h2>
                 <div className="bg-card border border-border rounded-2xl p-6 space-y-8 shadow-sm">
                   {/* AI Calls Usage */}
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-2 text-sm font-bold text-text-primary">
+                      <div className="flex items-center space-x-2 text-sm font-bold text-foreground">
                         <Sparkles className="h-4.5 w-4.5 text-accent" />
                         <span>AI Assistant Operations</span>
                       </div>
-                      <span className="text-xs font-semibold text-text-secondary">
+                      <span className="text-xs font-semibold text-muted-foreground">
                         {usageData.ai} / {usageData.limits.aiLimit} calls
                       </span>
                     </div>
                     {/* Progress Bar Container */}
-                    <div className="h-2.5 w-full bg-surface-subtle border border-border rounded-full overflow-hidden">
+                    <div className="h-2.5 w-full bg-muted border border-border rounded-full overflow-hidden">
                       <div
                         className="h-full bg-accent rounded-full transition-all duration-500"
                         style={{ width: `${calculatePercentage(usageData.ai, usageData.limits.aiLimit)}%` }}
                       ></div>
                     </div>
-                    <p className="text-[10px] text-text-muted leading-relaxed">
+                    <p className="text-[10px] text-muted-foreground leading-relaxed">
                       AI calls count requests routed to the Copilot assistant including MCP planning queries. Quota resets daily at midnight.
                     </p>
                   </div>
@@ -462,24 +462,24 @@ export default function BillingPage() {
                   {/* Gmail Usage */}
                   <div className="space-y-2 pt-2 border-t border-border/40">
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-2 text-sm font-bold text-text-primary">
-                        <Mail className="h-4.5 w-4.5 text-danger" />
+                      <div className="flex items-center space-x-2 text-sm font-bold text-foreground">
+                        <Mail className="h-4.5 w-4.5 text-red-600" />
                         <span>Manual Gmail Actions</span>
                       </div>
-                      <span className="text-xs font-semibold text-text-secondary">
+                      <span className="text-xs font-semibold text-muted-foreground">
                         {usageData.gmail} / {usageData.limits.gmailLimit} calls
                       </span>
                     </div>
                     {/* Progress Bar */}
-                    <div className="h-2.5 w-full bg-surface-subtle border border-border rounded-full overflow-hidden">
+                    <div className="h-2.5 w-full bg-muted border border-border rounded-full overflow-hidden">
                       <div
                         className="h-full bg-slate-400 dark:bg-slate-600 rounded-full transition-all duration-500"
                         style={{ width: `${calculatePercentage(usageData.gmail, usageData.limits.gmailLimit)}%` }}
                       ></div>
                     </div>
-                    <div className="flex items-center justify-between text-[10px] text-text-muted leading-relaxed">
+                    <div className="flex items-center justify-between text-[10px] text-muted-foreground leading-relaxed">
                       <span>Refreshes, details fetch, sends, or deletes processed manually.</span>
-                      <span className="text-success font-semibold bg-success/10 px-1.5 py-0.5 rounded-full select-none shrink-0 ml-2">
+                      <span className="text-primary font-semibold bg-primary/10 px-1.5 py-0.5 rounded-full select-none shrink-0 ml-2">
                         Free & Unlimited (500 daily anti-spam cap)
                       </span>
                     </div>
@@ -488,24 +488,24 @@ export default function BillingPage() {
                   {/* Calendar Usage */}
                   <div className="space-y-2 pt-2 border-t border-border/40">
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-2 text-sm font-bold text-text-primary">
+                      <div className="flex items-center space-x-2 text-sm font-bold text-foreground">
                         <CalendarIcon className="h-4.5 w-4.5 text-accent" />
                         <span>Manual Google Calendar Actions</span>
                       </div>
-                      <span className="text-xs font-semibold text-text-secondary">
+                      <span className="text-xs font-semibold text-muted-foreground">
                         {usageData.calendar} / {usageData.limits.calendarLimit} calls
                       </span>
                     </div>
                     {/* Progress Bar */}
-                    <div className="h-2.5 w-full bg-surface-subtle border border-border rounded-full overflow-hidden">
+                    <div className="h-2.5 w-full bg-muted border border-border rounded-full overflow-hidden">
                       <div
                         className="h-full bg-slate-400 dark:bg-slate-600 rounded-full transition-all duration-500"
                         style={{ width: `${calculatePercentage(usageData.calendar, usageData.limits.calendarLimit)}%` }}
                       ></div>
                     </div>
-                    <div className="flex items-center justify-between text-[10px] text-text-muted leading-relaxed">
+                    <div className="flex items-center justify-between text-[10px] text-muted-foreground leading-relaxed">
                       <span>Event CRUD syncs or monthly grid fetches processed manually.</span>
-                      <span className="text-success font-semibold bg-success/10 px-1.5 py-0.5 rounded-full select-none shrink-0 ml-2">
+                      <span className="text-primary font-semibold bg-primary/10 px-1.5 py-0.5 rounded-full select-none shrink-0 ml-2">
                         Free & Unlimited (500 daily anti-spam cap)
                       </span>
                     </div>

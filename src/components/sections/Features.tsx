@@ -391,7 +391,7 @@ function MCPOrchestrationAnimation() {
       {/* Target Tool Node 1: Gmail (Left Top) */}
       <g transform="translate(20, 13)">
         <rect x="0" y="0" width="24" height="24" rx="4" fill="var(--card)" stroke="var(--border)" strokeWidth="0.75" />
-        <Mail size={8} className="text-danger absolute" style={{ transform: "translate(8px, 8px)" }} />
+        <Mail size={8} className="text-red-600 absolute" style={{ transform: "translate(8px, 8px)" }} />
         <motion.circle
           cx="12"
           cy="12"
@@ -663,9 +663,9 @@ export default function Features() {
                 <GlassCard hover className="group flex h-full flex-col gap-5 p-6 justify-between">
                   {/* SVG Illustration wrapper */}
                   <div className={`w-full overflow-hidden rounded-lg bg-surface2 p-3 flex items-center justify-center ${feature.className.includes("row-span-2")
-                      ? "flex-1 min-h-[260px] md:min-h-[310px]"
-                      : "min-h-[140px] max-h-[200px]"
-                    }`}>
+ ? "flex-1 min-h-[260px] md:min-h-[310px]"
+ : "min-h-[140px] max-h-[200px]"
+ }`}>
                     <Illustration />
                   </div>
 
@@ -678,7 +678,7 @@ export default function Features() {
 
                     {/* Copy text */}
                     <div className="flex flex-col gap-1.5">
-                      <h3 className="font-display text-base font-semibold leading-snug tracking-tight text-text">
+                      <h3 className="text-base font-semibold leading-snug tracking-tight text-text">
                         {feature.title}
                       </h3>
                       <p className="text-sm leading-relaxed text-muted font-normal">

@@ -103,24 +103,24 @@ export default function ComposeModal({ isOpen, onClose }: ComposeModalProps) {
     <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
       {toast && (
         <div className={`fixed top-6 left-1/2 -translate-x-1/2 z-[110] flex items-center space-x-3 px-4 py-3 rounded-xl border backdrop-blur-md shadow-lg transition-all animate-in fade-in slide-in-from-top-4 duration-300 ${
-          toast.type === 'success'
-            ? 'bg-card/90 border-success/45 text-text-primary shadow-success/5'
-            : toast.type === 'error'
-            ? 'bg-card/90 border-danger/45 text-text-primary shadow-danger/5'
-            : 'bg-card/90 border-warning/45 text-text-primary shadow-warning/5'
-        }`}>
-          {toast.type === 'success' && <CheckCircle2 className="h-5 w-5 text-success shrink-0" />}
-          {toast.type === 'error' && <AlertCircle className="h-5 w-5 text-danger shrink-0" />}
-          {toast.type === 'info' && <InfoIcon className="h-5 w-5 text-warning shrink-0" />}
+ toast.type === 'success'
+  ? 'bg-card/90 border-primary/45 text-foreground shadow-primary/5'
+ : toast.type === 'error'
+ ? 'bg-card/90 border-red-500/45 text-foreground shadow-danger/5'
+ : 'bg-card/90 border-amber-500/45 text-foreground shadow-warning/5'
+ }`}>
+          {toast.type === 'success' && <CheckCircle2 className="h-5 w-5 text-primary shrink-0" />}
+          {toast.type === 'error' && <AlertCircle className="h-5 w-5 text-red-600 shrink-0" />}
+          {toast.type === 'info' && <InfoIcon className="h-5 w-5 text-amber-600 shrink-0" />}
           <span className="text-sm font-semibold">{toast.message}</span>
         </div>
       )}
-      <div className="bg-card border border-border rounded-2xl w-full max-w-lg shadow-2xl relative animate-zoom-in text-text-primary">
-        <div className="h-14 px-6 border-b border-border flex items-center justify-between bg-surface-subtle rounded-t-2xl">
-          <span className="font-bold text-text-primary text-sm">Compose New Email</span>
+      <div className="bg-card border border-border rounded-2xl w-full max-w-lg shadow-2xl relative animate-zoom-in text-foreground">
+        <div className="h-14 px-6 border-b border-border flex items-center justify-between bg-muted rounded-t-2xl">
+          <span className="font-bold text-foreground text-sm">Compose New Email</span>
           <button
             onClick={onClose}
-            className="p-1 rounded-lg text-text-secondary hover:bg-sidebar-hover hover:text-text-primary transition-colors cursor-pointer"
+            className="p-1 rounded-lg text-muted-foreground hover:bg-sidebar-hover hover:text-foreground transition-colors cursor-pointer"
           >
             <X className="h-4.5 w-4.5" />
           </button>
@@ -128,37 +128,37 @@ export default function ComposeModal({ isOpen, onClose }: ComposeModalProps) {
 
         <form onSubmit={handleSendEmail} className="p-6 space-y-4">
           <div className="space-y-1">
-            <label className="text-xs font-bold text-text-muted uppercase tracking-wider">To</label>
+            <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">To</label>
             <input
               type="email"
               placeholder="recipient@example.com"
               value={composeTo}
               onChange={(e) => setComposeTo(e.target.value)}
-              className="w-full bg-background border border-border rounded-xl py-2 px-3.5 text-sm text-text-primary placeholder-slate-400 focus:outline-none focus:border-slate-500 shadow-sm transition-all animate-zoom-in"
+              className="w-full bg-background border border-border rounded-xl py-2 px-3.5 text-sm text-foreground placeholder-slate-400 focus:outline-none focus:border-slate-500 shadow-sm transition-all animate-zoom-in"
               required
             />
           </div>
 
           <div className="space-y-1">
-            <label className="text-xs font-bold text-text-muted uppercase tracking-wider">Subject</label>
+            <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Subject</label>
             <input
               type="text"
               placeholder="Subject Line"
               value={composeSubject}
               onChange={(e) => setComposeSubject(e.target.value)}
-              className="w-full bg-background border border-border rounded-xl py-2 px-3.5 text-sm text-text-primary placeholder-slate-400 focus:outline-none focus:border-slate-500 shadow-sm transition-all"
+              className="w-full bg-background border border-border rounded-xl py-2 px-3.5 text-sm text-foreground placeholder-slate-400 focus:outline-none focus:border-slate-500 shadow-sm transition-all"
               required
             />
           </div>
 
           <div className="space-y-1">
-            <label className="text-xs font-bold text-text-muted uppercase tracking-wider">Body</label>
+            <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Body</label>
             <textarea
               rows={6}
               placeholder="Write your email body here..."
               value={composeBody}
               onChange={(e) => setComposeBody(e.target.value)}
-              className="w-full bg-background border border-border rounded-xl py-2 px-3.5 text-sm text-text-primary placeholder-slate-400 focus:outline-none focus:border-slate-500 shadow-sm transition-all resize-none"
+              className="w-full bg-background border border-border rounded-xl py-2 px-3.5 text-sm text-foreground placeholder-slate-400 focus:outline-none focus:border-slate-500 shadow-sm transition-all resize-none"
               required
             />
           </div>
@@ -168,14 +168,14 @@ export default function ComposeModal({ isOpen, onClose }: ComposeModalProps) {
               type="button"
               onClick={handleSaveDraft}
               disabled={savingDraft || sendingEmail}
-              className="px-4 py-2.5 rounded-xl border border-border text-sm font-semibold text-text-secondary hover:bg-hover-row hover:text-text-primary transition-all cursor-pointer bg-card disabled:opacity-50"
+              className="px-4 py-2.5 rounded-xl border border-border text-sm font-semibold text-muted-foreground hover:bg-accent hover:text-foreground transition-all cursor-pointer bg-card disabled:opacity-50"
             >
               {savingDraft ? 'Saving...' : 'Save Draft'}
             </button>
             <button
               type="submit"
               disabled={sendingEmail || savingDraft}
-              className="inline-flex items-center space-x-1.5 rounded-xl bg-success hover:opacity-90 px-6 py-2.5 text-sm font-semibold text-white shadow-sm transition-all active:scale-95 cursor-pointer disabled:opacity-50"
+              className="inline-flex items-center space-x-1.5 rounded-xl bg-primary hover:opacity-90 px-6 py-2.5 text-sm font-semibold text-primary-foreground shadow-sm transition-all active:scale-95 cursor-pointer disabled:opacity-50"
             >
               {sendingEmail ? (
                 <div className="flex items-center space-x-1">

@@ -19,6 +19,8 @@ interface ChatState {
   pollingIntervalId: NodeJS.Timeout | null;
   theme: 'light' | 'dark';
   isRightSidebarCollapsed: boolean;
+  aiChatOpen: boolean;
+  setAiChatOpen: (open: boolean) => void;
   setTheme: (theme: 'light' | 'dark') => void;
   setIsRightSidebarCollapsed: (collapsed: boolean) => void;
   fetchMessages: (userId: string) => Promise<void>;
@@ -52,9 +54,12 @@ export const useChatStore = create<ChatState>((set, get) => ({
   sidebarWidth: 360,
   theme: 'light',
   isRightSidebarCollapsed: false,
+  aiChatOpen: false,
   pollingIntervalId: null,
 
   setIsRightSidebarCollapsed: (collapsed) => set({ isRightSidebarCollapsed: collapsed }),
+
+  setAiChatOpen: (open) => set({ aiChatOpen: open }),
 
   setTheme: (theme) => {
     if (typeof window !== 'undefined') {

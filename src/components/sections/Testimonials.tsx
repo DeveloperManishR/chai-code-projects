@@ -168,7 +168,7 @@ export default function Testimonials() {
   return (
     <section id="testimonials" className="relative py-24 md:py-32 overflow-hidden">
       {/* subtle dot backdrop */}
-      <div aria-hidden className="absolute inset-0 -z-10 bg-dots opacity-40" />
+      <div aria-hidden className="absolute inset-0 -z-10 opacity-40" />
 
       <Container className="flex flex-col gap-14">
         <SectionHeading
@@ -179,23 +179,23 @@ export default function Testimonials() {
 
         <Reveal delay={100}>
           <div className="relative h-[650px] w-full overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)]">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 h-full marquee-vertical-pause">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 h-full ">
               {/* Column 1 */}
-              <div className="flex flex-col gap-6 marquee-vertical-track">
+              <div className="flex flex-col gap-6 ">
                 {col1Doubled.map((t, idx) => (
                   <TestimonialCard key={`col1-${idx}`} testimonial={t} />
                 ))}
               </div>
 
               {/* Column 2 */}
-              <div className="hidden md:flex flex-col gap-6 marquee-vertical-track-reverse">
+              <div className="hidden md:flex flex-col gap-6 -reverse">
                 {col2Doubled.map((t, idx) => (
                   <TestimonialCard key={`col2-${idx}`} testimonial={t} />
                 ))}
               </div>
 
               {/* Column 3 */}
-              <div className="hidden lg:flex flex-col gap-6 marquee-vertical-track">
+              <div className="hidden lg:flex flex-col gap-6 ">
                 {col3Doubled.map((t, idx) => (
                   <TestimonialCard key={`col3-${idx}`} testimonial={t} />
                 ))}
@@ -222,10 +222,10 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
             {testimonial.initials}
           </span>
           <div className="flex flex-col text-left">
-            <span className="text-sm font-semibold text-text-primary leading-tight">
+            <span className="text-sm font-semibold text-foreground leading-tight">
               {testimonial.name}
             </span>
-            <span className="text-xs text-text-muted">
+            <span className="text-xs text-muted-foreground">
               {testimonial.handle || `@${testimonial.initials.toLowerCase()}_tech`}
             </span>
           </div>
@@ -245,12 +245,12 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
       </div>
 
       {/* Quote Body */}
-      <p className="text-sm leading-relaxed text-text-secondary">
+      <p className="text-sm leading-relaxed text-muted-foreground">
         &ldquo;{testimonial.quote}&rdquo;
       </p>
 
       {/* Role Footer */}
-      <div className="flex items-center gap-1.5 border-t border-line/40 pt-3 text-[11px] font-medium text-text-muted">
+      <div className="flex items-center gap-1.5 border-t border-line/40 pt-3 text-[11px] font-medium text-muted-foreground">
         <span>{testimonial.role}</span>
       </div>
     </GlassCard>

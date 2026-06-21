@@ -240,20 +240,20 @@ export default function EventModal({
 
   return (
     <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
-      <div className="bg-card border border-border rounded-2xl w-full max-w-lg shadow-2xl relative animate-zoom-in overflow-hidden flex flex-col max-h-[90vh] text-text-primary">
+      <div className="bg-card border border-border rounded-2xl w-full max-w-lg shadow-2xl relative animate-zoom-in overflow-hidden flex flex-col max-h-[90vh] text-foreground">
         
         {/* Header */}
-        <div className="h-14 px-6 border-b border-border flex items-center justify-between bg-surface-subtle shrink-0">
+        <div className="h-14 px-6 border-b border-border flex items-center justify-between bg-muted shrink-0">
           <div className="flex items-center space-x-2">
             <Calendar className="h-4.5 w-4.5 text-indigo-500" />
-            <span className="font-bold text-text-primary text-sm">
+            <span className="font-bold text-foreground text-sm">
               {isEditMode ? 'Edit Event Details' : 'Create New Event'}
             </span>
           </div>
           <button
             type="button"
             onClick={onClose}
-            className="p-1 rounded-lg text-text-secondary hover:bg-sidebar-hover hover:text-text-primary transition-colors cursor-pointer"
+            className="p-1 rounded-lg text-muted-foreground hover:bg-sidebar-hover hover:text-foreground transition-colors cursor-pointer"
           >
             <X className="h-4.5 w-4.5" />
           </button>
@@ -270,13 +270,13 @@ export default function EventModal({
 
           {/* Title */}
           <div className="space-y-1">
-            <label className="text-xs font-bold text-text-muted uppercase tracking-wider">Event Title</label>
+            <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Event Title</label>
             <input
               type="text"
               placeholder="Add title and time"
               value={summary}
               onChange={(e) => setSummary(e.target.value)}
-              className="w-full bg-background border border-border rounded-xl py-2.5 px-3.5 text-sm text-text-primary placeholder-slate-400 focus:outline-none focus:border-slate-500 shadow-sm transition-all font-semibold"
+              className="w-full bg-background border border-border rounded-xl py-2.5 px-3.5 text-sm text-foreground placeholder-slate-400 focus:outline-none focus:border-slate-500 shadow-sm transition-all font-semibold"
               required
               disabled={loading}
             />
@@ -289,10 +289,10 @@ export default function EventModal({
               id="isAllDay"
               checked={isAllDay}
               onChange={(e) => setIsAllDay(e.target.checked)}
-              className="h-4 w-4 text-success border-border rounded focus:ring-success accent-success cursor-pointer bg-background"
+              className="h-4 w-4 text-primary border-border rounded focus:ring-primary accent-primary cursor-pointer bg-background"
               disabled={loading}
             />
-            <label htmlFor="isAllDay" className="text-xs font-bold text-text-secondary cursor-pointer select-none">
+            <label htmlFor="isAllDay" className="text-xs font-bold text-muted-foreground cursor-pointer select-none">
               All day event
             </label>
           </div>
@@ -301,8 +301,8 @@ export default function EventModal({
           <div className="grid grid-cols-2 gap-4">
             {/* Start Date & Time */}
             <div className="space-y-1">
-              <label className="text-xs font-bold text-text-muted uppercase tracking-wider flex items-center space-x-1">
-                <Clock className="h-3 w-3 text-text-muted" />
+              <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider flex items-center space-x-1">
+                <Clock className="h-3 w-3 text-muted-foreground" />
                 <span>Starts</span>
               </label>
               <div className="space-y-2">
@@ -315,7 +315,7 @@ export default function EventModal({
                       setEndDate(e.target.value);
                     }
                   }}
-                  className="w-full bg-background border border-border rounded-xl py-2 px-3.5 text-xs text-text-primary focus:outline-none focus:border-slate-500 shadow-sm transition-all"
+                  className="w-full bg-background border border-border rounded-xl py-2 px-3.5 text-xs text-foreground focus:outline-none focus:border-slate-500 shadow-sm transition-all"
                   style={{ colorScheme: theme }}
                   required
                   disabled={loading}
@@ -325,7 +325,7 @@ export default function EventModal({
                     type="time"
                     value={startTime}
                     onChange={(e) => setStartTime(e.target.value)}
-                    className="w-full bg-background border border-border rounded-xl py-2 px-3.5 text-xs text-text-primary focus:outline-none focus:border-slate-500 shadow-sm transition-all"
+                    className="w-full bg-background border border-border rounded-xl py-2 px-3.5 text-xs text-foreground focus:outline-none focus:border-slate-500 shadow-sm transition-all"
                     style={{ colorScheme: theme }}
                     required={!isAllDay}
                     disabled={loading}
@@ -336,8 +336,8 @@ export default function EventModal({
 
             {/* End Date & Time */}
             <div className="space-y-1">
-              <label className="text-xs font-bold text-text-muted uppercase tracking-wider flex items-center space-x-1">
-                <Clock className="h-3 w-3 text-text-muted" />
+              <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider flex items-center space-x-1">
+                <Clock className="h-3 w-3 text-muted-foreground" />
                 <span>Ends</span>
               </label>
               <div className="space-y-2">
@@ -345,7 +345,7 @@ export default function EventModal({
                   type="date"
                   value={endDate}
                   onChange={(e) => setEndDate(e.target.value)}
-                  className="w-full bg-background border border-border rounded-xl py-2 px-3.5 text-xs text-text-primary focus:outline-none focus:border-slate-500 shadow-sm transition-all"
+                  className="w-full bg-background border border-border rounded-xl py-2 px-3.5 text-xs text-foreground focus:outline-none focus:border-slate-500 shadow-sm transition-all"
                   style={{ colorScheme: theme }}
                   required
                   disabled={loading}
@@ -355,7 +355,7 @@ export default function EventModal({
                     type="time"
                     value={endTime}
                     onChange={(e) => setEndTime(e.target.value)}
-                    className="w-full bg-background border border-border rounded-xl py-2 px-3.5 text-xs text-text-primary focus:outline-none focus:border-slate-500 shadow-sm transition-all"
+                    className="w-full bg-background border border-border rounded-xl py-2 px-3.5 text-xs text-foreground focus:outline-none focus:border-slate-500 shadow-sm transition-all"
                     style={{ colorScheme: theme }}
                     required={!isAllDay}
                     disabled={loading}
@@ -367,8 +367,8 @@ export default function EventModal({
 
           {/* Location */}
           <div className="space-y-1">
-            <label className="text-xs font-bold text-text-muted uppercase tracking-wider flex items-center space-x-1">
-              <MapPin className="h-3 w-3 text-text-muted" />
+            <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider flex items-center space-x-1">
+              <MapPin className="h-3 w-3 text-muted-foreground" />
               <span>Location</span>
             </label>
             <input
@@ -376,15 +376,15 @@ export default function EventModal({
               placeholder="Add location"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              className="w-full bg-background border border-border rounded-xl py-2 px-3.5 text-sm text-text-primary placeholder-slate-400 focus:outline-none focus:border-slate-500 shadow-sm transition-all"
+              className="w-full bg-background border border-border rounded-xl py-2 px-3.5 text-sm text-foreground placeholder-slate-400 focus:outline-none focus:border-slate-500 shadow-sm transition-all"
               disabled={loading}
             />
           </div>
 
           {/* Guests / Attendees */}
           <div className="space-y-1">
-            <label className="text-xs font-bold text-text-muted uppercase tracking-wider flex items-center space-x-1">
-              <Users className="h-3 w-3 text-text-muted" />
+            <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider flex items-center space-x-1">
+              <Users className="h-3 w-3 text-muted-foreground" />
               <span>Add Guests (emails)</span>
             </label>
             <input
@@ -392,15 +392,15 @@ export default function EventModal({
               placeholder="guest1@gmail.com, guest2@gmail.com"
               value={attendeesText}
               onChange={(e) => setAttendeesText(e.target.value)}
-              className="w-full bg-background border border-border rounded-xl py-2 px-3.5 text-sm text-text-primary placeholder-slate-400 focus:outline-none focus:border-slate-500 shadow-sm transition-all"
+              className="w-full bg-background border border-border rounded-xl py-2 px-3.5 text-sm text-foreground placeholder-slate-400 focus:outline-none focus:border-slate-500 shadow-sm transition-all"
               disabled={loading}
             />
           </div>
 
           {/* Description */}
           <div className="space-y-1">
-            <label className="text-xs font-bold text-text-muted uppercase tracking-wider flex items-center space-x-1">
-              <AlignLeft className="h-3 w-3 text-text-muted" />
+            <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider flex items-center space-x-1">
+              <AlignLeft className="h-3 w-3 text-muted-foreground" />
               <span>Description / Notes</span>
             </label>
             <textarea
@@ -408,7 +408,7 @@ export default function EventModal({
               placeholder="Add description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full bg-background border border-border rounded-xl py-2 px-3.5 text-sm text-text-primary placeholder-slate-400 focus:outline-none focus:border-slate-500 shadow-sm transition-all resize-none"
+              className="w-full bg-background border border-border rounded-xl py-2 px-3.5 text-sm text-foreground placeholder-slate-400 focus:outline-none focus:border-slate-500 shadow-sm transition-all resize-none"
               disabled={loading}
             />
           </div>
@@ -434,14 +434,14 @@ export default function EventModal({
                 type="button"
                 onClick={onClose}
                 disabled={loading}
-                className="px-4 py-2.5 rounded-xl border border-border text-xs font-bold text-text-secondary hover:bg-hover-row hover:text-text-primary transition-all cursor-pointer bg-card disabled:opacity-50"
+                className="px-4 py-2.5 rounded-xl border border-border text-xs font-bold text-muted-foreground hover:bg-accent hover:text-foreground transition-all cursor-pointer bg-card disabled:opacity-50"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={loading}
-                className="inline-flex items-center space-x-1.5 rounded-xl bg-success hover:opacity-90 px-6 py-2.5 text-xs font-bold text-white shadow-sm transition-all active:scale-95 cursor-pointer disabled:opacity-50"
+                className="inline-flex items-center space-x-1.5 rounded-xl bg-primary hover:opacity-90 px-6 py-2.5 text-xs font-bold text-primary-foreground shadow-sm transition-all active:scale-95 cursor-pointer disabled:opacity-50"
               >
                 {loading ? (
                   <>

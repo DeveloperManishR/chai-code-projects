@@ -33,13 +33,13 @@ export default function Stats() {
             {/* dots texture */}
             <div
               aria-hidden
-              className="pointer-events-none absolute inset-0 bg-dots opacity-50"
+              className="pointer-events-none absolute inset-0 opacity-50"
             />
 
             {/* subtle accent glow at center */}
             <div
               aria-hidden
-              className="animate-glow pointer-events-none absolute left-1/2 top-1/2 h-48 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl"
+              className=" pointer-events-none absolute left-1/2 top-1/2 h-48 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl"
               style={{ background: "var(--glow)", opacity: 0.35 }}
             />
 
@@ -64,7 +64,7 @@ function StatCell({ stat }: { stat: Stat }) {
         value={stat.value}
         prefix={stat.prefix}
         suffix={stat.suffix}
-        className="font-display text-4xl font-semibold tracking-tight text-text sm:text-5xl"
+        className="text-4xl font-semibold tracking-tight text-text sm:text-5xl"
       />
       <p className="text-sm leading-snug text-muted">{stat.label}</p>
     </div>

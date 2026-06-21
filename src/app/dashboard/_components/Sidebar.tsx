@@ -5,22 +5,31 @@ import { usePathname, useRouter } from 'next/navigation';
 import {
   Mail,
   Calendar as CalendarIcon,
-  Inbox as InboxIcon,
-  AlertCircle,
   FileText,
-  ChevronRight,
-  ChevronLeft,
   Send,
   Clock,
+  AlertCircle,
   Link2,
   CreditCard,
-  X
 } from 'lucide-react';
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuButton,
+  SidebarGroup,
+  SidebarGroupLabel,
+  SidebarGroupContent,
+  SidebarSeparator,
+  SidebarRail,
+  useSidebar,
+} from '@/components/ui/sidebar';
 
 type SidebarProps = {
   projectName: string;
-  isLeftSidebarCollapsed: boolean;
-  setIsLeftSidebarCollapsed: (val: boolean) => void;
   user: {
     id: string;
     firstName: string | null;
@@ -30,16 +39,12 @@ type SidebarProps = {
   };
 };
 
-export default function Sidebar({
-  projectName,
-  isLeftSidebarCollapsed,
-  setIsLeftSidebarCollapsed,
-  user,
-}: SidebarProps) {
+export default function AppSidebar({ projectName, user }: SidebarProps) {
   const pathname = usePathname();
   const router = useRouter();
+  const { state } = useSidebar();
+  const isCollapsed = state === 'collapsed';
 
-  // Determine active folder based on pathname
   const lastSegment = pathname.split('/').pop() || 'inbox';
   const activeTab = (lastSegment === 'draft' || lastSegment === 'drafts') ? 'drafts' : lastSegment;
 
@@ -48,18 +53,7 @@ export default function Sidebar({
   const [spamTotal, setSpamTotal] = useState(0);
   const [gmailConnected, setGmailConnected] = useState(false);
   const [calendarConnected, setCalendarConnected] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  // Fetch labels count on mount once (no polling)
   useEffect(() => {
     const fetchCounts = async (force: boolean = false) => {
       try {
@@ -76,256 +70,156 @@ export default function Sidebar({
         console.error('Failed to fetch label counts:', err);
       }
     };
-
     fetchCounts(false);
 
-    const handleRefreshLabels = () => {
-      fetchCounts(true);
-    };
-
+    const handleRefreshLabels = () => fetchCounts(true);
     window.addEventListener('refresh-labels', handleRefreshLabels);
-    return () => {
-      window.removeEventListener('refresh-labels', handleRefreshLabels);
-    };
+    return () => window.removeEventListener('refresh-labels', handleRefreshLabels);
   }, []);
 
   const navigateToTab = (tab: string) => {
     const target = tab === 'drafts' ? 'draft' : tab;
     router.push(`/dashboard/${target}`);
-    // Auto-collapse sidebar on mobile clicks
-    if (window.innerWidth < 768) {
-      setIsLeftSidebarCollapsed(true);
-    }
   };
 
+  const navItems = [
+    { tab: 'inbox', icon: Mail, label: 'Inbox' },
+    { tab: 'drafts', icon: FileText, label: 'Drafts' },
+    { tab: 'sent', icon: Send, label: 'Sent' },
+    { tab: 'spam', icon: AlertCircle, label: 'Spam' },
+    { tab: 'trash', icon: Clock, label: 'Trash' },
+    { tab: 'calendar', icon: CalendarIcon, label: 'Calendar' },
+  ];
+
+  const settingsItems = [
+    { tab: 'integrations', icon: Link2, label: 'Integrations' },
+    { tab: 'billing', icon: CreditCard, label: 'Billing' },
+  ];
+
   return (
-    <aside className={`bg-sidebar-bg text-sidebar-text flex flex-col justify-between transition-all duration-300 ${
-      isMobile
-        ? isLeftSidebarCollapsed
-          ? 'fixed inset-y-0 left-0 z-[100] w-0 border-r-0 overflow-hidden'
-          : 'fixed inset-0 z-[100] w-full h-full border-r-0'
-        : isLeftSidebarCollapsed
-          ? 'relative z-30 w-16 border-r border-sidebar-border'
-          : 'relative z-30 w-60 border-r border-sidebar-border'
-    }`}>
-      {/* Absolute-positioned Symmetrical Toggle Button (hidden on mobile, visible on desktop) */}
-      {!isMobile && (
-        <button
-          onClick={() => setIsLeftSidebarCollapsed(!isLeftSidebarCollapsed)}
-          className="absolute -right-3 top-4 p-1 rounded-full border border-border dark:border-[#3e3e3a] bg-card text-text-secondary hover:text-text-primary hover:bg-hover-row hover:scale-105 transition-all shadow-md z-50 cursor-pointer flex items-center justify-center h-7 w-7"
-          title={isLeftSidebarCollapsed ? 'Expand Sidebar' : 'Collapse Sidebar'}
-        >
-          {isLeftSidebarCollapsed ? <ChevronRight className="h-3.5 w-3.5" /> : <ChevronLeft className="h-3.5 w-3.5" />}
-        </button>
-      )}
+    <Sidebar collapsible="icon" variant="sidebar" side="left">
+      <SidebarHeader className="border-b border-sidebar-border">
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton size="lg" asChild>
+              <a href="/dashboard/inbox" className="flex items-center gap-2.5">
+                <img src="/icon.png" alt="Logo" className="h-6 w-6 shrink-0" />
+                <span className="font-bold text-base tracking-tight">{projectName}</span>
+              </a>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarHeader>
 
-      <div className="flex flex-col flex-1 min-h-0 overflow-hidden w-full">
-        {/* Logo Header */}
-        <div className="h-16 px-4 flex items-center justify-between border-b border-sidebar-border bg-card">
-          {!isLeftSidebarCollapsed ? (
-            <>
-              <div className="flex items-center space-x-2.5">
-                <img src="/icon.png" alt="Logo" className="h-6 w-6 object-contain shrink-0" />
-                <span className="font-bold text-card-foreground tracking-tight text-lg">{projectName}</span>
-              </div>
-              {/* Close button inside sidebar on mobile */}
-              <button
-                onClick={() => setIsLeftSidebarCollapsed(true)}
-                className="p-1.5 rounded-lg text-text-secondary hover:bg-sidebar-hover hover:text-text-primary transition-colors cursor-pointer md:hidden flex items-center justify-center"
-                title="Collapse Sidebar"
-              >
-                <X className="h-5 w-5" />
-              </button>
-            </>
-          ) : (
-            <div className="w-full flex items-center justify-center">
-              <img src="/icon.png" alt="Logo" className="h-6 w-6 object-contain shrink-0" />
-            </div>
+      <SidebarContent>
+        <SidebarGroup>
+          {!isCollapsed && (
+            <SidebarGroupLabel>Workspace</SidebarGroupLabel>
           )}
-        </div>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {navItems.map(({ tab, icon: Icon, label }) => (
+                <SidebarMenuItem key={tab}>
+                  <SidebarMenuButton
+                    isActive={activeTab === tab}
+                    tooltip={label}
+                    onClick={() => navigateToTab(tab)}
+                  >
+                    <Icon className="h-4.5 w-4.5" />
+                    <span>{label}</span>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
 
-        {/* Navigation Sections */}
-        <div className="flex-1 overflow-y-auto px-2 py-4 space-y-6">
-          {/* Workspace Group */}
-          <div className="space-y-1">
-            {!isLeftSidebarCollapsed && (
-              <div className="flex items-center justify-between px-3 mb-1">
-                <span className="text-[10px] font-extrabold tracking-wider text-slate-400 uppercase">Workspace</span>
-              </div>
-            )}
-            <nav className="space-y-0.5">
-              <button
-                onClick={() => navigateToTab('inbox')}
-                className={`w-full flex items-center px-3 py-2 rounded-lg text-sm transition-all cursor-pointer ${
-                  activeTab === 'inbox'
-                    ? 'bg-sidebar-active-bg text-sidebar-active-text font-bold'
-                    : 'text-sidebar-text hover:bg-sidebar-hover hover:text-sidebar-active-text'
-                }`}
-              >
-                <Mail className="h-4.5 w-4.5 shrink-0" />
-                {!isLeftSidebarCollapsed && (
-                  <span className="ml-3 flex-1 text-left">Inbox</span>
-                )}
-              </button>
+        <SidebarSeparator />
 
-              <button
-                onClick={() => navigateToTab('drafts')}
-                className={`w-full flex items-center px-3 py-2 rounded-lg text-sm transition-all cursor-pointer ${
-                  activeTab === 'drafts'
-                    ? 'bg-sidebar-active-bg text-sidebar-active-text font-bold'
-                    : 'text-sidebar-text hover:bg-sidebar-hover hover:text-sidebar-active-text'
-                }`}
-              >
-                <FileText className="h-4.5 w-4.5 shrink-0" />
-                {!isLeftSidebarCollapsed && <span className="ml-3 flex-1 text-left">Drafts</span>}
-              </button>
+        <SidebarGroup>
+          {!isCollapsed && (
+            <SidebarGroupLabel>Settings</SidebarGroupLabel>
+          )}
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {settingsItems.map(({ tab, icon: Icon, label }) => (
+                <SidebarMenuItem key={tab}>
+                  <SidebarMenuButton
+                    isActive={activeTab === tab}
+                    tooltip={label}
+                    onClick={() => navigateToTab(tab)}
+                  >
+                    <Icon className="h-4.5 w-4.5" />
+                    <span>{label}</span>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+      </SidebarContent>
 
-              <button
-                onClick={() => navigateToTab('sent')}
-                className={`w-full flex items-center px-3 py-2 rounded-lg text-sm transition-all cursor-pointer ${
-                  activeTab === 'sent'
-                    ? 'bg-sidebar-active-bg text-sidebar-active-text font-bold'
-                    : 'text-sidebar-text hover:bg-sidebar-hover hover:text-sidebar-active-text'
-                }`}
-              >
-                <Send className="h-4.5 w-4.5 shrink-0" />
-                {!isLeftSidebarCollapsed && <span className="ml-3 flex-1 text-left">Sent</span>}
-              </button>
+      <SidebarRail />
 
-              <button
-                onClick={() => navigateToTab('spam')}
-                className={`w-full flex items-center px-3 py-2 rounded-lg text-sm transition-all cursor-pointer ${
-                  activeTab === 'spam'
-                    ? 'bg-sidebar-active-bg text-sidebar-active-text font-bold'
-                    : 'text-sidebar-text hover:bg-sidebar-hover hover:text-sidebar-active-text'
-                }`}
-              >
-                <AlertCircle className="h-4.5 w-4.5 shrink-0" />
-                {!isLeftSidebarCollapsed && <span className="ml-3 flex-1 text-left">Spam</span>}
-              </button>
-
-              <button
-                onClick={() => navigateToTab('trash')}
-                className={`w-full flex items-center px-3 py-2 rounded-lg text-sm transition-all cursor-pointer ${
-                  activeTab === 'trash'
-                    ? 'bg-sidebar-active-bg text-sidebar-active-text font-bold'
-                    : 'text-sidebar-text hover:bg-sidebar-hover hover:text-sidebar-active-text'
-                }`}
-              >
-                <Clock className="h-4.5 w-4.5 shrink-0" />
-                {!isLeftSidebarCollapsed && <span className="ml-3 flex-1 text-left">Trash</span>}
-              </button>
-
-              <button
-                onClick={() => navigateToTab('calendar')}
-                className={`w-full flex items-center px-3 py-2 rounded-lg text-sm transition-all cursor-pointer ${
-                  activeTab === 'calendar'
-                    ? 'bg-sidebar-active-bg text-sidebar-active-text font-bold'
-                    : 'text-sidebar-text hover:bg-sidebar-hover hover:text-sidebar-active-text'
-                }`}
-              >
-                <CalendarIcon className="h-4.5 w-4.5 shrink-0" />
-                {!isLeftSidebarCollapsed && <span className="ml-3 flex-1 text-left">Calendar</span>}
-              </button>
-            </nav>
-          </div>
-
-          {/* Settings Group */}
-          <div className="space-y-1">
-            {!isLeftSidebarCollapsed && (
-              <div className="flex items-center justify-between px-3 mb-1">
-                <span className="text-[10px] font-extrabold tracking-wider text-slate-400 uppercase">Settings</span>
-              </div>
-            )}
-            <nav className="space-y-0.5">
-              <button
-                onClick={() => navigateToTab('integrations')}
-                className={`w-full flex items-center px-3 py-2 rounded-lg text-sm transition-all cursor-pointer ${
-                  activeTab === 'integrations'
-                    ? 'bg-sidebar-active-bg text-sidebar-active-text font-bold'
-                    : 'text-sidebar-text hover:bg-sidebar-hover hover:text-sidebar-active-text'
-                }`}
-              >
-                <Link2 className="h-4.5 w-4.5 shrink-0" />
-                {!isLeftSidebarCollapsed && <span className="ml-3 flex-1 text-left">Integrations</span>}
-              </button>
-
-              <button
-                onClick={() => navigateToTab('billing')}
-                className={`w-full flex items-center px-3 py-2 rounded-lg text-sm transition-all cursor-pointer ${
-                  activeTab === 'billing'
-                    ? 'bg-sidebar-active-bg text-sidebar-active-text font-bold'
-                    : 'text-sidebar-text hover:bg-sidebar-hover hover:text-sidebar-active-text'
-                }`}
-              >
-                <CreditCard className="h-4.5 w-4.5 shrink-0" />
-                {!isLeftSidebarCollapsed && <span className="ml-3 flex-1 text-left">Billing</span>}
-              </button>
-            </nav>
-          </div>
-        </div>
-      </div>
-
-      {/* Premium Sidebar Footer */}
-      <div className="border-t border-sidebar-border bg-card p-3 shrink-0">
-        {!isLeftSidebarCollapsed ? (
+      <SidebarFooter className="border-t border-sidebar-border p-3">
+        {!isCollapsed ? (
           <div className="space-y-3">
-            {/* Connection Status Section */}
-            <div className="rounded-xl bg-sidebar-bg p-2.5 border border-sidebar-border space-y-2">
-              <span className="text-[9px] font-extrabold tracking-wider text-slate-400 uppercase block">Connections</span>
+            <div className="rounded-xl bg-sidebar-accent/50 p-2.5 border border-sidebar-border space-y-2">
+              <span className="text-[9px] font-bold tracking-wider text-sidebar-foreground/50 uppercase block">Connections</span>
               <div className="flex items-center justify-between text-xs">
-                <span className="text-text-secondary font-medium flex items-center">
-                  <span className={`w-1.5 h-1.5 rounded-full mr-2 ${gmailConnected ? 'bg-success' : 'bg-slate-400'}`}></span>
+                <span className="text-sidebar-foreground/70 font-medium flex items-center">
+                  <span className={`w-1.5 h-1.5 rounded-full mr-2 ${gmailConnected ? 'bg-primary' : 'bg-sidebar-foreground/30'}`} />
                   Gmail
                 </span>
-                <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded-full ${gmailConnected ? 'bg-success/15 text-success' : 'bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400'}`}>
+                <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded-full ${gmailConnected ? 'bg-primary/15 text-primary' : 'bg-sidebar-accent/50 text-sidebar-foreground/50'}`}>
                   {gmailConnected ? 'Active' : 'Offline'}
                 </span>
               </div>
               <div className="flex items-center justify-between text-xs">
-                <span className="text-text-secondary font-medium flex items-center">
-                  <span className={`w-1.5 h-1.5 rounded-full mr-2 ${calendarConnected ? 'bg-success' : 'bg-slate-400'}`}></span>
+                <span className="text-sidebar-foreground/70 font-medium flex items-center">
+                  <span className={`w-1.5 h-1.5 rounded-full mr-2 ${calendarConnected ? 'bg-primary' : 'bg-sidebar-foreground/30'}`} />
                   Calendar
                 </span>
-                <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded-full ${calendarConnected ? 'bg-success/15 text-success' : 'bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400'}`}>
+                <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded-full ${calendarConnected ? 'bg-primary/15 text-primary' : 'bg-sidebar-accent/50 text-sidebar-foreground/50'}`}>
                   {calendarConnected ? 'Active' : 'Offline'}
                 </span>
               </div>
             </div>
-            
-            {/* User Profile Info */}
-            <div className="flex items-center space-x-2.5 pt-1">
+
+            <div className="flex items-center gap-2.5 pt-1">
               {user?.imageUrl ? (
-                <img src={user.imageUrl} alt="Profile" className="h-8 w-8 rounded-full border border-border" />
+                <img src={user.imageUrl} alt="Profile" className="h-8 w-8 rounded-full border border-sidebar-border" />
               ) : (
-                <div className="h-8 w-8 rounded-full bg-accent/15 text-accent font-semibold flex items-center justify-center text-xs">
+                <div className="h-8 w-8 rounded-full bg-sidebar-accent text-sidebar-accent-foreground font-semibold flex items-center justify-center text-xs">
                   {user?.firstName?.charAt(0) || 'U'}
                 </div>
               )}
               <div className="min-w-0 flex-1">
-                <p className="text-xs font-bold text-card-foreground truncate leading-tight">
+                <p className="text-xs font-bold text-sidebar-foreground truncate leading-tight">
                   {user?.firstName || 'User'}
                 </p>
-                <p className="text-[10px] text-text-secondary truncate leading-none mt-0.5">
+                <p className="text-[10px] text-sidebar-foreground/60 truncate leading-none mt-0.5">
                   {user?.email || ''}
                 </p>
               </div>
             </div>
           </div>
         ) : (
-          <div className="flex flex-col items-center justify-center py-1">
-            {/* User Profile Mini */}
+          <div className="flex flex-col items-center gap-2 py-1">
             {user?.imageUrl ? (
-              <img src={user.imageUrl} alt="Profile" className="h-6 w-6 rounded-full border border-border" />
+              <img src={user.imageUrl} alt="Profile" className="h-7 w-7 rounded-full border border-sidebar-border" />
             ) : (
-              <div className="h-6 w-6 rounded-full bg-accent/15 text-accent font-semibold flex items-center justify-center text-[10px]">
+              <div className="h-7 w-7 rounded-full bg-sidebar-accent text-sidebar-accent-foreground font-semibold flex items-center justify-center text-[10px]">
                 {user?.firstName?.charAt(0) || 'U'}
               </div>
             )}
+            <div className="flex flex-col items-center gap-1.5">
+              <span className={`w-1.5 h-1.5 rounded-full ${gmailConnected ? 'bg-primary' : 'bg-sidebar-foreground/30'}`} />
+              <span className={`w-1.5 h-1.5 rounded-full ${calendarConnected ? 'bg-primary' : 'bg-sidebar-foreground/30'}`} style={{ animationDelay: '0.5s' }} />
+            </div>
           </div>
         )}
-      </div>
-
-    </aside>
+      </SidebarFooter>
+    </Sidebar>
   );
 }

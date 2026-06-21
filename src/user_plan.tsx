@@ -113,12 +113,12 @@ export default function UserPlanEditor() {
   };
 
   return (
-    <div className="flex-1 flex flex-col min-h-screen bg-background text-text-primary">
+    <div className="flex-1 flex flex-col min-h-screen bg-background text-foreground">
       {/* Dev Portal Header */}
       <div className="h-16 px-6 border-b border-border flex items-center justify-between shrink-0 bg-card">
         <div className="flex items-center space-x-3">
           <Shield className="h-5 w-5 text-accent" />
-          <h1 className="text-lg font-bold text-text-primary flex items-center gap-2">
+          <h1 className="text-lg font-bold text-foreground flex items-center gap-2">
             SwiftMail Dev Portal
             <span className="text-[10px] font-bold bg-amber-500/10 text-amber-500 border border-amber-500/20 px-2 py-0.5 rounded-full uppercase">
               Production Users
@@ -129,9 +129,9 @@ export default function UserPlanEditor() {
         <button
           onClick={loadData}
           disabled={loading}
-          className={`p-1.5 text-text-secondary hover:text-text-primary hover:bg-sidebar-hover rounded-lg transition-colors cursor-pointer flex items-center justify-center shrink-0 ${
-            loading ? 'animate-spin opacity-50' : ''
-          }`}
+          className={`p-1.5 text-muted-foreground hover:text-foreground hover:bg-sidebar-hover rounded-lg transition-colors cursor-pointer flex items-center justify-center shrink-0 ${
+ loading ? 'animate-spin opacity-50' : ''
+ }`}
           title="Refresh user list"
         >
           <RefreshCw className="h-4 w-4" />
@@ -150,8 +150,8 @@ export default function UserPlanEditor() {
         )}
 
         {successMsg && (
-          <div className="flex items-start space-x-2.5 p-4 rounded-xl border border-success/20 bg-success/5 text-success text-sm font-medium animate-in fade-in duration-200">
-            <CheckCircle2 className="h-5 w-5 shrink-0 mt-0.5 text-success" />
+          <div className="flex items-start space-x-2.5 p-4 rounded-xl border border-primary/20 bg-primary/5 text-primary text-sm font-medium animate-in fade-in duration-200">
+            <CheckCircle2 className="h-5 w-5 shrink-0 mt-0.5 text-primary" />
             <span>{successMsg}</span>
           </div>
         )}
@@ -159,26 +159,26 @@ export default function UserPlanEditor() {
         {/* Search & Stats Bar */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="relative w-full md:max-w-md">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-text-muted" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <input
               type="text"
               placeholder="Search users by email..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-card border border-border text-text-primary focus:border-accent rounded-xl py-2 pl-9 pr-4 text-sm placeholder-text-muted outline-none transition-colors"
+              className="w-full bg-card border border-border text-foreground focus:border-accent rounded-xl py-2 pl-9 pr-4 text-sm placeholder-text-muted outline-none transition-colors"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted hover:text-text-primary p-0.5"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground p-0.5"
               >
                 <X className="h-3.5 w-3.5" />
               </button>
             )}
           </div>
           
-          <div className="text-xs text-text-muted font-medium bg-card border border-border rounded-xl px-4 py-2 flex.shrink-0">
-            Showing <span className="font-bold text-text-primary">{filteredUsers.length}</span> of <span className="font-bold text-text-primary">{users.length}</span> users
+          <div className="text-xs text-muted-foreground font-medium bg-card border border-border rounded-xl px-4 py-2 flex.shrink-0">
+            Showing <span className="font-bold text-foreground">{filteredUsers.length}</span> of <span className="font-bold text-foreground">{users.length}</span> users
           </div>
         </div>
 
@@ -187,22 +187,22 @@ export default function UserPlanEditor() {
           {loading && users.length === 0 ? (
             <div className="flex flex-col items-center justify-center p-20 space-y-4">
               <RefreshCw className="h-8 w-8 text-accent animate-spin" />
-              <p className="text-sm text-text-secondary">Retrieving live production user list...</p>
+              <p className="text-sm text-muted-foreground">Retrieving live production user list...</p>
             </div>
           ) : filteredUsers.length === 0 ? (
-            <div className="p-16 text-center text-text-muted text-sm border-dashed border border-border/40 rounded-2xl m-6">
+            <div className="p-16 text-center text-muted-foreground text-sm border-dashed border border-border/40 rounded-2xl m-6">
               No users found matching your search query.
             </div>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full border-collapse">
                 <thead>
-                  <tr className="bg-surface-subtle border-b border-border">
-                    <th className="px-6 py-4 text-left text-xs font-bold text-text-muted uppercase tracking-wider">User</th>
-                    <th className="px-6 py-4 text-left text-xs font-bold text-text-muted uppercase tracking-wider">Email Address</th>
-                    <th className="px-6 py-4 text-left text-xs font-bold text-text-muted uppercase tracking-wider">Current Plan</th>
-                    <th className="px-6 py-4 text-left text-xs font-bold text-text-muted uppercase tracking-wider">Expiry</th>
-                    <th className="px-6 py-4 text-right text-xs font-bold text-text-muted uppercase tracking-wider">Actions</th>
+                  <tr className="bg-muted border-b border-border">
+                    <th className="px-6 py-4 text-left text-xs font-bold text-muted-foreground uppercase tracking-wider">User</th>
+                    <th className="px-6 py-4 text-left text-xs font-bold text-muted-foreground uppercase tracking-wider">Email Address</th>
+                    <th className="px-6 py-4 text-left text-xs font-bold text-muted-foreground uppercase tracking-wider">Current Plan</th>
+                    <th className="px-6 py-4 text-left text-xs font-bold text-muted-foreground uppercase tracking-wider">Expiry</th>
+                    <th className="px-6 py-4 text-right text-xs font-bold text-muted-foreground uppercase tracking-wider">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-border/60">
@@ -217,13 +217,13 @@ export default function UserPlanEditor() {
                     return (
                       <tr 
                         key={u.id} 
-                        className="hover:bg-hover-row/20 transition-colors cursor-pointer"
+                        className="hover:bg-accent/20 transition-colors cursor-pointer"
                         onClick={() => handleOpenModal(u)}
                       >
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-text-primary">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-foreground">
                           {u.firstName || u.lastName ? `${u.firstName} ${u.lastName}`.trim() : '(No Name)'}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-text-secondary font-mono">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground font-mono">
                           {u.email}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
@@ -231,13 +231,13 @@ export default function UserPlanEditor() {
                             {u.planName}
                           </span>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-xs text-text-muted">
+                        <td className="px-6 py-4 whitespace-nowrap text-xs text-muted-foreground">
                           {formatDate(u.endDate)}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium" onClick={(e) => e.stopPropagation()}>
                           <button
                             onClick={() => handleOpenModal(u)}
-                            className="inline-flex items-center space-x-1 rounded-xl border border-border bg-card hover:bg-hover-row px-3 py-1.5 text-xs font-bold text-text-primary transition-colors cursor-pointer"
+                            className="inline-flex items-center space-x-1 rounded-xl border border-border bg-card hover:bg-accent px-3 py-1.5 text-xs font-bold text-foreground transition-colors cursor-pointer"
                           >
                             <Edit3 className="h-3 w-3" />
                             <span>Modify</span>
@@ -255,15 +255,15 @@ export default function UserPlanEditor() {
         {/* Pagination Controls */}
         {filteredUsers.length > ITEMS_PER_PAGE && (
           <div className="flex items-center justify-between pt-4">
-            <div className="text-xs text-text-muted font-medium">
-              Page <span className="font-bold text-text-primary">{currentPage}</span> of <span className="font-bold text-text-primary">{totalPages}</span>
+            <div className="text-xs text-muted-foreground font-medium">
+              Page <span className="font-bold text-foreground">{currentPage}</span> of <span className="font-bold text-foreground">{totalPages}</span>
             </div>
             
             <div className="flex items-center space-x-2">
               <button
                 onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
                 disabled={currentPage === 1}
-                className="p-2 border border-border rounded-xl bg-card hover:bg-hover-row text-text-secondary hover:text-text-primary transition-colors cursor-pointer disabled:opacity-40"
+                className="p-2 border border-border rounded-xl bg-card hover:bg-accent text-muted-foreground hover:text-foreground transition-colors cursor-pointer disabled:opacity-40"
               >
                 <ChevronLeft className="h-4 w-4" />
               </button>
@@ -271,7 +271,7 @@ export default function UserPlanEditor() {
               <button
                 onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
                 disabled={currentPage === totalPages}
-                className="p-2 border border-border rounded-xl bg-card hover:bg-hover-row text-text-secondary hover:text-text-primary transition-colors cursor-pointer disabled:opacity-40"
+                className="p-2 border border-border rounded-xl bg-card hover:bg-accent text-muted-foreground hover:text-foreground transition-colors cursor-pointer disabled:opacity-40"
               >
                 <ChevronRight className="h-4 w-4" />
               </button>
@@ -290,48 +290,48 @@ export default function UserPlanEditor() {
             <div className="flex items-center justify-between border-b border-border/60 pb-4">
               <div className="flex items-center space-x-2">
                 <Shield className="h-4.5 w-4.5 text-accent" />
-                <h3 className="text-sm font-bold text-text-primary uppercase tracking-wider">Configure Subscription tier</h3>
+                <h3 className="text-sm font-bold text-foreground uppercase tracking-wider">Configure Subscription tier</h3>
               </div>
               <button 
                 onClick={handleCloseModal}
-                className="p-1 rounded-lg hover:bg-hover-row text-text-muted hover:text-text-primary transition-colors cursor-pointer"
+                className="p-1 rounded-lg hover:bg-accent text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
               >
                 <X className="h-4 w-4" />
               </button>
             </div>
 
             {/* Modal Body: User details snapshot */}
-            <div className="bg-surface-subtle/80 border border-border rounded-xl p-4 space-y-3">
+            <div className="bg-muted/80 border border-border rounded-xl p-4 space-y-3">
               <div className="grid grid-cols-2 gap-y-3 gap-x-2 text-xs">
                 <div>
-                  <p className="text-text-muted font-medium">Name</p>
-                  <p className="font-bold text-text-primary mt-0.5 text-sm">
+                  <p className="text-muted-foreground font-medium">Name</p>
+                  <p className="font-bold text-foreground mt-0.5 text-sm">
                     {selectedUser.firstName || selectedUser.lastName
                       ? `${selectedUser.firstName} ${selectedUser.lastName}`.trim()
                       : '(No name set)'}
                   </p>
                 </div>
                 <div>
-                  <p className="text-text-muted font-medium">Primary Email</p>
-                  <p className="font-mono text-text-secondary mt-0.5 text-xs truncate select-all" title={selectedUser.email}>
+                  <p className="text-muted-foreground font-medium">Primary Email</p>
+                  <p className="font-mono text-muted-foreground mt-0.5 text-xs truncate select-all" title={selectedUser.email}>
                     {selectedUser.email}
                   </p>
                 </div>
                 <div className="col-span-2">
-                  <p className="text-text-muted font-medium">User ID</p>
-                  <p className="font-mono text-text-muted mt-0.5 select-all break-all select-all">
+                  <p className="text-muted-foreground font-medium">User ID</p>
+                  <p className="font-mono text-muted-foreground mt-0.5 select-all break-all select-all">
                     {selectedUser.id}
                   </p>
                 </div>
                 <div>
-                  <p className="text-text-muted font-medium">Active Plan</p>
+                  <p className="text-muted-foreground font-medium">Active Plan</p>
                   <p className="font-bold text-accent mt-0.5 text-sm uppercase">
                     {selectedUser.planName}
                   </p>
                 </div>
                 <div>
-                  <p className="text-text-muted font-medium">Expires</p>
-                  <p className="font-medium text-text-secondary mt-0.5">
+                  <p className="text-muted-foreground font-medium">Expires</p>
+                  <p className="font-medium text-muted-foreground mt-0.5">
                     {formatDate(selectedUser.endDate)}
                   </p>
                 </div>
@@ -341,18 +341,18 @@ export default function UserPlanEditor() {
             {/* Modal Form: Plan Dropdown Selection */}
             <div className="space-y-4">
               <div className="space-y-1.5">
-                <label className="text-xs font-bold text-text-muted uppercase tracking-wider">Select Subscription Plan</label>
+                <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Select Subscription Plan</label>
                 <div className="relative">
                   <select
                     value={selectedPlan}
                     onChange={(e) => setSelectedPlan(e.target.value as any)}
-                    className="w-full bg-background border border-border focus:border-accent text-text-primary rounded-xl py-2.5 pl-4 pr-10 text-sm outline-none transition-colors appearance-none cursor-pointer"
+                    className="w-full bg-background border border-border focus:border-accent text-foreground rounded-xl py-2.5 pl-4 pr-10 text-sm outline-none transition-colors appearance-none cursor-pointer"
                   >
                     <option value="Starter">Starter (Free plan limits)</option>
                     <option value="Professional">Professional (₹599/mo premium tier)</option>
                     <option value="Business">Business (₹999/mo business tier)</option>
                   </select>
-                  <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 h-4 w-4 text-text-muted pointer-events-none" />
+                  <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
                 </div>
               </div>
 
@@ -361,7 +361,7 @@ export default function UserPlanEditor() {
                 <button
                   type="button"
                   onClick={handleCloseModal}
-                  className="rounded-xl border border-border hover:bg-hover-row px-4 py-2.5 text-xs font-bold text-text-secondary hover:text-text-primary transition-colors cursor-pointer"
+                  className="rounded-xl border border-border hover:bg-accent px-4 py-2.5 text-xs font-bold text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
                 >
                   Cancel
                 </button>

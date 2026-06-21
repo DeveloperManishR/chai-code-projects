@@ -72,10 +72,10 @@ export default function ChangelogPage() {
               <span className="w-fit self-center md:self-start inline-flex items-center gap-1.5 rounded-full bg-accent/10 px-3 py-1 text-xs font-semibold text-accent-ink border border-accent/20">
                 <Sparkles size={12} /> What&apos;s New
               </span>
-              <h1 className="font-display text-3xl font-bold tracking-tight text-text-primary md:text-4xl">
+              <h1 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
                 Changelog
               </h1>
-              <p className="text-sm md:text-base text-text-muted max-w-xl">
+              <p className="text-sm md:text-base text-muted-foreground max-w-xl">
                 Track releases, new features, and technical updates as we build the future of AI-first workspace management.
               </p>
             </div>
@@ -91,18 +91,18 @@ export default function ChangelogPage() {
 
                   {/* Release header info */}
                   <div className="flex flex-wrap items-center gap-3">
-                    <span className="font-display text-lg font-bold text-text-primary">
+                    <span className="text-lg font-bold text-foreground">
                       {release.version}
                     </span>
-                    <span className="text-xs text-text-muted">
+                    <span className="text-xs text-muted-foreground">
                       ({release.date})
                     </span>
-                    <span className="inline-flex items-center rounded-full bg-success/15 px-2 py-0.5 text-[10px] font-semibold text-success border border-success/20">
+                    <span className="inline-flex items-center rounded-full bg-primary/15 px-2 py-0.5 text-[10px] font-semibold text-primary border border-primary/20">
                       {release.badge}
                     </span>
                   </div>
 
-                  <h3 className="font-display text-xl font-bold text-text-primary">
+                  <h3 className="text-xl font-bold text-foreground">
                     {release.title}
                   </h3>
 
@@ -116,10 +116,10 @@ export default function ChangelogPage() {
                             <Icon size={16} className="text-accent-ink" />
                           </div>
                           <div className="flex flex-col gap-1">
-                            <h4 className="text-sm font-semibold text-text-primary leading-tight">
+                            <h4 className="text-sm font-semibold text-foreground leading-tight">
                               {change.title}
                             </h4>
-                            <p className="text-xs leading-relaxed text-text-muted">
+                            <p className="text-xs leading-relaxed text-muted-foreground">
                               {change.description}
                             </p>
                           </div>

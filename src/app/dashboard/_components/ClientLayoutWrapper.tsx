@@ -1,10 +1,13 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { SidebarProvider } from '@/components/ui/sidebar';
+import { TooltipProvider } from '@/components/ui/tooltip';
 import Sidebar from './Sidebar';
 import Header from './Header';
-import AIAssistant from './AIAssistant';
+import FloatingAIChat from './FloatingAIChat';
 import { useChatStore } from '@/store/chatStore';
+import { motion } from 'motion/react';
 
 type ClientLayoutWrapperProps = {
   user: {
@@ -23,50 +26,37 @@ export default function ClientLayoutWrapper({
   projectName,
   children,
 }: ClientLayoutWrapperProps) {
-  const [isLeftSidebarCollapsed, setIsLeftSidebarCollapsed] = useState(false);
-
   useEffect(() => {
-    // Sync settings from localStorage once client has mounted
     const savedTheme = localStorage.getItem('theme');
-    const savedWidth = localStorage.getItem('mailyflow-sidebar-width');
-
     if (savedTheme === 'dark' || savedTheme === 'light') {
       useChatStore.getState().setTheme(savedTheme);
-    }
-    if (savedWidth) {
-      useChatStore.getState().setSidebarWidth(Number(savedWidth));
-    }
-
-    // Collapse left sidebar by default on mobile layouts
-    if (window.innerWidth < 768) {
-      setIsLeftSidebarCollapsed(true);
     }
   }, []);
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-background text-foreground font-sans antialiased">
-      {/* 1. LEFT SIDEBAR */}
-      <Sidebar
-        projectName={projectName}
-        isLeftSidebarCollapsed={isLeftSidebarCollapsed}
-        setIsLeftSidebarCollapsed={setIsLeftSidebarCollapsed}
-        user={user}
-      />
+    <TooltipProvider delayDuration={0}>
+      <SidebarProvider defaultOpen={true}>
+        <div className="flex h-screen w-screen overflow-hidden bg-background text-foreground font-sans antialiased">
+          <Sidebar projectName={projectName} user={user} />
 
-      {/* 2. MIDDLE CONTENT PANEL */}
-      <div className="flex-1 flex flex-col min-w-0 border-r border-border bg-card">
-        <Header
-          user={user}
-          projectName={projectName}
-          isLeftSidebarCollapsed={isLeftSidebarCollapsed}
-          setIsLeftSidebarCollapsed={setIsLeftSidebarCollapsed}
-        />
-        {children}
-      </div>
+          <div className="flex-1 flex flex-col min-w-0 relative">
+            <Header user={user} projectName={projectName} />
+            <main className="flex-1 overflow-hidden relative">
+              <motion.div
+                key={typeof children === 'object' && children !== null ? 'page-content' : 'fallback'}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.25, ease: 'easeOut' }}
+                className="h-full"
+              >
+                {children}
+              </motion.div>
+            </main>
+          </div>
 
-      {/* 3. RIGHT PANEL (AI ASSISTANT CHAT) */}
-      <AIAssistant user={user} projectName={projectName} />
-    </div>
+          <FloatingAIChat user={user} projectName={projectName} />
+        </div>
+      </SidebarProvider>
+    </TooltipProvider>
   );
 }
-

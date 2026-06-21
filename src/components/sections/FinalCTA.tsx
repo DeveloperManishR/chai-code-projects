@@ -30,7 +30,7 @@ function GlowBlob({
   return (
     <span
       aria-hidden
-      className="animate-glow pointer-events-none absolute rounded-full blur-3xl"
+      className=" pointer-events-none absolute rounded-full blur-3xl"
       style={style}
     />
   );
@@ -42,7 +42,7 @@ export default function FinalCTA() {
       {/* animated grid backdrop */}
       <div
         aria-hidden
-        className="bg-grid bg-grid-move absolute inset-0 -z-10 opacity-[0.28]"
+        className=" absolute inset-0 -z-10 opacity-[0.28]"
       />
 
       {/* corner glow blobs — placed at edges so they never sit behind headline text */}
@@ -81,35 +81,35 @@ export default function FinalCTA() {
 
       {/* floating particles */}
       <Particle
-        className="animate-float bg-accent/40"
+        className=" bg-accent/40"
         style={{ width: "6px", height: "6px", top: "18%", left: "12%", animationDelay: "0s" }}
       />
       <Particle
-        className="animate-float bg-primary/50"
+        className=" bg-primary/50"
         style={{ width: "5px", height: "5px", top: "72%", left: "8%", animationDelay: "1.1s" }}
       />
       <Particle
-        className="animate-float bg-secondary/60"
+        className=" bg-secondary/60"
         style={{ width: "7px", height: "7px", top: "30%", right: "14%", animationDelay: "0.6s" }}
       />
       <Particle
-        className="animate-float bg-accent/30"
+        className=" bg-accent/30"
         style={{ width: "5px", height: "5px", top: "65%", right: "10%", animationDelay: "1.8s" }}
       />
       <Particle
-        className="animate-float bg-primary/40"
+        className=" bg-primary/40"
         style={{ width: "4px", height: "4px", top: "82%", left: "22%", animationDelay: "0.9s" }}
       />
       <Particle
-        className="animate-float bg-accent/50"
+        className=" bg-accent/50"
         style={{ width: "6px", height: "6px", top: "12%", right: "22%", animationDelay: "2.2s" }}
       />
       <Particle
-        className="animate-float bg-secondary/40"
+        className=" bg-secondary/40"
         style={{ width: "5px", height: "5px", top: "50%", left: "4%", animationDelay: "1.5s" }}
       />
       <Particle
-        className="animate-float bg-primary/30"
+        className=" bg-primary/30"
         style={{ width: "4px", height: "4px", bottom: "18%", right: "18%", animationDelay: "0.3s" }}
       />
 
@@ -123,7 +123,7 @@ export default function FinalCTA() {
         </Reveal>
 
         <Reveal delay={80}>
-          <h2 className="font-display max-w-3xl text-4xl font-semibold leading-[1.08] tracking-tight text-text sm:text-5xl md:text-[58px]">
+          <h2 className="max-w-3xl text-4xl font-semibold leading-[1.08] tracking-tight text-text sm:text-5xl md:text-[58px]">
             Stop Managing Email.{" "}
             <br className="hidden sm:block" />
             <span style={{ color: "var(--accent-ink)" }}>

@@ -84,10 +84,10 @@ export default function Pricing() {
             >
               <Card
                 className={`relative flex w-full flex-col ${
-                  plan.highlighted
-                    ? "border-primary shadow-lg ring-1 ring-primary/20"
-                    : ""
-                }`}
+ plan.highlighted
+ ? "border-primary shadow-lg ring-1 ring-primary/20"
+ : ""
+ }`}
               >
                 {plan.highlighted && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2">

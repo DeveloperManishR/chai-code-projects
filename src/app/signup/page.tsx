@@ -36,7 +36,7 @@ export default function SignUpPage() {
 
         <div className="w-full max-w-md rounded-2xl border border-line bg-surface/60 p-8 backdrop-blur-xl shadow-2xl flex flex-col items-center">
           <div className="mb-6 text-center">
-            <h1 className="font-display text-3xl font-extrabold tracking-tight bg-gradient-to-r from-accent via-primary to-secondary bg-clip-text text-transparent">
+            <h1 className="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-accent via-primary to-secondary bg-clip-text text-transparent">
               SwiftMail
             </h1>
             <p className="mt-2 text-sm text-muted">

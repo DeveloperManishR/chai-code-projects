@@ -330,7 +330,7 @@ export default function Problems() {
 
                   {/* Text */}
                   <div className="flex flex-col gap-2">
-                    <h3 className="font-display text-lg font-semibold leading-snug tracking-tight text-text">
+                    <h3 className="text-lg font-semibold leading-snug tracking-tight text-text">
                       {offering.title}
                     </h3>
                     <p className="text-sm leading-relaxed text-muted">{offering.description}</p>

@@ -26,7 +26,7 @@ const floatingCards = [
     label: "Summary Generated",
     desc: "Thread digest for project launch",
     time: "5 min ago",
-    gradient: "from-emerald-500/10 to-emerald-600/5",
+    gradient: "from-primary/10 to-primary/5",
   },
 ];
 
@@ -101,7 +101,7 @@ export default function Hero() {
               className="mt-10 flex items-center gap-4 text-sm text-muted-foreground"
             >
               <span className="flex items-center gap-1.5">
-                <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                <span className="flex h-1.5 w-1.5 rounded-full bg-primary" />
                 No credit card required
               </span>
               <span className="hidden h-4 w-px bg-border sm:block" />
@@ -132,7 +132,7 @@ export default function Hero() {
                         Ready to help — 12 unread threads
                       </p>
                     </div>
-                    <span className="flex h-2 w-2 rounded-full bg-emerald-500 shadow-sm shadow-emerald-500/50" />
+                    <span className="flex h-2 w-2 rounded-full bg-primary shadow-sm shadow-primary/50" />
                   </div>
                 </div>
 

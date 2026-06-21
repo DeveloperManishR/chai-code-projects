@@ -13,8 +13,8 @@ interface SimDef {
 const SIMS: SimDef[] = [
   {
     workflowName: "Email & Calendar Sync",
-    prompt: "Send help@pallabdev.in an email about tomorrow's message and add that event in calendar",
-    response: "I've drafted the email to **help@pallabdev.in** regarding tomorrow's message and created the corresponding event on your Google Calendar. Ready for your final approval.",
+    prompt: "Send manishrawat0711@gmail.com an email about tomorrow's message and add that event in calendar",
+    response: "I've drafted the email to **manishrawat0711@gmail.com** regarding tomorrow's message and created the corresponding event on your Google Calendar. Ready for your final approval.",
   },
   {
     workflowName: "Payout Triage",
@@ -33,7 +33,7 @@ type Phase = "waiting" | "thinking" | "streaming" | "success";
 export default function Simulation() {
   return (
     <section className="relative py-24 md:py-32">
-      <div aria-hidden className="absolute inset-0 -z-10 bg-dots opacity-[0.35]" />
+      <div aria-hidden className="absolute inset-0 -z-10 opacity-[0.35]" />
       <Container className="flex flex-col gap-14">
         <SectionHeading
           eyebrow="Live simulation"
@@ -127,14 +127,14 @@ function SimWindow({ def, index }: { def: SimDef; index: number }) {
         <div className="flex items-center gap-1.5 text-[10px] font-medium text-muted">
           <span
             className={`h-1.5 w-1.5 rounded-full shrink-0 ${
-              status === "waiting"
-                ? "bg-zinc-300 dark:bg-zinc-600 animate-pulse"
-                : status === "thinking"
-                ? "bg-amber-400 animate-pulse"
-                : status === "streaming"
-                ? "bg-accent animate-pulse"
-                : "bg-emerald-500"
-            }`}
+ status === "waiting"
+ ? "bg-zinc-300 dark:bg-zinc-600 animate-pulse"
+ : status === "thinking"
+ ? "bg-amber-400 animate-pulse"
+ : status === "streaming"
+ ? "bg-accent animate-pulse"
+  : "bg-primary"
+ }`}
           />
           <span className="capitalize">{status === "waiting" ? "ready" : status === "streaming" ? "typing" : status}</span>
         </div>
@@ -181,7 +181,7 @@ function SimWindow({ def, index }: { def: SimDef; index: number }) {
 
             {/* Final Outcome Approval Badge */}
             {status === "success" && (
-              <div className="flex items-center justify-center gap-1.5 rounded-lg border border-accent/25 bg-accent/10 py-1.5 text-[10.5px] font-semibold text-accent-ink mt-1 select-none animate-float">
+              <div className="flex items-center justify-center gap-1.5 rounded-lg border border-accent/25 bg-accent/10 py-1.5 text-[10.5px] font-semibold text-accent-ink mt-1 select-none ">
                 <Check size={12} strokeWidth={2.5} /> Workflow Complete & Approved
               </div>
             )}
@@ -207,10 +207,10 @@ function SimWindow({ def, index }: { def: SimDef; index: number }) {
           disabled={status !== "waiting"}
           aria-label="Send query"
           className={`h-7 w-7 rounded-full flex items-center justify-center shrink-0 transition-all cursor-pointer ${
-            status === "waiting"
-              ? "bg-accent text-white hover:scale-105 animate-pulse shadow-[0_0_12px_rgba(110,155,126,0.65)]"
-              : "bg-surface2 text-muted border border-line"
-          }`}
+ status === "waiting"
+ ? "bg-accent text-white hover:scale-105 animate-pulse shadow-[0_0_12px_rgba(110,155,126,0.65)]"
+ : "bg-surface2 text-muted border border-line"
+ }`}
         >
           <Send size={11} className={status === "waiting" ? "animate-pulse" : ""} />
         </button>

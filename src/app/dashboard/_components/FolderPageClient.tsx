@@ -495,14 +495,14 @@ export default function FolderPageClient({
   };
 
   return (
-    <div className="flex-1 flex flex-col min-h-0 bg-background text-text-primary">
+    <div className="flex-1 flex flex-col min-h-0 bg-background text-foreground">
       {/* Tab Content Header */}
       <div className="h-16 px-6 border-b border-border flex items-center justify-between shrink-0 bg-card">
         {selectedEmail ? (
           <div className="flex items-center space-x-3">
             <button
               onClick={() => setSelectedEmail(null)}
-              className="inline-flex items-center space-x-1 py-1.5 px-3 rounded-lg text-sm font-semibold text-text-secondary hover:bg-sidebar-hover hover:text-text-primary transition-colors cursor-pointer"
+              className="inline-flex items-center space-x-1 py-1.5 px-3 rounded-lg text-sm font-semibold text-muted-foreground hover:bg-sidebar-hover hover:text-foreground transition-colors cursor-pointer"
             >
               <ChevronLeft className="h-4 w-4" />
               <span>Back</span>
@@ -511,21 +511,21 @@ export default function FolderPageClient({
         ) : (
           <div className="flex items-center space-x-3">
             {getFolderIcon()}
-            <h1 className="text-lg font-bold text-text-primary">{title}</h1>
+            <h1 className="text-lg font-bold text-foreground">{title}</h1>
 
             {/* Refresh Button */}
             <button
               onClick={() => fetchEmails(true)}
               disabled={loading || refreshing}
-              className={`p-1.5 text-text-secondary hover:text-text-primary hover:bg-sidebar-hover rounded-lg transition-colors cursor-pointer flex items-center justify-center shrink-0 ${
-                (loading || refreshing) ? 'animate-spin opacity-50' : ''
-              }`}
+              className={`p-1.5 text-muted-foreground hover:text-foreground hover:bg-sidebar-hover rounded-lg transition-colors cursor-pointer flex items-center justify-center shrink-0 ${
+ (loading || refreshing) ? 'animate-spin opacity-50' : ''
+ }`}
               title="Refresh messages"
             >
               <RefreshCw className="h-4 w-4" />
             </button>
 
-            <span className="text-xs text-text-secondary font-medium">
+            <span className="text-xs text-muted-foreground font-medium">
               {folder === 'inbox'
                 ? `${uniqueEmails.filter(e => e.labelIds?.includes('UNREAD')).length} unread`
                 : `${uniqueEmails.length} messages`
@@ -537,19 +537,19 @@ export default function FolderPageClient({
         {selectedEmail ? (
           <button
             onClick={() => handleTrashEmail(selectedEmail.id)}
-            className="p-2 text-text-secondary hover:text-red-500 hover:bg-red-500/10 rounded-xl transition-colors cursor-pointer flex items-center justify-center"
+            className="p-2 text-muted-foreground hover:text-red-500 hover:bg-red-500/10 rounded-xl transition-colors cursor-pointer flex items-center justify-center"
             title={folder === 'trash' ? "Delete Permanently" : "Move to Trash"}
           >
             <Trash2 className="h-4.5 w-4.5" />
           </button>
         ) : selectedEmails.size > 0 ? (
           <div className="flex items-center space-x-3">
-            <span className="text-xs text-text-secondary font-medium">
+            <span className="text-xs text-muted-foreground font-medium">
               {selectedEmails.size} selected
             </span>
             <button
               onClick={() => setSelectedEmails(new Set())}
-              className="py-1.5 px-3 rounded-lg text-xs font-semibold text-text-secondary hover:bg-sidebar-hover hover:text-text-primary transition-colors cursor-pointer bg-transparent border border-border"
+              className="py-1.5 px-3 rounded-lg text-xs font-semibold text-muted-foreground hover:bg-sidebar-hover hover:text-foreground transition-colors cursor-pointer bg-transparent border border-border"
             >
               Cancel
             </button>
@@ -565,7 +565,7 @@ export default function FolderPageClient({
           folder !== 'trash' && (
             <button
               onClick={() => setIsComposeOpen(true)}
-              className="inline-flex items-center space-x-1.5 rounded-xl bg-success px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-90 active:scale-95 transition-all cursor-pointer"
+              className="inline-flex items-center space-x-1.5 rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm hover:opacity-90 active:scale-95 transition-all cursor-pointer"
             >
               <PenSquare className="h-4 w-4" />
               <span>Compose</span>
@@ -586,7 +586,7 @@ export default function FolderPageClient({
           onScroll={handleScroll}
           className="flex-1 overflow-y-auto bg-background"
         >
-          <div className="divide-y divide-border-row">
+          <div className="divide-y divide-border-border">
             {emailErrorState && (
               <div className="m-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 p-5 rounded-2xl border border-red-500/20 bg-red-500/5 text-red-700">
                 <div className="flex items-start space-x-3">
@@ -607,17 +607,17 @@ export default function FolderPageClient({
             )}
 
             {loading ? (
-              <div className="divide-y divide-border-row">
+              <div className="divide-y divide-border-border">
                 {[...Array(6)].map((_, i) => (
                   <div key={`skeleton-${i}`} className="flex items-center px-6 py-4 animate-pulse relative">
                     <div className="flex items-center space-x-4 flex-1 min-w-0">
                       {/* Avatar Skeleton */}
-                      <div className="h-10 w-10 shrink-0 rounded-full bg-surface-subtle"></div>
+                      <div className="h-10 w-10 shrink-0 rounded-full bg-muted"></div>
 
                       <div className="flex-1 min-w-0 pr-8">
                         <div className="flex items-baseline justify-between">
                           {/* Name Skeleton */}
-                          <div className="h-4 w-28 bg-surface-subtle rounded"></div>
+                          <div className="h-4 w-28 bg-muted rounded"></div>
                           {/* Date Skeleton */}
                           <div className="h-3 w-14 bg-border rounded"></div>
                         </div>
@@ -635,9 +635,9 @@ export default function FolderPageClient({
               <>
                 {!emailErrorState && uniqueEmails.length === 0 && !nextPageToken && !loading && (
                   <div className="flex flex-col items-center justify-center p-20 text-center">
-                    <InboxIcon className="h-12 w-12 text-text-muted mb-3" />
-                    <span className="font-semibold text-text-secondary">All caught up!</span>
-                    <p className="text-xs text-text-muted mt-1 max-w-sm">
+                    <InboxIcon className="h-12 w-12 text-muted-foreground mb-3" />
+                    <span className="font-semibold text-muted-foreground">All caught up!</span>
+                    <p className="text-xs text-muted-foreground mt-1 max-w-sm">
                       No emails match your active filters.
                     </p>
                   </div>
@@ -677,13 +677,13 @@ export default function FolderPageClient({
                       }, 100);
                     }
                   }}
-                  className={`group flex items-center px-6 py-4 transition-colors hover:bg-hover-row cursor-pointer relative ${
-                    isUnread ? 'bg-mail-unread-bg' : 'bg-mail-read-bg'
-                  }`}
+                  className={`group flex items-center px-6 py-4 transition-colors hover:bg-accent cursor-pointer relative ${
+ isUnread ? 'bg-muted' : 'bg-background'
+ }`}
                 >
                   {/* Unread dot indicator on the left margin */}
                   {isUnread && (
-                    <div className="absolute left-2.5 h-1.5 w-1.5 rounded-full bg-success"></div>
+                    <div className="absolute left-2.5 h-1.5 w-1.5 rounded-full bg-primary"></div>
                   )}
 
                   <div className="flex items-center space-x-4 flex-1 min-w-0">
@@ -694,19 +694,19 @@ export default function FolderPageClient({
 
                     <div className="flex-1 min-w-0 pr-8">
                       <div className="flex items-baseline justify-between">
-                        <span className={`text-sm leading-tight ${isUnread ? 'font-bold text-text-primary' : 'font-normal text-text-secondary'}`}>
+                        <span className={`text-sm leading-tight ${isUnread ? 'font-bold text-foreground' : 'font-normal text-muted-foreground'}`}>
                           {sender.name}
                         </span>
-                        <span className={`text-xs shrink-0 ${isUnread ? 'font-semibold text-text-primary' : 'font-medium text-text-muted'}`}>
+                        <span className={`text-xs shrink-0 ${isUnread ? 'font-semibold text-foreground' : 'font-medium text-muted-foreground'}`}>
                           {formatEmailDate(email.date)}
                         </span>
                       </div>
 
-                      <p className="text-sm text-text-secondary truncate leading-relaxed mt-1">
-                        <span className={`pr-1 ${isUnread ? 'font-semibold text-text-primary' : 'font-normal text-text-secondary'}`}>
+                      <p className="text-sm text-muted-foreground truncate leading-relaxed mt-1">
+                        <span className={`pr-1 ${isUnread ? 'font-semibold text-foreground' : 'font-normal text-muted-foreground'}`}>
                           {email.subject}
                         </span>
-                        <span className="text-text-muted font-normal">— {email.snippet}</span>
+                        <span className="text-muted-foreground font-normal">— {email.snippet}</span>
                       </p>
                     </div>
                   </div>
@@ -720,9 +720,9 @@ export default function FolderPageClient({
                       type="checkbox"
                       checked={isSelected}
                       onChange={() => toggleSelectEmail(email.id)}
-                      className={`h-4.5 w-4.5 rounded-md border-2 border-border text-success focus:ring-success accent-success bg-background cursor-pointer transition-opacity duration-200 ${
-                        isSelected ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
-                      }`}
+                      className={`h-4.5 w-4.5 rounded-md border-2 border-border text-primary focus:ring-primary accent-primary bg-background cursor-pointer transition-opacity duration-200 ${
+ isSelected ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+ }`}
                     />
                   </div>
                 </div>
@@ -730,14 +730,14 @@ export default function FolderPageClient({
             })}
 
             {loadingMore && (
-              <div className="flex items-center justify-center p-6 space-x-2.5 bg-surface-subtle">
-                <RefreshCw className="h-4.5 w-4.5 animate-spin text-text-secondary" />
-                <span className="text-xs text-text-secondary font-semibold">Loading more messages...</span>
+              <div className="flex items-center justify-center p-6 space-x-2.5 bg-muted">
+                <RefreshCw className="h-4.5 w-4.5 animate-spin text-muted-foreground" />
+                <span className="text-xs text-muted-foreground font-semibold">Loading more messages...</span>
               </div>
             )}
 
             {!nextPageToken && filteredEmails.length > 0 && (
-              <div className="text-center py-6 text-xs text-text-muted font-semibold bg-surface-subtle/50">
+              <div className="text-center py-6 text-xs text-muted-foreground font-semibold bg-muted/50">
                 ✨ End of your inbox list
               </div>
             )}

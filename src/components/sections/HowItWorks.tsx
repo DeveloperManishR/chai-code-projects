@@ -315,7 +315,7 @@ function StepCard({ stepNumber, title, description, Illustration, details }: Ste
       <div className="flex justify-between items-start">
         <div>
           <span className="text-[10px] font-bold text-accent-ink tracking-widest uppercase">Step {stepNumber}</span>
-          <h3 className="font-display text-lg font-semibold tracking-tight text-text mt-1">
+          <h3 className="text-lg font-semibold tracking-tight text-text mt-1">
             {title}
           </h3>
         </div>
@@ -329,7 +329,7 @@ function StepCard({ stepNumber, title, description, Illustration, details }: Ste
 
       {/* Description & Details */}
       <div className="flex flex-col gap-3">
-        <p className="text-sm text-text-secondary leading-relaxed font-normal">{description}</p>
+        <p className="text-sm text-muted-foreground leading-relaxed font-normal">{description}</p>
         
         <div className="flex flex-col gap-2.5 text-muted mt-2">
           {details.map((detail, idx) => (

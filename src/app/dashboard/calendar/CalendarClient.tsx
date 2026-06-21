@@ -186,26 +186,26 @@ export default function CalendarClient({
   };
 
   return (
-    <div className="flex-1 flex flex-col min-h-0 bg-background text-text-primary">
+    <div className="flex-1 flex flex-col min-h-0 bg-background text-foreground">
       {/* Header */}
-      <div className="h-16 px-6 border-b border-border flex items-center justify-between shrink-0 bg-card">
-        <div className="flex items-center space-x-3">
-          <CalendarIcon className="h-5 w-5 text-text-secondary" />
-          <h1 className="text-lg font-bold text-text-primary">Calendar</h1>
+      <div className="h-16 px-6 border-b border-border flex items-center justify-between shrink-0 bg-background">
+        <div className="flex items-center gap-3">
+          <CalendarIcon className="h-5 w-5 text-muted-foreground" />
+          <h1 className="text-lg font-bold text-foreground">Calendar</h1>
 
           {/* Refresh Button */}
           <button
             onClick={fetchEvents}
             disabled={eventsLoading}
-            className={`p-1.5 text-text-secondary hover:text-text-primary hover:bg-sidebar-hover rounded-lg transition-colors cursor-pointer flex items-center justify-center shrink-0 ${
-              eventsLoading ? 'animate-spin opacity-50' : ''
-            }`}
+            className={`p-2 text-muted-foreground hover:text-foreground hover:bg-accent/10 rounded-lg transition-colors cursor-pointer flex items-center justify-center shrink-0 ${
+ eventsLoading ? 'animate-spin opacity-50' : ''
+ }`}
             title="Refresh events"
           >
             <RefreshCw className="h-4 w-4" />
           </button>
 
-          <span className="text-xs text-text-secondary font-medium">
+          <span className="text-xs text-muted-foreground font-medium">
             {eventsState.filter(e => {
               if (!e.start?.dateTime && !e.start?.date) return false;
               const d = new Date(e.start.dateTime || e.start.date || '');
@@ -215,7 +215,7 @@ export default function CalendarClient({
         </div>
         <button
           onClick={handleAddEvent}
-          className="inline-flex items-center space-x-1.5 bg-success text-white px-4 py-2 rounded-xl text-xs font-semibold shadow-sm transition-all hover:opacity-95 active:scale-95 cursor-pointer"
+          className="inline-flex items-center space-x-1.5 bg-primary text-primary-foreground px-4 py-2 rounded-xl text-xs font-semibold shadow-sm transition-all hover:opacity-95 active:scale-95 cursor-pointer"
         >
           <span>+ Add Event</span>
         </button>
@@ -229,13 +229,13 @@ export default function CalendarClient({
           {/* Month Selector Header */}
           <div className="flex items-center justify-between px-6 py-4 border-b border-border shrink-0">
             <div className="flex items-center space-x-3">
-              <h3 className="font-bold text-text-primary text-sm">
+              <h3 className="font-bold text-foreground text-sm">
                 {currentMonthDate.toLocaleDateString([], { month: 'long', year: 'numeric' })}
               </h3>
               {/* Collapse/Expand Toggle Button (mobile only) */}
               <button
                 onClick={() => setIsGridCollapsed(!isGridCollapsed)}
-                className="px-2 py-0.5 text-[10px] font-bold rounded-lg border border-border bg-background text-text-secondary hover:text-text-primary hover:bg-hover-row transition-all md:hidden flex items-center space-x-1 cursor-pointer"
+                className="px-2 py-0.5 text-[10px] font-bold rounded-lg border border-border bg-background text-muted-foreground hover:text-foreground hover:bg-accent transition-all md:hidden flex items-center space-x-1 cursor-pointer"
               >
                 <span>{isGridCollapsed ? 'Show Calendar' : 'Hide Calendar'}</span>
               </button>
@@ -243,13 +243,13 @@ export default function CalendarClient({
             <div className="flex space-x-2">
               <button
                 onClick={handlePrevMonth}
-                className="p-1 hover:bg-sidebar-hover rounded text-text-secondary transition-colors cursor-pointer"
+                className="p-1 hover:bg-sidebar-hover rounded text-muted-foreground transition-colors cursor-pointer"
               >
                 <ChevronLeft className="h-4 w-4" />
               </button>
               <button
                 onClick={handleNextMonth}
-                className="p-1 hover:bg-sidebar-hover rounded text-text-secondary transition-colors cursor-pointer"
+                className="p-1 hover:bg-sidebar-hover rounded text-muted-foreground transition-colors cursor-pointer"
               >
                 <ChevronRight className="h-4 w-4" />
               </button>
@@ -258,10 +258,10 @@ export default function CalendarClient({
 
           {/* Grid Container */}
           <div className={`p-6 bg-card shrink-0 transition-all duration-300 ${
-            isGridCollapsed && isMobile ? 'hidden' : 'block'
-          }`}>
+ isGridCollapsed && isMobile ? 'hidden' : 'block'
+ }`}>
             {/* Weekday headers */}
-            <div className="grid grid-cols-7 gap-x-1.5 text-center text-xs font-bold text-text-muted uppercase tracking-wider mb-3">
+            <div className="grid grid-cols-7 gap-x-1.5 text-center text-xs font-bold text-muted-foreground uppercase tracking-wider mb-3">
               {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
                 <div key={day} className="py-1">{day}</div>
               ))}
@@ -283,18 +283,18 @@ export default function CalendarClient({
                     onClick={() => setSelectedDate(dayDate)}
                     className="flex flex-col items-center justify-center py-1 cursor-pointer"
                   >
-                    <div className={`h-8 w-8 flex items-center justify-center text-xs transition-all ${active
-                        ? 'bg-success text-white font-bold rounded-full shadow-md'
-                        : todayActive
-                          ? 'border border-success text-success rounded-full font-bold'
-                          : 'text-text-primary hover:bg-hover-row rounded-full'
-                      }`}>
+<div className={`h-8 w-8 flex items-center justify-center text-xs transition-all ${active
+  ? 'bg-primary text-primary-foreground font-bold rounded-full shadow-md'
+  : todayActive
+  ? 'border border-primary text-primary rounded-full font-bold'
+ : 'text-foreground hover:bg-accent rounded-full'
+ }`}>
                       {dayDate.getDate()}
                     </div>
                     {/* Dot indicator */}
                     <div className="h-1 w-full flex items-center justify-center">
                       {eventMark && (
-                        <span className={`h-1 w-1 rounded-full ${active ? 'bg-white' : 'bg-success'}`}></span>
+                        <span className={`h-1 w-1 rounded-full ${active ? 'bg-white' : 'bg-primary'}`}></span>
                       )}
                     </div>
                   </div>
@@ -308,30 +308,30 @@ export default function CalendarClient({
         <div className="flex-1 flex flex-col min-h-0 bg-background">
           {/* Header for Selected Day Events */}
           <div className="px-6 py-4 border-b border-border flex items-center justify-between shrink-0 bg-card">
-            <h3 className="text-sm font-bold text-text-primary">
+            <h3 className="text-sm font-bold text-foreground">
               {selectedDate.toLocaleDateString([], { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })}
             </h3>
-            <span className="text-xs text-text-secondary font-medium">
+            <span className="text-xs text-muted-foreground font-medium">
               {dailyEvents.length} scheduled
             </span>
           </div>
 
           {/* Events scrollable list */}
-          <div className="flex-1 overflow-y-auto divide-y divide-border-row bg-background">
+          <div className="flex-1 overflow-y-auto divide-y divide-border-border bg-background">
             {eventsLoading && (
-              <div className="divide-y divide-border-row w-full">
+              <div className="divide-y divide-border-border w-full">
                 {[...Array(3)].map((_, i) => (
                   <div key={`cal-skeleton-${i}`} className="p-5 space-y-3 animate-pulse bg-background">
                     <div className="flex items-start justify-between gap-4">
                       {/* Event title skeleton */}
-                      <div className="h-4 w-40 bg-surface-subtle rounded"></div>
+                      <div className="h-4 w-40 bg-muted rounded"></div>
                       {/* Time badge skeleton */}
                       <div className="h-5 w-24 bg-border rounded shrink-0"></div>
                     </div>
                     {/* Description skeleton */}
                     <div className="h-3 w-5/6 bg-border rounded"></div>
                     {/* Location badge skeleton */}
-                    <div className="h-4 w-28 bg-surface-subtle rounded"></div>
+                    <div className="h-4 w-28 bg-muted rounded"></div>
                   </div>
                 ))}
               </div>
@@ -358,9 +358,9 @@ export default function CalendarClient({
 
             {!calendarErrorState && !eventsLoading && dailyEvents.length === 0 && (
               <div className="flex flex-col items-center justify-center p-20 text-center">
-                <CalendarIcon className="h-8 w-8 text-text-muted mb-2" />
-                <span className="font-semibold text-text-secondary text-sm">No events scheduled</span>
-                <p className="text-xs text-text-muted mt-1 max-w-xs">
+                <CalendarIcon className="h-8 w-8 text-muted-foreground mb-2" />
+                <span className="font-semibold text-muted-foreground text-sm">No events scheduled</span>
+                <p className="text-xs text-muted-foreground mt-1 max-w-xs">
                   There are no calendar events scheduled for this day.
                 </p>
               </div>
@@ -378,26 +378,26 @@ export default function CalendarClient({
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div className="space-y-1">
-                      <h3 className="text-sm font-bold text-text-primary tracking-tight group-hover:text-success transition-colors">
+                      <h3 className="text-sm font-bold text-foreground tracking-tight group-hover:text-primary transition-colors">
                         {event.summary || '(no title)'}
                       </h3>
                     </div>
 
-                    <div className="flex items-center space-x-1 text-[11px] text-text-secondary bg-surface-subtle px-2 py-0.5 rounded border border-border shrink-0">
-                      <Clock className="h-3 w-3 text-[#5f7a68]" />
+                    <div className="flex items-center space-x-1 text-[11px] text-muted-foreground bg-muted px-2 py-0.5 rounded border border-border shrink-0">
+                      <Clock className="h-3 w-3 text-muted-foreground" />
                       <span>{isAllDay ? 'All Day' : `${eventTime} - ${event.end?.dateTime ? new Date(event.end.dateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ''}`}</span>
                     </div>
                   </div>
 
                   {event.description && (
-                    <p className="text-xs text-text-secondary leading-relaxed max-w-2xl font-normal">
+                    <p className="text-xs text-muted-foreground leading-relaxed max-w-2xl font-normal">
                       {event.description}
                     </p>
                   )}
 
-                  <div className="flex flex-wrap items-center gap-3 text-xs text-text-secondary pt-0.5">
+                  <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground pt-0.5">
                     {event.location && (
-                      <div className="flex items-center space-x-1 bg-surface-subtle px-2 py-0.5 rounded border border-border text-[11px]">
+                      <div className="flex items-center space-x-1 bg-muted px-2 py-0.5 rounded border border-border text-[11px]">
                         <MapPin className="h-3 w-3 text-red-500 shrink-0" />
                         <span className="truncate max-w-xs">{event.location}</span>
                       </div>

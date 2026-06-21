@@ -170,10 +170,10 @@ export const getInitials = (from: string) => {
 };
 
 const avatarColors = [
-  'bg-sender-blue/15 text-sender-blue border-sender-blue/20',
-  'bg-sender-clay/15 text-sender-clay border-sender-clay/20',
-  'bg-sender-sand/15 text-sender-sand border-sender-sand/20',
-  'bg-sender-sage/15 text-sender-sage border-sender-sage/20',
+  'bg-primary/10 text-primary border-primary/20',
+  'bg-accent/10 text-accent-foreground border-accent/20',
+  'bg-muted text-muted-foreground border-border',
+  'bg-secondary/10 text-secondary-foreground border-secondary/20',
 ];
 
 export const getAvatarColor = (name: string) => {

@@ -84,45 +84,45 @@ export default function EmailDetail({
   const sender = parseSender(email.from);
 
   return (
-    <div className="flex-1 flex flex-col min-h-0 bg-background text-text-primary">
+    <div className="flex-1 flex flex-col min-h-0 bg-background text-foreground">
       <div className="flex-1 overflow-y-auto p-6 space-y-6">
         <div className="space-y-4 shrink-0">
-          <h2 className="text-xl font-extrabold text-text-primary leading-snug">
+          <h2 className="text-xl font-extrabold text-foreground leading-snug">
             {email.subject}
           </h2>
 
-          <div className="flex items-center space-x-3 bg-surface-subtle p-4 rounded-xl border border-border">
+          <div className="flex items-center space-x-3 bg-muted p-4 rounded-xl border border-border">
             <div className={`h-10 w-10 rounded-full flex items-center justify-center text-sm font-semibold transition-all duration-200 ${getAvatarColor(email.from)}`}>
               {getInitials(email.from)}
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-xs text-text-secondary font-semibold leading-none">From</p>
-              <p className="text-sm font-bold text-text-primary truncate leading-none mt-1">
+              <p className="text-xs text-muted-foreground font-semibold leading-none">From</p>
+              <p className="text-sm font-bold text-foreground truncate leading-none mt-1">
                 {sender.name}
               </p>
-              <p className="text-[10px] text-text-muted truncate mt-1">
+              <p className="text-[10px] text-muted-foreground truncate mt-1">
                 {sender.email}
               </p>
             </div>
           </div>
 
-          <div className="text-xs text-text-muted font-medium">
-            Date: <span className="font-semibold text-text-secondary">{formatEmailDate(email.date)}</span>
+          <div className="text-xs text-muted-foreground font-medium">
+            Date: <span className="font-semibold text-muted-foreground">{formatEmailDate(email.date)}</span>
           </div>
         </div>
 
         {/* Message Details with Rich Text Render */}
         <div className="border-t border-border pt-6">
-          <h4 className="text-[10px] uppercase font-bold tracking-wider text-text-muted mb-3">Message Body</h4>
+          <h4 className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground mb-3">Message Body</h4>
 
           {loading && (
             <div className="flex flex-col items-center justify-center py-12 space-y-3">
               <div className="flex items-center space-x-1.5">
-                <div className="h-2.5 w-2.5 rounded-full bg-success animate-bounce [animation-delay:-0.3s]"></div>
-                <div className="h-2.5 w-2.5 rounded-full bg-success animate-bounce [animation-delay:-0.15s]"></div>
-                <div className="h-2.5 w-2.5 rounded-full bg-success animate-bounce"></div>
+                <div className="h-2.5 w-2.5 rounded-full bg-primary animate-bounce [animation-delay:-0.3s]"></div>
+                <div className="h-2.5 w-2.5 rounded-full bg-primary animate-bounce [animation-delay:-0.15s]"></div>
+                <div className="h-2.5 w-2.5 rounded-full bg-primary animate-bounce"></div>
               </div>
-              <span className="text-xs text-text-secondary">Loading email body...</span>
+              <span className="text-xs text-muted-foreground">Loading email body...</span>
             </div>
           )}
 
@@ -134,7 +134,7 @@ export default function EmailDetail({
           )}
 
           {!loading && !error && detailEmail && (
-            <div className="bg-surface-subtle rounded-xl border border-border p-4">
+            <div className="bg-muted rounded-xl border border-border p-4">
               <iframe
                 ref={iframeRef}
                 srcDoc={getEmailHtml(detailEmail, true, isDark)}

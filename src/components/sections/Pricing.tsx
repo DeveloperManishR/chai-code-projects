@@ -95,7 +95,7 @@ export default function Pricing() {
       <div id="payment" className="absolute -top-20" />
       
       {/* subtle grid backdrop */}
-      <div aria-hidden className="absolute inset-0 -z-10 bg-grid opacity-40" />
+      <div aria-hidden className="absolute inset-0 -z-10 opacity-40" />
 
       <Container className="flex flex-col gap-14">
         <SectionHeading
@@ -112,7 +112,7 @@ export default function Pricing() {
                   {/* glow behind card */}
                   <div
                     aria-hidden
-                    className="animate-glow pointer-events-none absolute -inset-3 -z-10 rounded-xl blur-2xl"
+                    className=" pointer-events-none absolute -inset-3 -z-10 rounded-xl blur-2xl"
                     style={{ background: "var(--glow)" }}
                   />
                   {/* card */}
@@ -161,11 +161,11 @@ function PlanContent({
     <>
       {/* header */}
       <div className="flex flex-col gap-1.5">
-        <p className="font-display text-sm font-semibold uppercase tracking-widest text-accent-ink">
+        <p className="text-sm font-semibold uppercase tracking-widest text-accent-ink">
           {plan.name}
         </p>
         <div className="flex items-end gap-1">
-          <span className="font-display text-4xl font-semibold tracking-tight text-text">
+          <span className="text-4xl font-semibold tracking-tight text-text">
             {plan.price}
           </span>
           {plan.priceNote && (

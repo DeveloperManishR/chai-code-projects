@@ -30,9 +30,9 @@ const AgentProgressLoader = () => {
   }, []);
 
   const stages = [
-    { text: 'Thinking', icon: <Brain className="h-3.5 w-3.5 text-success animate-pulse shrink-0" /> },
-    { text: 'Selecting tools', icon: <Wrench className="h-3.5 w-3.5 text-success shrink-0" /> },
-    { text: 'Working', icon: <Cpu className="h-3.5 w-3.5 text-success shrink-0" /> },
+    { text: 'Thinking', icon: <Brain className="h-3.5 w-3.5 text-primary animate-pulse shrink-0" /> },
+    { text: 'Selecting tools', icon: <Wrench className="h-3.5 w-3.5 text-primary shrink-0" /> },
+    { text: 'Working', icon: <Cpu className="h-3.5 w-3.5 text-primary shrink-0" /> },
   ];
 
   const currentStage = stages[stage] || stages[0];
@@ -41,17 +41,17 @@ const AgentProgressLoader = () => {
     <div className="flex flex-col space-y-2.5 p-4 bg-card border border-border rounded-2xl w-[170px] shadow-sm transition-all duration-300">
       <div className="flex items-center space-x-2.5">
         {/* Smooth minimal rotating ring spinner */}
-        <div className="h-4 w-4 rounded-full border-2 border-[#6e9b7e]/25 border-t-[#6e9b7e] animate-spin shrink-0"></div>
-        <span className="text-[11px] font-bold text-text-secondary select-none flex items-center space-x-1.5">
+        <div className="h-4 w-4 rounded-full border-2 border-primary/25 border-t-primary animate-spin shrink-0"></div>
+        <span className="text-[11px] font-bold text-muted-foreground select-none flex items-center space-x-1.5">
           {currentStage.icon}
           <span>{currentStage.text}...</span>
         </span>
       </div>
 
       {/* Minimal smooth progress bar */}
-      <div className="w-full bg-border-row rounded-full h-1 overflow-hidden">
+      <div className="w-full bg-border-border rounded-full h-1 overflow-hidden">
         <div
-          className="bg-success h-1 rounded-full transition-all duration-500 ease-out"
+          className="bg-primary h-1 rounded-full transition-all duration-500 ease-out"
           style={{ width: stage === 0 ? '30%' : stage === 1 ? '65%' : '90%' }}
         />
       </div>
@@ -82,7 +82,7 @@ function renderLinksAndText(text: string): React.ReactNode[] {
         href={linkUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-[#6e9b7e] hover:underline font-semibold"
+        className="text-primary hover:underline font-semibold"
       >
         {linkText}
       </a>
@@ -110,7 +110,7 @@ function renderRawLinks(text: string): React.ReactNode[] {
           href={part}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-[#6e9b7e] hover:underline break-all font-semibold inline-block"
+          className="text-primary hover:underline break-all font-semibold inline-block"
         >
           {part}
         </a>
@@ -412,16 +412,16 @@ export default function AIAssistant({ user, projectName }: AIAssistantProps) {
       <aside
         style={{ width: isRightSidebarCollapsed ? (isMobile ? '0px' : '48px') : (isMobile ? '100%' : `${sidebarWidth}px`) }}
         className={`border-l border-border bg-sidebar-bg flex flex-col justify-between select-none shrink-0 ${isResizing ? 'transition-none' : 'transition-all duration-300'
-          } ${isRightSidebarCollapsed
-            ? (isMobile ? 'border-l-0 overflow-hidden relative z-30' : 'relative z-30')
-            : (isMobile ? 'fixed inset-0 z-[100] w-full h-full bg-sidebar-bg border-l-0' : 'relative z-30 min-w-[280px] max-w-[600px]')
-          }`}
+ } ${isRightSidebarCollapsed
+ ? (isMobile ? 'border-l-0 overflow-hidden relative z-30' : 'relative z-30')
+ : (isMobile ? 'fixed inset-0 z-[100] w-full h-full bg-sidebar-bg border-l-0' : 'relative z-30 min-w-[280px] max-w-[600px]')
+ }`}
       >
         {/* Resizable drag handle (visible only when expanded and not on mobile) */}
         {!isRightSidebarCollapsed && !isMobile && (
           <div
             onMouseDown={handleMouseDown}
-            className="absolute -left-[2px] top-16 bottom-0 w-[4px] cursor-col-resize hover:bg-success bg-transparent z-40 transition-colors duration-150"
+            className="absolute -left-[2px] top-16 bottom-0 w-[4px] cursor-col-resize hover:bg-primary bg-transparent z-40 transition-colors duration-150"
             title="Drag to resize AI Sidebar"
           />
         )}
@@ -430,7 +430,7 @@ export default function AIAssistant({ user, projectName }: AIAssistantProps) {
         {!isMobile && (
           <button
             onClick={() => setIsRightSidebarCollapsed(!isRightSidebarCollapsed)}
-            className="absolute -left-3 top-4 p-1 rounded-full border border-border dark:border-[#3e3e3a] bg-card text-text-secondary hover:text-text-primary hover:bg-hover-row hover:scale-105 transition-all shadow-md z-50 cursor-pointer flex items-center justify-center h-7 w-7"
+            className="absolute -left-3 top-4 p-1 rounded-full border border-border dark:border-[#3e3e3a] bg-card text-muted-foreground hover:text-foreground hover:bg-accent hover:scale-105 transition-all shadow-md z-50 cursor-pointer flex items-center justify-center h-7 w-7"
             title={isRightSidebarCollapsed ? 'Expand AI Assistant' : 'Collapse AI Assistant'}
           >
             {isRightSidebarCollapsed ? <ChevronLeft className="h-3.5 w-3.5" /> : <ChevronRight className="h-3.5 w-3.5" />}
@@ -441,7 +441,7 @@ export default function AIAssistant({ user, projectName }: AIAssistantProps) {
           /* COLLAPSED ASSISTANT COLUMN */
           !isMobile && (
             <div className="flex flex-col items-center py-6 space-y-6">
-              <Sparkles className="h-5 w-5 text-[#6e9b7e]" />
+              <Sparkles className="h-5 w-5 text-primary" />
             </div>
           )
         ) : (
@@ -450,7 +450,7 @@ export default function AIAssistant({ user, projectName }: AIAssistantProps) {
             {/* Header */}
             <div className="h-16 px-6 border-b border-border flex items-center justify-between bg-card shrink-0">
               <div className="flex items-center space-x-2">
-                <Sparkles className="h-4.5 w-4.5 text-[#6e9b7e]" />
+                <Sparkles className="h-4.5 w-4.5 text-primary" />
                 <span className="font-bold text-foreground text-sm">
                   {activeView === 'history' ? 'Chat History' : 'AI Assistant'}
                 </span>
@@ -459,7 +459,7 @@ export default function AIAssistant({ user, projectName }: AIAssistantProps) {
                 {/* New Chat Button */}
                 <button
                   onClick={handleNewChat}
-                  className="p-1.5 rounded-lg text-text-secondary hover:bg-sidebar-hover hover:text-text-primary transition-colors cursor-pointer flex items-center justify-center"
+                  className="p-1.5 rounded-lg text-muted-foreground hover:bg-sidebar-hover hover:text-foreground transition-colors cursor-pointer flex items-center justify-center"
                   title="New Chat"
                 >
                   <Plus className="h-4 w-4" />
@@ -468,10 +468,10 @@ export default function AIAssistant({ user, projectName }: AIAssistantProps) {
                 <button
                   onClick={handleToggleHistory}
                   className={`p-1.5 rounded-lg transition-colors cursor-pointer flex items-center justify-center ${
-                    activeView === 'history'
-                      ? 'bg-success/15 text-success'
-                      : 'text-text-secondary hover:bg-sidebar-hover hover:text-text-primary'
-                  }`}
+ activeView === 'history'
+  ? 'bg-primary/15 text-primary'
+ : 'text-muted-foreground hover:bg-sidebar-hover hover:text-foreground'
+ }`}
                   title="Chat History"
                 >
                   <History className="h-4 w-4" />
@@ -479,7 +479,7 @@ export default function AIAssistant({ user, projectName }: AIAssistantProps) {
                 {/* Close Button */}
                 <button
                   onClick={() => setIsRightSidebarCollapsed(true)}
-                  className="p-1.5 rounded-lg text-text-secondary hover:bg-sidebar-hover hover:text-text-primary transition-colors cursor-pointer flex items-center justify-center"
+                  className="p-1.5 rounded-lg text-muted-foreground hover:bg-sidebar-hover hover:text-foreground transition-colors cursor-pointer flex items-center justify-center"
                   title="Close AI Assistant"
                 >
                   <X className="h-4 w-4" />
@@ -493,7 +493,7 @@ export default function AIAssistant({ user, projectName }: AIAssistantProps) {
                 <div className="space-y-3">
                   {groupMessagesIntoSessions(historyMessages).length === 0 ? (
                     <div className="h-full flex flex-col items-center justify-center text-center p-6 text-slate-400">
-                      <History className="h-8 w-8 text-[#6e9b7e]/40 mb-2 animate-pulse" />
+                      <History className="h-8 w-8 text-primary/40 mb-2 animate-pulse" />
                       <p className="text-xs">No chat history found.</p>
                     </div>
                   ) : (
@@ -508,14 +508,14 @@ export default function AIAssistant({ user, projectName }: AIAssistantProps) {
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.2, delay: index * 0.03 }}
                           onClick={() => handleSelectSession(session)}
-                          className="p-4 bg-card hover:bg-hover-row border border-border rounded-xl cursor-pointer transition-all duration-200 group flex items-start space-x-3 shadow-sm active:scale-[0.99]"
+                          className="p-4 bg-card hover:bg-accent border border-border rounded-xl cursor-pointer transition-all duration-200 group flex items-start space-x-3 shadow-sm active:scale-[0.99]"
                         >
-                          <MessageSquare className="h-4 w-4 text-[#6e9b7e] shrink-0 mt-0.5" />
+                          <MessageSquare className="h-4 w-4 text-primary shrink-0 mt-0.5" />
                           <div className="flex-1 min-w-0">
-                            <h4 className="text-sm font-semibold text-foreground truncate group-hover:text-[#6e9b7e] transition-colors">
+                            <h4 className="text-sm font-semibold text-foreground truncate group-hover:text-primary transition-colors">
                               {title}
                             </h4>
-                            <p className="text-[11px] text-text-secondary mt-1 flex items-center space-x-1.5">
+                            <p className="text-[11px] text-muted-foreground mt-1 flex items-center space-x-1.5">
                               <span>{timeLabel}</span>
                               <span>•</span>
                               <span>{session.length} message{session.length !== 1 ? 's' : ''}</span>
@@ -530,7 +530,7 @@ export default function AIAssistant({ user, projectName }: AIAssistantProps) {
                 <>
                   {messages.length === 0 && (
                     <div className="h-full flex flex-col items-center justify-center text-center p-6 text-slate-400">
-                      <Sparkles className="h-8 w-8 text-[#6e9b7e]/40 mb-2 animate-pulse" />
+                      <Sparkles className="h-8 w-8 text-primary/40 mb-2 animate-pulse" />
                       <p className="text-xs">
                         Ask me anything about your emails, drafting answers, or scheduling calendar events!
                       </p>
@@ -552,21 +552,21 @@ export default function AIAssistant({ user, projectName }: AIAssistantProps) {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         transition={{ duration: 0.25, ease: [0.215, 0.610, 0.355, 1.000] }}
                         className={`flex flex-col space-y-1 max-w-[85%] ${isAssistant ? 'self-start' : 'self-end ml-auto'
-                          }`}
+ }`}
                       >
                         <div className={`p-3.5 rounded-2xl text-sm leading-relaxed shadow-sm transition-all duration-200 break-words ${isAssistant
-                          ? isCancelled
-                            ? 'bg-danger/10 border border-danger/20 text-danger'
-                            : isFailed
-                              ? 'bg-danger/10 border border-danger/20 text-danger'
-                              : 'bg-card border border-border text-foreground'
-                          : 'bg-[#e4e9e5] dark:bg-sidebar-active-bg text-slate-800 dark:text-white border border-border'
-                          }`}>
+ ? isCancelled
+ ? 'bg-red-500/10 border border-red-500/20 text-red-600'
+ : isFailed
+ ? 'bg-red-500/10 border border-red-500/20 text-red-600'
+ : 'bg-card border border-border text-foreground'
+  : 'bg-muted text-slate-800 dark:text-white border border-border'
+ }`}>
                           {isPending ? (
                             <div className="space-y-2.5">
                               <AgentProgressLoader />
                               {msg.content && (
-                                <p className="text-[11px] text-text-secondary italic pl-1 animate-pulse select-none leading-normal">
+                                <p className="text-[11px] text-muted-foreground italic pl-1 animate-pulse select-none leading-normal">
                                   {msg.content}
                                 </p>
                               )}
@@ -630,7 +630,7 @@ export default function AIAssistant({ user, projectName }: AIAssistantProps) {
                     <button
                       type="button"
                       onClick={handleCancel}
-                      className="absolute right-2.5 bottom-2.5 p-1.5 rounded-full bg-danger hover:bg-danger/80 text-white transition-all flex items-center justify-center cursor-pointer shadow-sm animate-pulse"
+                      className="absolute right-2.5 bottom-2.5 p-1.5 rounded-full bg-red-500 hover:bg-red-500/80 text-white transition-all flex items-center justify-center cursor-pointer shadow-sm animate-pulse"
                       title="Pause AI Response"
                     >
                       <Pause className="h-3.5 w-3.5" />
@@ -639,7 +639,7 @@ export default function AIAssistant({ user, projectName }: AIAssistantProps) {
                     <button
                       type="submit"
                       disabled={!chatInput.trim()}
-                      className="absolute right-2.5 bottom-2.5 p-1.5 rounded-full bg-success text-white hover:bg-success/80 transition-all flex items-center justify-center cursor-pointer shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="absolute right-2.5 bottom-2.5 p-1.5 rounded-full bg-primary text-primary-foreground hover:bg-primary/80 transition-all flex items-center justify-center cursor-pointer shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
                       title="Send Message"
                     >
                       <ArrowUp className="h-3.5 w-3.5" />

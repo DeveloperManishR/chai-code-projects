@@ -47,7 +47,7 @@ export default function FAQ() {
   return (
     <section id="faq" className="relative py-24 md:py-32">
       {/* subtle grid backdrop */}
-      <div aria-hidden className="absolute inset-0 -z-10 bg-grid opacity-[0.3]" />
+      <div aria-hidden className="absolute inset-0 -z-10 opacity-[0.3]" />
 
       <Container className="flex flex-col items-center gap-14">
         <SectionHeading
@@ -84,8 +84,8 @@ function AccordionItem({
   return (
     <div
       className={`overflow-hidden rounded-xl border transition-colors duration-200 ${
-        isOpen ? "border-line-strong bg-surface" : "border-line bg-surface"
-      }`}
+ isOpen ? "border-line-strong bg-surface" : "border-line bg-surface"
+ }`}
     >
       {/* trigger */}
       <button

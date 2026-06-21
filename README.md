@@ -85,6 +85,11 @@ RAZORPAY_KEY_SECRET=your_razorpay_key_secret
 # Project Details
 ProjectName=SwiftMail
 NEXT_PUBLIC_APP_URL=http://localhost:3000
+
+# Inngest local development
+INNGEST_DEV=1
+INNGEST_EVENT_KEY=local-inngest-event-key
+INNGEST_SIGNING_KEY=local-inngest-signing-key
 ```
 
 ### 3. Installation & Run
@@ -95,9 +100,14 @@ npm install
 # Push database schema to PostgreSQL
 npm run db:push
 
+# Start the Inngest dev server in Docker
+docker compose up -d inngest
+
 # Start development server
 npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to view the SwiftMail dashboard onboarding flow!
+
+The Inngest dev server UI will be available at [http://localhost:8288](http://localhost:8288) and will sync functions from `http://localhost:3000/api/inngest`.
 

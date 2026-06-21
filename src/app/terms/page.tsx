@@ -15,34 +15,34 @@ export default function TermsPage() {
           <Container className="max-w-4xl">
             <GlassCard className="p-8 md:p-12 flex flex-col gap-8">
               <div className="border-b border-line pb-6">
-                <h1 className="font-display text-3xl font-bold tracking-tight text-text-primary md:text-4xl">
+                <h1 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
                   Terms of Service
                 </h1>
-                <p className="mt-2 text-sm text-text-muted">
+                <p className="mt-2 text-sm text-muted-foreground">
                   Last Updated: June 15, 2026
                 </p>
               </div>
 
-              <div className="prose prose-neutral dark:prose-invert max-w-none flex flex-col gap-6 text-text-secondary text-sm md:text-base leading-relaxed">
+              <div className="prose prose-neutral dark:prose-invert max-w-none flex flex-col gap-6 text-muted-foreground text-sm md:text-base leading-relaxed">
                 <p>
                   Welcome to SwiftMail. These Terms of Service (&ldquo;Terms&rdquo;) govern your access to and use of SwiftMail&apos;s website, dashboard, and automation tools. By accessing or using our services, you agree to be bound by these Terms.
                 </p>
 
-                <h2 className="font-display text-xl font-semibold text-text-primary mt-4">
+                <h2 className="text-xl font-semibold text-foreground mt-4">
                   1. Services Description & Scope
                 </h2>
                 <p>
                   SwiftMail provides a premium AI-first mail client and dashboard syncing Gmail and Google Calendar operations. Our AI assistant functions as a draft compiler, staging recommendations for you to manually inspect, approve, and send.
                 </p>
 
-                <h2 className="font-display text-xl font-semibold text-text-primary mt-4">
+                <h2 className="text-xl font-semibold text-foreground mt-4">
                   2. Accounts and Authentication
                 </h2>
                 <p>
                   To use SwiftMail, you must create an account and connect your Google Account via official OAuth credentials. You are responsible for maintaining the confidentiality of your account credentials and for all actions taken under your account.
                 </p>
 
-                <h2 className="font-display text-xl font-semibold text-text-primary mt-4">
+                <h2 className="text-xl font-semibold text-foreground mt-4">
                   3. Subscriptions, Fees, and Razorpay Transactions
                 </h2>
                 <p>
@@ -54,42 +54,42 @@ export default function TermsPage() {
                   <li><strong>Price Adjustments:</strong> We reserve the right to alter pricing plans, but will notify users 30 days in advance of any changes.</li>
                 </ul>
 
-                <h2 className="font-display text-xl font-semibold text-text-primary mt-4">
+                <h2 className="text-xl font-semibold text-foreground mt-4">
                   4. Usage Limits & Fair Use
                 </h2>
                 <p>
                   Each plan carries specific daily limits on AI operations (triage checks, draft compositions, tool lookups). Automated abuse, spam generation, or scripting that compromises SwiftMail infrastructure may result in immediate workspace suspension.
                 </p>
 
-                <h2 className="font-display text-xl font-semibold text-text-primary mt-4">
+                <h2 className="text-xl font-semibold text-foreground mt-4">
                   5. No-Refund Policy
                 </h2>
                 <p>
                   Due to the immediate provisioning of LLM computational credits and sync webhooks, <strong>all sales are final and SwiftMail does not offer refunds</strong>. Please see our Refund Policy for complete information.
                 </p>
 
-                <h2 className="font-display text-xl font-semibold text-text-primary mt-4">
+                <h2 className="text-xl font-semibold text-foreground mt-4">
                   6. Disclaimers & Limitation of Liability
                 </h2>
                 <p>
                   SwiftMail is provided &ldquo;as is&rdquo; without warranties of any kind. Since AI models can occasionally hallucinate, SwiftMail requires human-in-the-loop validation for all outbound emails. We are not liable for any messages sent, events modified, or damages resulting from unchecked AI drafts.
                 </p>
 
-                <h2 className="font-display text-xl font-semibold text-text-primary mt-4">
+                <h2 className="text-xl font-semibold text-foreground mt-4">
                   7. Governing Law
                 </h2>
                 <p>
                   These Terms shall be governed by and construed in accordance with the laws of India, without regard to conflict of law principles. Any dispute arising out of these Terms shall be resolved in courts located in India.
                 </p>
 
-                <h2 className="font-display text-xl font-semibold text-text-primary mt-4">
+                <h2 className="text-xl font-semibold text-foreground mt-4">
                   8. Changes to Terms
                 </h2>
                 <p>
                   We reserve the right to modify these Terms. Your continued use of the platform after updates indicates acceptance of the revised Terms.
                 </p>
 
-                <h2 className="font-display text-xl font-semibold text-text-primary mt-4">
+                <h2 className="text-xl font-semibold text-foreground mt-4">
                   9. Contact Us
                 </h2>
                 <p>

@@ -86,10 +86,10 @@ export default function Hero() {
   return (
     <section id="top" className="relative overflow-hidden pt-36 pb-20 md:pt-44 md:pb-28">
       {/* ambient backdrop */}
-      <div aria-hidden className="absolute inset-0 -z-10 bg-grid opacity-[0.5]" />
+      <div aria-hidden className="absolute inset-0 -z-10 opacity-[0.5]" />
       <div
         aria-hidden
-        className="animate-glow absolute -top-20 left-1/2 -z-10 h-[420px] w-[820px] -translate-x-1/2 rounded-full blur-3xl"
+        className=" absolute -top-20 left-1/2 -z-10 h-[420px] w-[820px] -translate-x-1/2 rounded-full blur-3xl"
         style={{ background: "radial-gradient(closest-side, var(--glow), transparent)" }}
       />
 
@@ -104,7 +104,7 @@ export default function Hero() {
           </Reveal>
           
           <Reveal delay={90}>
-            <h1 className="font-display text-[44px] font-semibold leading-[1.04] tracking-tight text-text sm:text-6xl md:text-[68px] max-w-2xl">
+            <h1 className="text-[44px] font-semibold leading-[1.04] tracking-tight text-text sm:text-6xl md:text-[68px] max-w-2xl">
               Your Inbox Can{" "}
               <span className="relative whitespace-nowrap text-accent-ink">
                 Work For You
@@ -146,7 +146,7 @@ export default function Hero() {
                 <div className="flex gap-1.5">
                   <span className="h-2.5 w-2.5 rounded-full bg-red-500/80" />
                   <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/80" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-green-500/80" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-primary/80" />
                 </div>
                 <div className="flex items-center gap-1.5 bg-surface border border-line rounded-md px-4 py-1 text-[10.5px] text-muted w-full max-w-[340px] justify-center select-none">
                   <span className="text-[9px] text-accent font-semibold">https://</span>
@@ -161,21 +161,21 @@ export default function Hero() {
 
             {/* Floating chips overlay - hidden on mobile */}
             <FloatChip
-              className="animate-float -left-12 top-16 hidden md:flex"
+              className=" -left-12 top-16 hidden md:flex"
               icon={<CornerUpLeft size={14} strokeWidth={2} />}
               title="Smart reply drafted"
               sub="Re: Q3 investor update"
               tone="accent"
             />
             <FloatChip
-              className="animate-float-lg -right-12 top-44 hidden md:flex"
+              className=" -right-12 top-44 hidden md:flex"
               icon={<Calendar size={14} strokeWidth={2} />}
               title="Meeting scheduled"
               sub="Tue 3:00 PM · 5 invitees"
               tone="primary"
             />
             <FloatChip
-              className="animate-float -bottom-8 left-24 hidden md:flex"
+              className=" -bottom-8 left-24 hidden md:flex"
               icon={<Check size={14} strokeWidth={2.4} />}
               title="Inbox triaged"
               sub="12 emails sorted"

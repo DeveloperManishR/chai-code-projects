@@ -26,10 +26,10 @@ export default function Navbar() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "border-b bg-background/80 backdrop-blur-xl"
-          : "border-transparent bg-transparent"
-      }`}
+ scrolled
+ ? "border-b bg-background/80 backdrop-blur-xl"
+ : "border-transparent bg-transparent"
+ }`}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
         <Link href="/" className="flex items-center gap-2.5">

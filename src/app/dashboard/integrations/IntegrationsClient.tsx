@@ -1,8 +1,13 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Mail, Calendar as CalendarIcon, Link2, CheckCircle2, XCircle, ArrowRight, RefreshCw, Trash2, CalendarRange, Clock, MapPin, AlertCircle } from 'lucide-react';
+import {
+  Mail, Calendar as CalendarIcon, Link2, CheckCircle2, XCircle,
+  ArrowRight, RefreshCw, Trash2, CalendarRange, Clock, MapPin, AlertCircle,
+  Loader2,
+} from 'lucide-react';
 import { disconnectPlugin } from '../../onboarding/actions';
+import { motion, AnimatePresence } from 'motion/react';
 
 type CalendarEvent = {
   id?: string;
@@ -20,6 +25,50 @@ type IntegrationsClientProps = {
   dbError: boolean;
 };
 
+function ConnectionStatusBadge({ connected, loading }: { connected: boolean; loading: boolean }) {
+  if (loading) {
+    return (
+      <div className="flex items-center gap-2 text-primary font-semibold text-sm">
+        <Loader2 className="h-4 w-4 animate-spin" />
+        <span>Connecting...</span>
+      </div>
+    );
+  }
+
+  if (connected) {
+    return (
+      <motion.div
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+        className="flex items-center gap-2 text-primary font-semibold text-sm"
+      >
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ type: 'spring', stiffness: 400, damping: 15, delay: 0.1 }}
+        >
+          <CheckCircle2 className="h-4.5 w-4.5" />
+        </motion.div>
+        <motion.span
+          initial={{ opacity: 0, x: -5 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.2 }}
+        >
+          Authorized
+        </motion.span>
+      </motion.div>
+    );
+  }
+
+  return (
+    <div className="flex items-center gap-2 text-muted-foreground font-semibold text-sm">
+      <XCircle className="h-4.5 w-4.5" />
+      <span>Not Connected</span>
+    </div>
+  );
+}
+
 export default function IntegrationsClient({
   isGmailConnected,
   isCalendarConnected,
@@ -27,6 +76,7 @@ export default function IntegrationsClient({
 }: IntegrationsClientProps) {
   const [gmailLoading, setGmailLoading] = useState(false);
   const [calendarLoading, setCalendarLoading] = useState(false);
+  const [disconnectLoading, setDisconnectLoading] = useState<'gmail' | 'googlecalendar' | null>(null);
   const [events, setEvents] = useState<CalendarEvent[]>([]);
   const [eventsLoading, setEventsLoading] = useState(false);
   const [eventsError, setEventsError] = useState<string | null>(null);
@@ -38,7 +88,7 @@ export default function IntegrationsClient({
     try {
       const start = new Date();
       const end = new Date();
-      end.setDate(start.getDate() + 14); // Next 14 days
+      end.setDate(start.getDate() + 14);
 
       const res = await fetch(`/api/calendar?timeMin=${encodeURIComponent(start.toISOString())}&timeMax=${encodeURIComponent(end.toISOString())}`);
       if (res.ok) {
@@ -61,19 +111,15 @@ export default function IntegrationsClient({
   }, [isCalendarConnected]);
 
   const handleDisconnect = async (plugin: 'gmail' | 'googlecalendar') => {
-    if (plugin === 'gmail') setGmailLoading(true);
-    if (plugin === 'googlecalendar') setCalendarLoading(true);
-
+    setDisconnectLoading(plugin);
     try {
       await disconnectPlugin(plugin);
-      // Refresh counts and connections in layout
       window.dispatchEvent(new CustomEvent('refresh-labels'));
       window.location.reload();
     } catch (err) {
       console.error(`Failed to disconnect ${plugin}:`, err);
     } finally {
-      if (plugin === 'gmail') setGmailLoading(false);
-      if (plugin === 'googlecalendar') setCalendarLoading(false);
+      setDisconnectLoading(null);
     }
   };
 
@@ -83,123 +129,143 @@ export default function IntegrationsClient({
     if (!dateStr) return '';
     const parsed = new Date(dateStr);
     if (isNaN(parsed.getTime())) return dateStr;
-
-    const options: Intl.DateTimeFormatOptions = dateVal.dateTime 
+    const options: Intl.DateTimeFormatOptions = dateVal.dateTime
       ? { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }
       : { month: 'short', day: 'numeric' };
-      
     return parsed.toLocaleString('en-US', options);
   };
 
+  const isGoogleConnected = isGmailConnected && isCalendarConnected;
+
   return (
-    <div className="flex-1 flex flex-col min-h-0 bg-background text-text-primary">
-      {/* Integrations Header */}
-      <div className="h-16 px-6 border-b border-border flex items-center justify-between shrink-0 bg-card">
-        <div className="flex items-center space-x-3">
-          <Link2 className="h-5 w-5 text-slate-600 dark:text-slate-400" />
-          <h1 className="text-lg font-bold text-text-primary">Integrations</h1>
+    <div className="flex-1 flex flex-col min-h-0 bg-background text-foreground">
+      <div className="h-16 px-6 border-b border-border flex items-center justify-between shrink-0 bg-background">
+        <div className="flex items-center gap-3">
+          <Link2 className="h-5 w-5 text-muted-foreground" />
+          <h1 className="text-lg font-bold text-foreground">Integrations</h1>
         </div>
         <button
-          onClick={() => {
-            fetchEvents();
-          }}
+          onClick={fetchEvents}
           disabled={eventsLoading}
-          className={`p-1.5 text-text-secondary hover:text-text-primary hover:bg-sidebar-hover rounded-lg transition-colors cursor-pointer flex items-center justify-center shrink-0 ${
-            eventsLoading ? 'animate-spin opacity-50' : ''
-          }`}
-          title="Refresh connection details"
+          className={`p-2 text-muted-foreground hover:text-foreground hover:bg-accent/10 rounded-lg transition-colors cursor-pointer flex items-center justify-center shrink-0 ${
+ eventsLoading ? 'animate-spin opacity-50' : ''
+ }`}
+          title="Refresh"
         >
           <RefreshCw className="h-4 w-4" />
         </button>
       </div>
 
-      {/* Main Content Area */}
       <div className="flex-1 overflow-y-auto p-6 space-y-8">
         {dbError && (
-          <div className="flex items-start space-x-2.5 p-4 rounded-xl border border-amber-500/20 bg-amber-500/5 text-amber-600 text-sm font-medium">
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="flex items-start gap-2.5 p-4 rounded-xl border border-amber-500/20 bg-amber-500/5 text-amber-600 dark:text-amber-400 text-sm font-medium"
+          >
             <AlertCircle className="h-5 w-5 shrink-0 mt-0.5 text-amber-500" />
-            <span>⚠️ Database storage quota exceeded. Running in offline/fallback mode. Integration changes may not persist.</span>
-          </div>
+            <span>Database storage quota exceeded. Running in offline/fallback mode. Integration changes may not persist.</span>
+          </motion.div>
         )}
 
         <div className="space-y-4">
-          <h2 className="text-sm font-bold uppercase tracking-wider text-text-muted">Connected Services</h2>
-          
-          <div className="max-w-xl">
-            {/* Google Workspace Integration Card */}
-            {(() => {
-              const isGoogleConnected = isGmailConnected && isCalendarConnected;
-              return (
-                <div className={`rounded-2xl border p-6 transition-all duration-300 ${
-                  isGoogleConnected ? 'border-success/30 bg-success/5' : 'border-border bg-card hover:border-accent/30'
-                }`}>
-                  <div className="flex flex-col h-full justify-between space-y-6">
-                    <div className="space-y-4">
-                      <div className="flex space-x-3">
-                        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-danger/10 text-danger">
-                          <Mail className="h-6 w-6" />
-                        </div>
-                        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent-soft text-accent">
-                          <CalendarIcon className="h-6 w-6" />
-                        </div>
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-bold text-text-primary flex items-center space-x-2">
-                          <span>Google Account</span>
-                          {isGoogleConnected && (
-                            <span className="text-success text-xs font-semibold bg-success/10 px-2 py-0.5 rounded-full">
-                              Connected
-                            </span>
-                          )}
-                        </h3>
-                        <p className="mt-1.5 text-xs text-text-secondary leading-relaxed">
-                          Authorizes SwiftMail to read, draft, and organize your emails, and sync with your primary Google calendar to manage events and meetings.
-                        </p>
-                      </div>
-                    </div>
+          <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">Connected Services</h2>
 
-                    <div className="pt-2">
-                      {isGoogleConnected ? (
-                        <div className="flex items-center justify-between w-full">
-                          <div className="flex items-center space-x-2 text-success font-semibold text-sm">
-                            <CheckCircle2 className="h-4.5 w-4.5" />
-                            <span>Authorized</span>
-                          </div>
-                          <button
-                            onClick={() => handleDisconnect('gmail')}
-                            disabled={gmailLoading}
-                            className="rounded-xl border border-danger/25 text-danger hover:bg-danger/10 px-4 py-2 text-xs font-semibold transition-all duration-200 active:scale-95 cursor-pointer flex items-center space-x-1.5"
-                          >
-                            {gmailLoading ? <RefreshCw className="h-3.5 w-3.5 animate-spin" /> : <Trash2 className="h-3.5 w-3.5" />}
-                            <span>Disconnect</span>
-                          </button>
-                        </div>
-                      ) : (
-                        <a
-                          href="/api/auth/connect?plugin=gmail"
-                          className="inline-flex items-center space-x-2 rounded-xl bg-accent px-5 py-2.5 text-xs font-semibold text-white transition-all hover:bg-accent/90 hover:shadow-sm active:scale-95"
+          <div className="max-w-xl">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, ease: 'easeOut' }}
+              className={`rounded-2xl border p-6 transition-all duration-300 ${
+ isGoogleConnected
+  ? 'border-primary/30 bg-primary/5 dark:bg-primary/5'
+ : 'border-border bg-card hover:border-primary/30'
+ }`}
+            >
+              <div className="flex flex-col h-full justify-between space-y-6">
+                <div className="space-y-4">
+                  <div className="flex gap-3">
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      className="flex h-12 w-12 items-center justify-center rounded-xl bg-destructive/10 text-destructive"
+                    >
+                      <Mail className="h-6 w-6" />
+                    </motion.div>
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary"
+                    >
+                      <CalendarIcon className="h-6 w-6" />
+                    </motion.div>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-foreground flex items-center gap-2">
+                      <span>Google Account</span>
+                      {isGoogleConnected && (
+                        <motion.span
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          className="text-primary text-xs font-semibold bg-primary/10 px-2 py-0.5 rounded-full"
                         >
-                          <span>Connect Google Account</span>
-                          <ArrowRight className="h-3.5 w-3.5" />
-                        </a>
+                          Connected
+                        </motion.span>
                       )}
-                    </div>
+                    </h3>
+                    <p className="mt-1.5 text-xs text-muted-foreground leading-relaxed">
+                      Authorizes SwiftMail to read, draft, and organize your emails, and sync with your primary Google calendar to manage events and meetings.
+                    </p>
                   </div>
                 </div>
-              );
-            })()}
+
+                <div className="pt-2">
+                  {isGoogleConnected ? (
+                    <div className="flex items-center justify-between w-full">
+                      <ConnectionStatusBadge connected={true} loading={false} />
+                      <motion.button
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => handleDisconnect('gmail')}
+                        disabled={!!disconnectLoading}
+                        className="rounded-xl border border-destructive/25 text-destructive hover:bg-destructive/10 px-4 py-2 text-xs font-semibold transition-all duration-200 cursor-pointer flex items-center gap-1.5"
+                      >
+                        {disconnectLoading === 'gmail' ? (
+                          <RefreshCw className="h-3.5 w-3.5 animate-spin" />
+                        ) : (
+                          <Trash2 className="h-3.5 w-3.5" />
+                        )}
+                        <span>Disconnect</span>
+                      </motion.button>
+                    </div>
+                  ) : (
+                    <motion.a
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.95 }}
+                      href="/api/auth/connect?plugin=gmail"
+                      className="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-xs font-semibold text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-sm"
+                    >
+                      <span>Connect Google Account</span>
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </motion.a>
+                  )}
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
 
-        {/* Calendar Events Sync Section */}
         {isCalendarConnected && (
-          <div className="space-y-4 pt-4 border-t border-border">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+            className="space-y-4 pt-4 border-t border-border"
+          >
             <div className="flex items-center justify-between">
-              <h2 className="text-sm font-bold uppercase tracking-wider text-text-muted flex items-center space-x-2">
+              <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-2">
                 <CalendarRange className="h-4 w-4" />
                 <span>Upcoming Calendar Events</span>
               </h2>
-              <span className="text-[10px] text-text-muted font-medium">Auto-synced from Google</span>
+              <span className="text-[10px] text-muted-foreground font-medium">Auto-synced from Google</span>
             </div>
 
             {eventsLoading ? (
@@ -207,56 +273,64 @@ export default function IntegrationsClient({
                 {[...Array(3)].map((_, i) => (
                   <div key={`cal-s-${i}`} className="flex items-center justify-between p-4 rounded-xl border border-border bg-card animate-pulse">
                     <div className="space-y-2 flex-1">
-                      <div className="h-4 w-1/3 bg-surface-subtle rounded"></div>
-                      <div className="h-3 w-1/4 bg-border rounded"></div>
+                      <div className="h-4 w-1/3 bg-muted rounded" />
+                      <div className="h-3 w-1/4 bg-border rounded" />
                     </div>
-                    <div className="h-4 w-20 bg-border rounded"></div>
+                    <div className="h-4 w-20 bg-border rounded" />
                   </div>
                 ))}
               </div>
             ) : eventsError ? (
-              <div className="flex items-center space-x-2 p-4 rounded-xl border border-red-500/10 bg-red-500/5 text-red-700 text-xs font-medium">
-                <XCircle className="h-4.5 w-4.5 shrink-0 text-red-500" />
+              <div className="flex items-center gap-2 p-4 rounded-xl border border-destructive/10 bg-destructive/5 text-destructive text-xs font-medium">
+                <XCircle className="h-4.5 w-4.5 shrink-0" />
                 <span>{eventsError}</span>
               </div>
             ) : events.length === 0 ? (
               <div className="flex flex-col items-center justify-center p-8 border border-dashed border-border rounded-xl text-center">
-                <CalendarIcon className="h-8 w-8 text-text-muted mb-2" />
-                <span className="text-xs text-text-secondary font-medium">No events found in the next 14 days</span>
-                <p className="text-[10px] text-text-muted mt-0.5">Try scheduling an event using the AI sidebar!</p>
+                <CalendarIcon className="h-8 w-8 text-muted-foreground mb-2" />
+                <span className="text-xs text-muted-foreground font-medium">No events found in the next 14 days</span>
+                <p className="text-[10px] text-muted-foreground mt-0.5">Try scheduling an event using the AI assistant!</p>
               </div>
             ) : (
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {events.slice(0, 6).map((event) => (
-                  <div key={event.id} className="p-4 rounded-xl border border-border bg-card hover:border-accent/20 transition-all flex flex-col justify-between space-y-4">
-                    <div className="space-y-1">
-                      <h4 className="text-sm font-bold text-text-primary leading-tight truncate" title={event.summary}>
-                        {event.summary || '(No Title)'}
-                      </h4>
-                      {event.description && (
-                        <p className="text-xs text-text-muted line-clamp-2 leading-relaxed">
-                          {event.description}
-                        </p>
-                      )}
-                    </div>
-
-                    <div className="space-y-1.5 pt-2 border-t border-border/50 text-[10px] text-text-secondary font-medium shrink-0">
-                      <div className="flex items-center space-x-1.5">
-                        <Clock className="h-3.5 w-3.5 text-text-muted" />
-                        <span>{formatEventDate(event.start)}</span>
+                <AnimatePresence>
+                  {events.slice(0, 6).map((event, index) => (
+                    <motion.div
+                      key={event.id}
+                      initial={{ opacity: 0, y: 12 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3, delay: index * 0.05 }}
+                      whileHover={{ y: -2, boxShadow: '0 4px 12px rgba(0,0,0,0.08)' }}
+                      className="p-4 rounded-xl border border-border bg-card hover:border-primary/20 transition-all flex flex-col justify-between space-y-4"
+                    >
+                      <div className="space-y-1">
+                        <h4 className="text-sm font-bold text-foreground leading-tight truncate" title={event.summary}>
+                          {event.summary || '(No Title)'}
+                        </h4>
+                        {event.description && (
+                          <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">
+                            {event.description}
+                          </p>
+                        )}
                       </div>
-                      {event.location && (
-                        <div className="flex items-center space-x-1.5">
-                          <MapPin className="h-3.5 w-3.5 text-text-muted" />
-                          <span className="truncate" title={event.location}>{event.location}</span>
+                      <div className="space-y-1.5 pt-2 border-t border-border/50 text-[10px] text-muted-foreground font-medium shrink-0">
+                        <div className="flex items-center gap-1.5">
+                          <Clock className="h-3.5 w-3.5 text-muted-foreground" />
+                          <span>{formatEventDate(event.start)}</span>
                         </div>
-                      )}
-                    </div>
-                  </div>
-                ))}
+                        {event.location && (
+                          <div className="flex items-center gap-1.5">
+                            <MapPin className="h-3.5 w-3.5 text-muted-foreground" />
+                            <span className="truncate" title={event.location}>{event.location}</span>
+                          </div>
+                        )}
+                      </div>
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
               </div>
             )}
-          </div>
+          </motion.div>
         )}
       </div>
     </div>

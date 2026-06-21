@@ -406,7 +406,7 @@ function CalendarPreview() {
         </div>
         <button
           onClick={handleAddEventClick}
-          className="inline-flex items-center space-x-1.5 bg-success text-white px-2.5 py-1.5 rounded-lg text-[10px] font-semibold shadow-sm transition-all hover:brightness-105 active:scale-95 cursor-pointer"
+          className="inline-flex items-center space-x-1.5 bg-primary text-primary-foreground px-2.5 py-1.5 rounded-lg text-[10px] font-semibold shadow-sm transition-all hover:brightness-105 active:scale-95 cursor-pointer"
         >
           <span>+ Add Event</span>
         </button>
@@ -463,18 +463,18 @@ function CalendarPreview() {
                     onClick={() => setSelectedDay(day)}
                     className="flex flex-col items-center justify-center cursor-pointer"
                   >
-                    <div className={`h-6.5 w-6.5 flex items-center justify-center text-[9.5px] transition-all ${active
-                        ? 'bg-success text-white font-bold rounded-full shadow-sm'
-                        : todayActive
-                          ? 'border border-success text-success rounded-full font-bold'
-                          : 'text-text hover:bg-surface2 rounded-full'
-                      }`}>
+<div className={`h-6.5 w-6.5 flex items-center justify-center text-[9.5px] transition-all ${active
+  ? 'bg-primary text-primary-foreground font-bold rounded-full shadow-sm'
+  : todayActive
+  ? 'border border-primary text-primary rounded-full font-bold'
+ : 'text-text hover:bg-surface2 rounded-full'
+ }`}>
                       {day}
                     </div>
                     {/* Dot indicator */}
                     <div className="h-0.5 w-full flex items-center justify-center mt-0.5">
                       {eventMark && (
-                        <span className={`h-0.75 w-0.75 rounded-full ${active ? 'bg-white' : 'bg-success'}`}></span>
+                        <span className={`h-0.75 w-0.75 rounded-full ${active ? 'bg-white' : 'bg-primary'}`}></span>
                       )}
                     </div>
                   </div>
@@ -516,12 +516,12 @@ function CalendarPreview() {
                   className="p-3 space-y-1.5 hover:bg-surface2/30 transition-colors bg-surface group cursor-pointer"
                 >
                   <div className="flex items-start justify-between gap-2">
-                    <h4 className="text-[11px] font-bold text-text tracking-tight group-hover:text-success transition-colors text-left">
+                    <h4 className="text-[11px] font-bold text-text tracking-tight group-hover:text-primary transition-colors text-left">
                       {event.title}
                     </h4>
 
                     <div className="flex items-center space-x-1 text-[8.5px] text-muted bg-surface2 px-1.5 py-0.5 rounded border border-line shrink-0">
-                      <Clock className="h-2.5 w-2.5 text-[#5f7a68]" />
+                      <Clock className="h-2.5 w-2.5 text-muted-foreground" />
                       <span>{event.time}</span>
                     </div>
                   </div>
@@ -577,7 +577,7 @@ function CalendarPreview() {
                   placeholder="e.g. Sync Session"
                   value={formSummary}
                   onChange={(e) => setFormSummary(e.target.value)}
-                  className="w-full bg-surface border border-line rounded-lg py-1.5 px-2.5 text-[11px] text-text placeholder-muted focus:outline-none focus:border-accent-ink transition-all font-semibold"
+                  className="w-full bg-surface border border-line rounded-lg py-1.5 px-2.5 text-[11px] text-text placeholder-muted focus:outline-none focus:border-primary transition-all font-semibold"
                   required
                 />
               </div>
@@ -590,7 +590,7 @@ function CalendarPreview() {
                   placeholder="e.g. 10:00 AM - 11:00 AM"
                   value={formTime}
                   onChange={(e) => setFormTime(e.target.value)}
-                  className="w-full bg-surface border border-line rounded-lg py-1.5 px-2.5 text-[11px] text-text placeholder-muted focus:outline-none focus:border-accent-ink transition-all"
+                  className="w-full bg-surface border border-line rounded-lg py-1.5 px-2.5 text-[11px] text-text placeholder-muted focus:outline-none focus:border-primary transition-all"
                   required
                 />
               </div>
@@ -605,7 +605,7 @@ function CalendarPreview() {
                   placeholder="Add location or link"
                   value={formLocation}
                   onChange={(e) => setFormLocation(e.target.value)}
-                  className="w-full bg-surface border border-line rounded-lg py-1.5 px-2.5 text-[11px] text-text placeholder-muted focus:outline-none focus:border-accent-ink transition-all"
+                  className="w-full bg-surface border border-line rounded-lg py-1.5 px-2.5 text-[11px] text-text placeholder-muted focus:outline-none focus:border-primary transition-all"
                 />
               </div>
 
@@ -648,7 +648,7 @@ function CalendarPreview() {
                   </button>
                   <button
                     type="submit"
-                    className="inline-flex items-center space-x-1 rounded-lg bg-success hover:opacity-95 text-white px-3 py-1.5 text-[9.5px] font-bold shadow-sm transition-all active:scale-95 cursor-pointer"
+                    className="inline-flex items-center space-x-1 rounded-lg bg-primary hover:opacity-95 text-primary-foreground px-3 py-1.5 text-[9.5px] font-bold shadow-sm transition-all active:scale-95 cursor-pointer"
                   >
                     Save
                   </button>
@@ -771,7 +771,7 @@ function WorkflowPreview() {
           { label: "Success",    value: "100%" },
         ].map((s) => (
           <div key={s.label} className="flex flex-col items-center py-2.5">
-            <span className="font-display text-[15px] font-semibold text-text">{s.value}</span>
+            <span className="text-[15px] font-semibold text-text">{s.value}</span>
             <span className="text-[9.5px] text-muted">{s.label}</span>
           </div>
         ))}
@@ -853,8 +853,8 @@ export default function DeepDive() {
           <div
             key={row.eyebrow}
             className={`flex flex-col items-center gap-10 md:gap-16 lg:flex-row ${
-              row.flip ? "lg:flex-row-reverse" : ""
-            }`}
+ row.flip ? "lg:flex-row-reverse" : ""
+ }`}
           >
             {/* Text side */}
             <Reveal
@@ -865,7 +865,7 @@ export default function DeepDive() {
                 <span className="h-1.5 w-1.5 rounded-full bg-accent" />
                 {row.eyebrow}
               </span>
-              <h3 className="font-display text-2xl font-semibold leading-[1.15] tracking-tight text-text sm:text-3xl">
+              <h3 className="text-2xl font-semibold leading-[1.15] tracking-tight text-text sm:text-3xl">
                 {row.title}
               </h3>
               <p className="text-[15px] leading-relaxed text-muted">

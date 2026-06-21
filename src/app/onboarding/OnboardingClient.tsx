@@ -53,23 +53,23 @@ function ServiceCard({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay }}
       className={`group relative overflow-hidden rounded-2xl border p-5 transition-all duration-300 ${
-        connected
-          ? "border-emerald-500/20 bg-gradient-to-br from-emerald-500/[0.04] via-background to-background"
-          : "bg-card hover:border-primary/20 hover:shadow-sm"
-      }`}
+ connected
+  ? "border-primary/20 bg-gradient-to-br from-primary/[0.04] via-background to-background"
+ : "bg-card hover:border-primary/20 hover:shadow-sm"
+ }`}
     >
       <div className="absolute top-0 right-0 h-24 w-24 translate-x-6 -translate-y-6 rounded-full bg-primary/[0.03] blur-2xl" />
 
       <div className="relative flex items-start gap-4">
         <div
           className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl transition-colors ${
-            connected ? "bg-emerald-500/10" : "bg-primary/10"
-          }`}
+  connected ? "bg-primary/10" : "bg-primary/10"
+ }`}
         >
           <Icon
-            className={`h-5 w-5 ${
-              connected ? "text-emerald-500" : "text-primary"
-            }`}
+className={`h-5 w-5 ${
+  connected ? "text-primary" : "text-primary"
+  }`}
           />
         </div>
 
@@ -80,7 +80,7 @@ function ServiceCard({
               <motion.span
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="rounded-full bg-emerald-500/10 px-2 py-0.5 text-[10px] font-semibold text-emerald-500"
+                className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-semibold text-primary"
               >
                 Connected
               </motion.span>
@@ -93,7 +93,7 @@ function ServiceCard({
           <div className="mt-4">
             {connected ? (
               <div className="flex items-center justify-between">
-                <span className="flex items-center gap-2 text-xs font-medium text-emerald-500">
+                <span className="flex items-center gap-2 text-xs font-medium text-primary">
                   <CheckCircle2 className="h-3.5 w-3.5" />
                   Authorized
                 </span>
@@ -215,21 +215,21 @@ export default function OnboardingClient({
                     <div key={label} className="flex items-center gap-3">
                       <div
                         className={`flex h-8 w-8 items-center justify-center rounded-full text-xs font-semibold transition-colors ${
-                          i === 0
-                            ? "bg-primary text-primary-foreground"
-                            : allConnected && i <= 1
-                              ? "bg-primary/20 text-primary"
-                              : "bg-muted text-muted-foreground"
-                        }`}
+ i === 0
+ ? "bg-primary text-primary-foreground"
+ : allConnected && i <= 1
+ ? "bg-primary/20 text-primary"
+ : "bg-muted text-muted-foreground"
+ }`}
                       >
                         {i + 1}
                       </div>
                       <span
                         className={`text-xs font-medium ${
-                          i === 0
-                            ? "text-foreground"
-                            : "text-muted-foreground"
-                        }`}
+ i === 0
+ ? "text-foreground"
+ : "text-muted-foreground"
+ }`}
                       >
                         {label}
                       </span>
@@ -290,20 +290,20 @@ export default function OnboardingClient({
               >
                 <div
                   className={`rounded-2xl border p-5 transition-all ${
-                    allConnected
-                      ? "border-primary/20 bg-gradient-to-br from-primary/[0.03] via-background to-background"
-                      : "bg-card"
-                  }`}
+ allConnected
+ ? "border-primary/20 bg-gradient-to-br from-primary/[0.03] via-background to-background"
+ : "bg-card"
+ }`}
                 >
                   <div className="flex items-center justify-between gap-4">
                     <div className="flex items-center gap-3">
                       <div
                         className={`flex h-10 w-10 items-center justify-center rounded-xl ${
-                          allConnected ? "bg-emerald-500/10" : "bg-muted"
-                        }`}
+  allConnected ? "bg-primary/10" : "bg-muted"
+ }`}
                       >
                         {allConnected ? (
-                          <CheckCircle2 className="h-5 w-5 text-emerald-500" />
+                          <CheckCircle2 className="h-5 w-5 text-primary" />
                         ) : (
                           <div className="h-5 w-5 rounded-full border-2 border-muted-foreground/30" />
                         )}

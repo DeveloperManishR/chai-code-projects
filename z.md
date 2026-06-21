@@ -22,3 +22,7 @@ Light
 | Primary    | `blue-600` |
 | Border     | `zinc-200` |
 | Text       | `zinc-900` |
+
+
+
+I want some changes in the code the Dashboard sidebar is not looking good so i want to Import shadcn sidebadrd which i already Imported so Implement that one and the funcatinlity remain same also match the theme color fix it and Impove it and also the Ai sidebar i want to remove it and it would comes as a chat Support on every scree and when user will click on it then it appears in Type of Modal and user can chat with that so Impove it and whole functijnlity remains the same fix it and imPOVE IT 

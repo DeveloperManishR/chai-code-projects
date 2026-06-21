@@ -136,7 +136,7 @@ export default function AppSidebar({ projectName, user }: SidebarProps) {
 
         <SidebarSeparator />
 
-        <SidebarGroup>
+        {/* <SidebarGroup>
           {!isCollapsed && (
             <SidebarGroupLabel>Settings</SidebarGroupLabel>
           )}
@@ -156,7 +156,7 @@ export default function AppSidebar({ projectName, user }: SidebarProps) {
               ))}
             </SidebarMenu>
           </SidebarGroupContent>
-        </SidebarGroup>
+        </SidebarGroup> */}
       </SidebarContent>
 
       <SidebarRail />

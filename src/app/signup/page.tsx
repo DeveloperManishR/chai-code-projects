@@ -30,22 +30,22 @@ export default function SignUpPage() {
 
   return (
     <ThemeProvider>
-      <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-bg px-4 py-12 sm:px-6 lg:px-8">
+      <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-background px-4 py-12 sm:px-6 lg:px-8">
         <div className="absolute top-1/4 left-1/4 -z-10 h-96 w-96 rounded-full bg-accent/10 blur-3xl animate-pulse"></div>
         <div className="absolute bottom-1/4 right-1/4 -z-10 h-96 w-96 rounded-full bg-primary/10 blur-3xl animate-pulse delay-1000"></div>
 
-        <div className="w-full max-w-md rounded-2xl border border-line bg-surface/60 p-8 backdrop-blur-xl shadow-2xl flex flex-col items-center">
+        <div className="w-full max-w-md rounded-2xl border border-border bg-card/60 p-8 backdrop-blur-xl shadow-2xl flex flex-col items-center">
           <div className="mb-6 text-center">
             <h1 className="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-accent via-primary to-secondary bg-clip-text text-transparent">
               SwiftMail
             </h1>
-            <p className="mt-2 text-sm text-muted">
+            <p className="mt-2 text-sm text-muted-foreground">
               Sign in to manage your AI workflows and integrations
             </p>
           </div>
 
           {error && (
-            <div className="mb-4 w-full p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-500 text-sm text-center">
+            <div className="mb-4 w-full p-3 rounded-lg bg-destructive/10 border border-destructive/20 text-destructive text-sm text-center">
               {error}
             </div>
           )}
@@ -53,7 +53,7 @@ export default function SignUpPage() {
           <button
             onClick={handleGoogleSignIn}
             disabled={loading || isPending}
-            className="flex w-full items-center justify-center gap-3 rounded-xl border border-line bg-surface px-4 py-3 text-sm font-semibold text-text shadow-sm transition-all hover:bg-surface2 active:scale-[0.98] disabled:opacity-50 cursor-pointer"
+            className="flex w-full items-center justify-center gap-3 rounded-xl border border-border bg-card px-4 py-3 text-sm font-semibold text-foreground shadow-sm transition-all hover:bg-accent hover:text-accent-foreground active:scale-[0.98] disabled:opacity-50 cursor-pointer"
           >
             <svg className="h-5 w-5 shrink-0" viewBox="0 0 24 24">
               <path
@@ -76,11 +76,6 @@ export default function SignUpPage() {
             <span>{loading ? "Connecting..." : "Continue with Google"}</span>
           </button>
 
-          <p className="mt-6 text-xs text-muted text-center">
-            By continuing, you agree to SwiftMail&apos;s{" "}
-            <a href="/terms" className="text-accent hover:underline">Terms</a> and{" "}
-            <a href="/privacy" className="text-accent hover:underline">Privacy Policy</a>.
-          </p>
         </div>
       </div>
     </ThemeProvider>

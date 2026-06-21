@@ -136,7 +136,7 @@ function SimWindow({ def, index }: { def: SimDef; index: number }) {
   : "bg-primary"
  }`}
           />
-          <span className="capitalize">{status === "waiting" ? "ready" : status === "streaming" ? "typing" : status}</span>
+          <span className="capitalize">{status === "waiting" ? "ready" : status === "thinking" ? "analyzing" : status === "streaming" ? "processing" : "completed"}</span>
         </div>
       </div>
 

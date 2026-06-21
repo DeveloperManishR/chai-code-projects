@@ -1,7 +1,6 @@
 "use client";
 
 import Navbar from "../../components/sections/Navbar";
-import Footer from "../../components/sections/Footer";
 import Container from "../../components/ui/Container";
 import GlassCard from "../../components/ui/GlassCard";
 import { ThemeProvider } from "../../theme";
@@ -132,7 +131,6 @@ export default function ChangelogPage() {
             </div>
           </Container>
         </main>
-        <Footer />
       </div>
     </ThemeProvider>
   );

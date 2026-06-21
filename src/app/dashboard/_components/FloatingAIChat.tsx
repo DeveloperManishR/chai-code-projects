@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import {
-  Sparkles, ArrowUp, Pause, X, Brain, Wrench, Cpu,
+  Sparkles, ArrowUp, Pause, X,
   History, Plus, MessageSquare, ChevronRight, PanelRightClose,
 } from 'lucide-react';
 import { useChatStore, ChatMessage } from '@/store/chatStore';
@@ -33,9 +33,9 @@ const AgentProgressLoader = () => {
   }, []);
 
   const stages = [
-    { text: 'Thinking', icon: <Brain className="h-3.5 w-3.5 text-primary animate-pulse shrink-0" /> },
-    { text: 'Selecting tools', icon: <Wrench className="h-3.5 w-3.5 text-primary shrink-0" /> },
-    { text: 'Working', icon: <Cpu className="h-3.5 w-3.5 text-primary shrink-0" /> },
+    { text: 'Analyzing' },
+    { text: 'Processing' },
+    { text: 'Completing' },
   ];
 
   const currentStage = stages[stage] || stages[0];
@@ -45,7 +45,6 @@ const AgentProgressLoader = () => {
       <div className="flex items-center space-x-2.5">
         <div className="h-4 w-4 rounded-full border-2 border-primary/25 border-t-primary animate-spin shrink-0" />
         <span className="text-[11px] font-bold text-muted-foreground select-none flex items-center space-x-1.5">
-          {currentStage.icon}
           <span>{currentStage.text}...</span>
         </span>
       </div>
